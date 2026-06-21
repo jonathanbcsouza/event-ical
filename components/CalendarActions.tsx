@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { StepHeader } from "@/components/StepHeader";
 import {
   buildCalendarApiUrl,
   buildGoogleSubscribeUrl,
@@ -31,13 +32,29 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
     : "";
 
   return (
-    <section className="sticky bottom-0 -mx-4 border-t border-zinc-200 bg-white/95 px-4 py-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95 sm:-mx-6 sm:px-6">
-      <SummaryBar count={selectedIds.length} />
+    <section className="surface-card sticky bottom-3 z-40 rounded-2xl px-4 py-4 sm:px-5">
+      <StepHeader
+        step={3}
+        title="Export your calendar"
+        description={
+          hasSelection
+            ? "Subscribe in Google Calendar or download a file for Apple Calendar and Outlook."
+            : "Select matches above to enable export."
+        }
+        badge={
+          hasSelection ? (
+            <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
+              {selectedIds.length}
+            </span>
+          ) : undefined
+        }
+      />
 
-      <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+      <div className="mt-4 flex flex-col gap-2 sm:flex-row">
         <a
-          href={hasSelection ? calendarUrl : undefined}
-          download={hasSelection ? "world-cup-2026.ics" : undefined}
+          href={hasSelection ? googleUrl : undefined}
+          target="_blank"
+          rel="noopener noreferrer"
           aria-disabled={!hasSelection}
           className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors ${
             hasSelection
@@ -48,13 +65,12 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
             if (!hasSelection) e.preventDefault();
           }}
         >
-          <Icon icon={Download} className="size-4" />
-          Download .ics
+          <Icon icon={CalendarDays} className="size-4" />
+          Add to Google Calendar
         </a>
         <a
-          href={hasSelection ? googleUrl : undefined}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={hasSelection ? calendarUrl : undefined}
+          download={hasSelection ? "world-cup-2026.ics" : undefined}
           aria-disabled={!hasSelection}
           className={`inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold transition-colors ${
             hasSelection
@@ -65,15 +81,15 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
             if (!hasSelection) e.preventDefault();
           }}
         >
-          <Icon icon={CalendarDays} className="size-4" />
-          Add to Google Calendar
+          <Icon icon={Download} className="size-4" />
+          Download .ics
         </a>
       </div>
 
       <button
         type="button"
         onClick={() => setShowImportHelp((v) => !v)}
-        className="mt-2 inline-flex items-center gap-1 text-sm text-zinc-500 underline-offset-2 hover:text-zinc-700 hover:underline dark:hover:text-zinc-300"
+        className="mt-3 inline-flex items-center gap-1 text-sm text-zinc-500 underline-offset-2 hover:text-zinc-700 hover:underline dark:hover:text-zinc-300"
       >
         <Icon
           icon={showImportHelp ? ChevronUp : ChevronDown}
@@ -94,23 +110,6 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
         </ol>
       )}
     </section>
-  );
-}
-
-function SummaryBar({ count }: { count: number }) {
-  if (count === 0) {
-    return (
-      <p className="text-sm text-zinc-500">
-        Select matches to enable calendar export.
-      </p>
-    );
-  }
-
-  return (
-    <p className="text-sm text-zinc-700 dark:text-zinc-300">
-      <span className="font-semibold">{count}</span>{" "}
-      {count === 1 ? "match" : "matches"} selected
-    </p>
   );
 }
 

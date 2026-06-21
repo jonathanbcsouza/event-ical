@@ -1,5 +1,6 @@
 "use client";
 
+import { StepHeader } from "@/components/StepHeader";
 import { getTeamsByGroup, type TeamRef } from "@/lib/fixtures";
 import { getFlag } from "@/lib/flags";
 
@@ -34,30 +35,32 @@ export function TeamPicker({ selected, onChange }: TeamPickerProps) {
   const groups = getTeamsByGroup();
 
   return (
-    <section className="rounded-xl border border-zinc-200 px-3 py-3 sm:px-4 dark:border-zinc-800">
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-2">
-          <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
-            Step 1: Select the teams you cheer for
-          </h2>
-          {selected.length > 0 && (
+    <section className="surface-card rounded-2xl px-4 py-4 sm:px-5">
+      <StepHeader
+        step={1}
+        title="Pick your teams"
+        description="Tap the nations you want to follow."
+        badge={
+          selected.length > 0 ? (
             <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
               {selected.length}
             </span>
-          )}
-        </div>
-        {selected.length > 0 && (
-          <button
-            type="button"
-            onClick={() => onChange([])}
-            className="shrink-0 py-1 text-xs text-zinc-500 underline-offset-2 hover:text-zinc-800 hover:underline dark:hover:text-zinc-200"
-          >
-            Clear all
-          </button>
-        )}
-      </div>
+          ) : undefined
+        }
+        action={
+          selected.length > 0 ? (
+            <button
+              type="button"
+              onClick={() => onChange([])}
+              className="shrink-0 py-1 text-xs text-zinc-500 underline-offset-2 hover:text-zinc-800 hover:underline dark:hover:text-zinc-200"
+            >
+              Clear all
+            </button>
+          ) : undefined
+        }
+      />
 
-      <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
+      <div className="mt-4 divide-y divide-zinc-200 dark:divide-zinc-800">
         {groups.map(({ group, teams }) => (
           <div
             key={group}

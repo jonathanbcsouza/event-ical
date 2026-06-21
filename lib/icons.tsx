@@ -16,12 +16,18 @@ export function Icon({ icon: LucideIcon, className, ...props }: IconProps) {
 }
 
 export {
+  ArrowRight,
+  CalendarCheck,
   CalendarDays,
   ChevronDown,
   ChevronUp,
   Download,
+  Heart,
   Lightbulb,
   List,
+  MapPin,
   Moon,
+  Sparkles,
+  Trophy,
   Users,
 } from "lucide-react";

@@ -3,14 +3,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { CalendarActions, StageBreakdown } from "@/components/CalendarActions";
 import { CalendarView } from "@/components/CalendarView";
+import { Hero } from "@/components/Hero";
 import { MatchList } from "@/components/MatchList";
+import { SiteFooter } from "@/components/SiteFooter";
+import { StepHeader } from "@/components/StepHeader";
 import { TeamPicker } from "@/components/TeamPicker";
 import { ViewToggle, type ViewMode } from "@/components/ViewToggle";
 import {
   ALL_MATCHES,
   filterMatchesByTeams,
   matchInvolvesTeam,
-  TOURNAMENT,
 } from "@/lib/fixtures";
 
 export function HomePage() {
@@ -50,58 +52,50 @@ export function HomePage() {
   );
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-3 pb-32 pt-6 sm:px-6 sm:pt-8">
-      <header className="mb-6 overflow-hidden rounded-2xl border border-zinc-200 bg-gradient-to-br from-emerald-50 via-white to-white p-4 dark:border-zinc-800 dark:from-emerald-950/40 dark:via-zinc-950 dark:to-zinc-950 sm:mb-8 sm:p-8">
-        <p className="text-xs font-medium uppercase tracking-wide text-emerald-600 sm:text-sm">
-          {TOURNAMENT}
-        </p>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
-          Build your match calendar
-        </h1>
-        <p className="mt-2 max-w-xl text-sm text-zinc-600 dark:text-zinc-400 sm:text-base">
-          Pick the teams you support, choose the matches you care about, then
-          download or subscribe in one click.
-        </p>
-        <p className="mt-3 text-xs font-medium text-zinc-500 sm:text-sm">
-          Jun 11 &ndash; Jul 19, 2026 &middot; United States, Canada &amp; Mexico
-        </p>
-      </header>
+    <>
+      <main className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-3 pb-8 pt-5 sm:px-6 sm:pb-12 sm:pt-8">
+        <Hero />
 
-      <div className="space-y-6 sm:space-y-10">
-        <TeamPicker selected={selectedTeams} onChange={setSelectedTeams} />
+        <div className="mt-8 space-y-6 sm:mt-10 sm:space-y-8">
+          <TeamPicker selected={selectedTeams} onChange={setSelectedTeams} />
 
-        <div className="space-y-4">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-50 sm:text-lg">
-              {view === "list" ? "Step 2: See your matches (these will all appear on your calendar!)" : "Tournament calendar"}
-            </h2>
-            <ViewToggle value={view} onChange={setView} />
-          </div>
+          <section className="surface-card rounded-2xl px-4 py-4 sm:px-5">
+            <StepHeader
+              step={2}
+              title="Choose your matches"
+              description="These are the games that will land on your calendar."
+              action={<ViewToggle value={view} onChange={setView} />}
+            />
 
-          {view === "list" ? (
-            <div className="space-y-2">
-              <MatchList
-                matches={filteredMatches}
-                selectedIds={selectedMatchIds}
-                onSelectionChange={setSelectedMatchIds}
-              />
-              <StageBreakdown matches={selectedMatches} />
+            <div className="mt-4">
+              {view === "list" ? (
+                <div className="space-y-2">
+                  <MatchList
+                    matches={filteredMatches}
+                    selectedIds={selectedMatchIds}
+                    onSelectionChange={setSelectedMatchIds}
+                  />
+                  <StageBreakdown matches={selectedMatches} />
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <CalendarView
+                    matches={ALL_MATCHES}
+                    selectedTeams={selectedTeams}
+                    selectedIds={selectedMatchIds}
+                    onSelectionChange={setSelectedMatchIds}
+                  />
+                  <StageBreakdown matches={selectedMatches} />
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="space-y-2">
-              <CalendarView
-                matches={ALL_MATCHES}
-                selectedTeams={selectedTeams}
-                selectedIds={selectedMatchIds}
-                onSelectionChange={setSelectedMatchIds}
-              />
-              <StageBreakdown matches={selectedMatches} />
-            </div>
-          )}
+          </section>
+
+          <CalendarActions selectedIds={selectedMatchIds} />
         </div>
-      </div>
+      </main>
 
-      <CalendarActions selectedIds={selectedMatchIds} />
-    </div>
+      <SiteFooter />
+    </>
   );
 }
