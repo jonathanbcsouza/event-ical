@@ -74,6 +74,10 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
           <li>Click &ldquo;Download .ics&rdquo; and save the file.</li>
           <li>Open Google Calendar → Settings → Import &amp; export.</li>
           <li>Select the downloaded file and choose a calendar.</li>
+          <li>
+            To use green in Google Calendar: find &ldquo;FIFA World Cup
+            2026&rdquo; in the left sidebar → ⋮ → pick green.
+          </li>
         </ol>
       )}
     </section>

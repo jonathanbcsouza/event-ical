@@ -7,6 +7,7 @@ import {
 } from "./fixtures";
 
 const MATCH_DURATION_HOURS = 2;
+const CALENDAR_COLOR = "#059669";
 const CALENDAR_DOMAIN =
   process.env.NEXT_PUBLIC_APP_URL?.replace(/^https?:\/\//, "") ??
   "event-ical.vercel.app";
@@ -22,13 +23,18 @@ export function generateCalendarIcs(matchIds: string[]): string {
     timezone: "UTC",
     method: ICalCalendarMethod.PUBLISH,
     prodId: { company: "event-ical", product: "wc2026" },
+    color: CALENDAR_COLOR,
   });
 
   for (const match of matches) {
     addMatchEvent(calendar, match);
   }
 
-  return calendar.toString();
+  return applyEventColors(calendar.toString());
+}
+
+function applyEventColors(ics: string): string {
+  return ics.replace(/BEGIN:VEVENT\r\n/g, `BEGIN:VEVENT\r\nCOLOR:${CALENDAR_COLOR}\r\n`);
 }
 
 function addMatchEvent(
