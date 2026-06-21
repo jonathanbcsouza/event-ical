@@ -32,7 +32,7 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
     : "";
 
   return (
-    <section className="surface-card sticky bottom-3 z-40 rounded-2xl px-4 py-4 sm:px-5">
+    <section className="surface-card rounded-2xl px-4 py-4 sm:px-5">
       <StepHeader
         step={3}
         title="Export your calendar"
