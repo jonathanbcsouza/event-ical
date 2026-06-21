@@ -45,6 +45,46 @@ export function getStageLabel(stage: MatchStage): string {
   return STAGE_LABELS[stage];
 }
 
+export type StageColor = {
+  dot: string;
+  chip: string;
+};
+
+const STAGE_COLORS: Record<MatchStage, StageColor> = {
+  group: {
+    dot: "bg-sky-500",
+    chip: "bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300",
+  },
+  r32: {
+    dot: "bg-teal-500",
+    chip: "bg-teal-100 text-teal-700 dark:bg-teal-950 dark:text-teal-300",
+  },
+  r16: {
+    dot: "bg-emerald-500",
+    chip: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
+  },
+  qf: {
+    dot: "bg-amber-500",
+    chip: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
+  },
+  sf: {
+    dot: "bg-orange-500",
+    chip: "bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300",
+  },
+  third: {
+    dot: "bg-rose-400",
+    chip: "bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300",
+  },
+  final: {
+    dot: "bg-rose-600",
+    chip: "bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300",
+  },
+};
+
+export function getStageColor(stage: MatchStage): StageColor {
+  return STAGE_COLORS[stage];
+}
+
 export function getAllTeams(): TeamRef[] {
   const seen = new Map<string, TeamRef>();
   for (const codes of Object.values(GROUPS)) {

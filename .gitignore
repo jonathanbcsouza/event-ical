@@ -37,6 +37,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local tooling (never commit)
+.local/
+.cursor/
+AGENTS.md
+CLAUDE.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

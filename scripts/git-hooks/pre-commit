@@ -1,0 +1,16 @@
+#!/bin/sh
+# Prevents accidental commits of local editor/agent tooling files.
+
+blocked=$(
+  git diff --cached --name-only --diff-filter=ACMR \
+    | grep -E '^\.cursor/|^\.local/|/AGENTS\.md$|/CLAUDE\.md$' \
+    || true
+)
+
+if [ -n "$blocked" ]; then
+  echo "Commit blocked: these paths must stay local and uncommitted:" >&2
+  echo "$blocked" | sed 's/^/  /' >&2
+  exit 1
+fi
+
+exit 0

@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { CalendarActions, StageBreakdown } from "@/components/CalendarActions";
+import { CalendarView } from "@/components/CalendarView";
 import { MatchList } from "@/components/MatchList";
 import { TeamPicker } from "@/components/TeamPicker";
+import { ViewToggle, type ViewMode } from "@/components/ViewToggle";
 import {
   ALL_MATCHES,
   filterMatchesByTeams,
@@ -14,6 +16,7 @@ import {
 export function HomePage() {
   const [selectedTeams, setSelectedTeams] = useState<string[]>([]);
   const [selectedMatchIds, setSelectedMatchIds] = useState<string[]>([]);
+  const [view, setView] = useState<ViewMode>("list");
 
   const filteredMatches = useMemo(
     () => filterMatchesByTeams(ALL_MATCHES, selectedTeams),
@@ -47,30 +50,54 @@ export function HomePage() {
   );
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-3xl flex-col px-4 pb-32 pt-8 sm:px-6">
-      <header className="mb-8 space-y-2">
+    <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-4 pb-32 pt-8 sm:px-6">
+      <header className="mb-8 overflow-hidden rounded-2xl border border-zinc-200 bg-gradient-to-br from-emerald-50 via-white to-white p-6 dark:border-zinc-800 dark:from-emerald-950/40 dark:via-zinc-950 dark:to-zinc-950 sm:p-8">
         <p className="text-sm font-medium uppercase tracking-wide text-emerald-600">
           {TOURNAMENT}
         </p>
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+        <h1 className="mt-1 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
           Build your match calendar
         </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 max-w-xl text-zinc-600 dark:text-zinc-400">
           Pick the teams you support, choose the matches you care about, then
           download or subscribe in one click.
+        </p>
+        <p className="mt-3 text-sm font-medium text-zinc-500">
+          Jun 11 &ndash; Jul 19, 2026 &middot; United States, Canada &amp; Mexico
         </p>
       </header>
 
       <div className="space-y-10">
         <TeamPicker selected={selectedTeams} onChange={setSelectedTeams} />
 
-        <div className="space-y-2">
-          <MatchList
-            matches={filteredMatches}
-            selectedIds={selectedMatchIds}
-            onSelectionChange={setSelectedMatchIds}
-          />
-          <StageBreakdown matches={selectedMatches} />
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+              {view === "list" ? "Your matches" : "Tournament calendar"}
+            </h2>
+            <ViewToggle value={view} onChange={setView} />
+          </div>
+
+          {view === "list" ? (
+            <div className="space-y-2">
+              <MatchList
+                matches={filteredMatches}
+                selectedIds={selectedMatchIds}
+                onSelectionChange={setSelectedMatchIds}
+              />
+              <StageBreakdown matches={selectedMatches} />
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <CalendarView
+                matches={ALL_MATCHES}
+                selectedTeams={selectedTeams}
+                selectedIds={selectedMatchIds}
+                onSelectionChange={setSelectedMatchIds}
+              />
+              <StageBreakdown matches={selectedMatches} />
+            </div>
+          )}
         </div>
       </div>
 

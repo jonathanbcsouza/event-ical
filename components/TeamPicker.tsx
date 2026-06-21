@@ -1,6 +1,7 @@
 "use client";
 
 import { getTeamsByGroup, type TeamRef } from "@/lib/fixtures";
+import { getFlag } from "@/lib/flags";
 
 type TeamPickerProps = {
   selected: string[];
@@ -69,12 +70,15 @@ function TeamChip({
       type="button"
       onClick={onToggle}
       aria-pressed={active}
-      className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
+      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
         active
           ? "border-emerald-600 bg-emerald-600 text-white"
           : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-zinc-500"
       }`}
     >
+      <span aria-hidden className="text-base leading-none">
+        {getFlag(team.code)}
+      </span>
       {team.name}
     </button>
   );
