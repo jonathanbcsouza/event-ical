@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { getTeamsByGroup, type TeamRef } from "@/lib/fixtures";
 import { getFlag } from "@/lib/flags";
 
@@ -9,79 +8,68 @@ type TeamPickerProps = {
   onChange: (codes: string[]) => void;
 };
 
+const SHORT_NAMES: Record<string, string> = {
+  "Bosnia and Herzegovina": "Bosnia",
+  "Czech Republic": "Czechia",
+  "South Africa": "S. Africa",
+  "South Korea": "S. Korea",
+  "Ivory Coast": "Ivory Coast",
+  "New Zealand": "N. Zealand",
+  "Saudi Arabia": "Saudi",
+  "DR Congo": "DR Congo",
+};
+
 function toggleTeam(selected: string[], code: string): string[] {
   return selected.includes(code)
     ? selected.filter((c) => c !== code)
     : [...selected, code];
 }
 
+function displayName(name: string, compact: boolean): string {
+  if (!compact) return name;
+  return SHORT_NAMES[name] ?? name;
+}
+
 export function TeamPicker({ selected, onChange }: TeamPickerProps) {
   const groups = getTeamsByGroup();
-  const [open, setOpen] = useState(selected.length === 0);
-
-  useEffect(() => {
-    if (selected.length === 0) setOpen(true);
-  }, [selected.length]);
 
   return (
-    <section className="rounded-xl border border-zinc-200 dark:border-zinc-800">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        className="flex w-full items-center gap-3 px-4 py-3 text-left"
-      >
-        <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
-          Select the teams you cheer for
-        </span>
-        {selected.length > 0 && (
-          <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
-            {selected.length}
-          </span>
-        )}
-        <span className="ml-auto flex items-center gap-2">
-          {!open && selected.length > 0 && (
-            <span aria-hidden className="text-sm leading-none">
-              {selected.slice(0, 8).map((code) => getFlag(code)).join(" ")}
-              {selected.length > 8 ? " …" : ""}
+    <section className="rounded-xl border border-zinc-200 px-3 py-3 sm:px-4 dark:border-zinc-800">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-2">
+          <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
+            Teams you cheer for
+          </h2>
+          {selected.length > 0 && (
+            <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
+              {selected.length}
             </span>
           )}
-          <svg
-            className={`size-4 text-zinc-400 transition-transform ${open ? "rotate-180" : ""}`}
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden
+        </div>
+        {selected.length > 0 && (
+          <button
+            type="button"
+            onClick={() => onChange([])}
+            className="shrink-0 py-1 text-xs text-zinc-500 underline-offset-2 hover:text-zinc-800 hover:underline dark:hover:text-zinc-200"
           >
-            <path
-              fillRule="evenodd"
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </span>
-      </button>
+            Clear all
+          </button>
+        )}
+      </div>
 
-      {open && (
-        <div className="space-y-3 border-t border-zinc-200 px-4 py-3 dark:border-zinc-800">
-          <div className="flex items-center justify-between">
-            <p className="text-xs text-zinc-500">
-              Tap a country to filter its matches.
-            </p>
-            {selected.length > 0 && (
-              <button
-                type="button"
-                onClick={() => onChange([])}
-                className="text-xs text-zinc-500 underline-offset-2 hover:text-zinc-800 hover:underline dark:hover:text-zinc-200"
-              >
-                Clear all
-              </button>
-            )}
-          </div>
-          {groups.map(({ group, teams }) => (
-            <div key={group} className="flex flex-wrap items-center gap-1.5">
-              <span className="w-6 shrink-0 text-[11px] font-semibold uppercase text-zinc-400">
-                {group}
-              </span>
+      <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
+        {groups.map(({ group, teams }) => (
+          <div
+            key={group}
+            className="grid grid-cols-[2rem_1fr] items-center gap-x-2 py-2.5 first:pt-0 last:pb-0 sm:gap-x-3"
+          >
+            <span
+              aria-hidden
+              className="flex size-7 items-center justify-center rounded-md bg-zinc-100 text-xs font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+            >
+              {group}
+            </span>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-1.5">
               {teams.map((team) => (
                 <TeamChip
                   key={team.code}
@@ -91,9 +79,9 @@ export function TeamPicker({ selected, onChange }: TeamPickerProps) {
                 />
               ))}
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
@@ -112,17 +100,21 @@ function TeamChip({
       type="button"
       onClick={onToggle}
       aria-pressed={active}
+      aria-label={team.name}
       title={team.name}
-      className={`inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs font-medium transition-colors ${
+      className={`flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg border px-1.5 py-2 text-center transition-colors sm:min-h-9 sm:rounded-md sm:px-2 sm:py-1 ${
         active
           ? "border-emerald-600 bg-emerald-600 text-white"
           : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-zinc-500"
       }`}
     >
-      <span aria-hidden className="text-sm leading-none">
+      <span aria-hidden className="shrink-0 text-base leading-none sm:text-sm">
         {getFlag(team.code)}
       </span>
-      {team.name}
+      <span className="line-clamp-2 text-[11px] font-medium leading-tight sm:line-clamp-1 sm:text-xs">
+        <span className="sm:hidden">{displayName(team.name, true)}</span>
+        <span className="hidden sm:inline">{team.name}</span>
+      </span>
     </button>
   );
 }
