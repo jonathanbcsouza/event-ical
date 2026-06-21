@@ -18,13 +18,15 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_APP_URL` to your public URL in production.
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_APP_URL` to your public URL in production. Optional: set `NEXT_PUBLIC_GA_MEASUREMENT_ID` for Google Analytics (e.g. `G-BYRPBMKJ6M`).
 
 ## Deploy on Vercel
 
 1. Push this repo to GitHub
 2. Import the project in [Vercel](https://vercel.com)
-3. Set environment variable: `NEXT_PUBLIC_APP_URL=https://world-cup-ical.vercel.app`
+3. Set environment variables:
+   - `NEXT_PUBLIC_APP_URL=https://world-cup-ical.vercel.app`
+   - `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-BYRPBMKJ6M`
 4. Deploy — Next.js is auto-detected
 
 ## Data

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { PitchBackground } from "@/components/PitchBackground";
 import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
@@ -35,6 +36,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <GoogleAnalytics />
       </head>
       <body className="min-h-full flex flex-col text-zinc-900 dark:text-zinc-50">
         <PitchBackground />
