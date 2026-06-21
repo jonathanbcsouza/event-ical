@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "World Cup 2026 Calendar",
+  title: "World Cup 2026 - Calendar",
   description:
     "Pick your teams and matches, then download or subscribe to a FIFA World Cup 2026 calendar.",
 };

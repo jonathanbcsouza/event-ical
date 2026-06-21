@@ -24,7 +24,7 @@ Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_APP_URL` to your public
 
 1. Push this repo to GitHub
 2. Import the project in [Vercel](https://vercel.com)
-3. Set environment variable: `NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app`
+3. Set environment variable: `NEXT_PUBLIC_APP_URL=https://world-cup-ical.vercel.app`
 4. Deploy — Next.js is auto-detected
 
 ## Data

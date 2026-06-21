@@ -10,7 +10,7 @@ const MATCH_DURATION_HOURS = 2;
 const CALENDAR_COLOR = "#059669";
 const CALENDAR_DOMAIN =
   process.env.NEXT_PUBLIC_APP_URL?.replace(/^https?:\/\//, "") ??
-  "event-ical.vercel.app";
+  "world-cup-ical.vercel.app";
 
 export function generateCalendarIcs(matchIds: string[]): string {
   const matches = getMatchesByIds(matchIds).sort(
