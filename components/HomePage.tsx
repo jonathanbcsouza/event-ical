@@ -73,7 +73,7 @@ export function HomePage() {
         <div className="space-y-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-50 sm:text-lg">
-              {view === "list" ? "See your matches (these will all appear on your calendar!)" : "Tournament calendar"}
+              {view === "list" ? "Step 2: See your matches (these will all appear on your calendar!)" : "Tournament calendar"}
             </h2>
             <ViewToggle value={view} onChange={setView} />
           </div>

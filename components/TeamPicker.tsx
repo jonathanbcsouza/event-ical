@@ -38,7 +38,7 @@ export function TeamPicker({ selected, onChange }: TeamPickerProps) {
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2">
           <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
-            Select the teams you cheer for
+            Step 1: Select the teams you cheer for
           </h2>
           {selected.length > 0 && (
             <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
