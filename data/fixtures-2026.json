@@ -1,0 +1,1745 @@
+{
+  "tournament": "FIFA World Cup 2026",
+  "startDate": "2026-06-11",
+  "endDate": "2026-07-19",
+  "groups": {
+    "A": [
+      "MEX",
+      "RSA",
+      "KOR",
+      "CZE"
+    ],
+    "B": [
+      "CAN",
+      "BIH",
+      "SUI",
+      "QAT"
+    ],
+    "C": [
+      "BRA",
+      "MAR",
+      "SCO",
+      "HAI"
+    ],
+    "D": [
+      "USA",
+      "PAR",
+      "AUS",
+      "TUR"
+    ],
+    "E": [
+      "GER",
+      "ECU",
+      "CIV",
+      "CUW"
+    ],
+    "F": [
+      "NED",
+      "JPN",
+      "TUN",
+      "SWE"
+    ],
+    "G": [
+      "BEL",
+      "IRN",
+      "EGY",
+      "NZL"
+    ],
+    "H": [
+      "ESP",
+      "CPV",
+      "KSA",
+      "URU"
+    ],
+    "I": [
+      "FRA",
+      "SEN",
+      "IRQ",
+      "NOR"
+    ],
+    "J": [
+      "ARG",
+      "ALG",
+      "AUT",
+      "JOR"
+    ],
+    "K": [
+      "POR",
+      "COL",
+      "UZB",
+      "COD"
+    ],
+    "L": [
+      "ENG",
+      "CRO",
+      "PAN",
+      "GHA"
+    ]
+  },
+  "matches": [
+    {
+      "id": "1",
+      "matchNumber": 1,
+      "stage": "group",
+      "home": {
+        "code": "MEX",
+        "name": "Mexico"
+      },
+      "away": {
+        "code": "RSA",
+        "name": "South Africa"
+      },
+      "startUtc": "2026-06-11T19:00:00.000Z",
+      "venue": "Mexico City Stadium",
+      "city": "Mexico City"
+    },
+    {
+      "id": "2",
+      "matchNumber": 2,
+      "stage": "group",
+      "home": {
+        "code": "KOR",
+        "name": "South Korea"
+      },
+      "away": {
+        "code": "CZE",
+        "name": "Czech Republic"
+      },
+      "startUtc": "2026-06-11T21:00:00.000Z",
+      "venue": "Estadio Guadalajara",
+      "city": "Guadalajara"
+    },
+    {
+      "id": "3",
+      "matchNumber": 3,
+      "stage": "group",
+      "home": {
+        "code": "CAN",
+        "name": "Canada"
+      },
+      "away": {
+        "code": "BIH",
+        "name": "Bosnia and Herzegovina"
+      },
+      "startUtc": "2026-06-12T17:00:00.000Z",
+      "venue": "Toronto Stadium",
+      "city": "Toronto"
+    },
+    {
+      "id": "4",
+      "matchNumber": 4,
+      "stage": "group",
+      "home": {
+        "code": "USA",
+        "name": "USA"
+      },
+      "away": {
+        "code": "PAR",
+        "name": "Paraguay"
+      },
+      "startUtc": "2026-06-12T23:00:00.000Z",
+      "venue": "Los Angeles Stadium",
+      "city": "Los Angeles"
+    },
+    {
+      "id": "5",
+      "matchNumber": 5,
+      "stage": "group",
+      "home": {
+        "code": "QAT",
+        "name": "Qatar"
+      },
+      "away": {
+        "code": "SUI",
+        "name": "Switzerland"
+      },
+      "startUtc": "2026-06-13T20:00:00.000Z",
+      "venue": "San Francisco Bay Area Stadium",
+      "city": "San Francisco Bay Area"
+    },
+    {
+      "id": "6",
+      "matchNumber": 6,
+      "stage": "group",
+      "home": {
+        "code": "BRA",
+        "name": "Brazil"
+      },
+      "away": {
+        "code": "MAR",
+        "name": "Morocco"
+      },
+      "startUtc": "2026-06-13T20:00:00.000Z",
+      "venue": "New York New Jersey Stadium",
+      "city": "New York/NJ"
+    },
+    {
+      "id": "7",
+      "matchNumber": 7,
+      "stage": "group",
+      "home": {
+        "code": "HAI",
+        "name": "Haiti"
+      },
+      "away": {
+        "code": "SCO",
+        "name": "Scotland"
+      },
+      "startUtc": "2026-06-13T23:00:00.000Z",
+      "venue": "Boston Stadium",
+      "city": "Boston"
+    },
+    {
+      "id": "8",
+      "matchNumber": 8,
+      "stage": "group",
+      "home": {
+        "code": "AUS",
+        "name": "Australia"
+      },
+      "away": {
+        "code": "TUR",
+        "name": "Türkiye"
+      },
+      "startUtc": "2026-06-13T20:00:00.000Z",
+      "venue": "BC Place Vancouver",
+      "city": "Vancouver"
+    },
+    {
+      "id": "9",
+      "matchNumber": 9,
+      "stage": "group",
+      "home": {
+        "code": "GER",
+        "name": "Germany"
+      },
+      "away": {
+        "code": "CUW",
+        "name": "Curaçao"
+      },
+      "startUtc": "2026-06-14T18:00:00.000Z",
+      "venue": "Houston Stadium",
+      "city": "Houston"
+    },
+    {
+      "id": "10",
+      "matchNumber": 10,
+      "stage": "group",
+      "home": {
+        "code": "NED",
+        "name": "Netherlands"
+      },
+      "away": {
+        "code": "JPN",
+        "name": "Japan"
+      },
+      "startUtc": "2026-06-14T21:00:00.000Z",
+      "venue": "Dallas Stadium",
+      "city": "Dallas"
+    },
+    {
+      "id": "11",
+      "matchNumber": 11,
+      "stage": "group",
+      "home": {
+        "code": "CIV",
+        "name": "Ivory Coast"
+      },
+      "away": {
+        "code": "ECU",
+        "name": "Ecuador"
+      },
+      "startUtc": "2026-06-14T23:00:00.000Z",
+      "venue": "Philadelphia Stadium",
+      "city": "Philadelphia"
+    },
+    {
+      "id": "12",
+      "matchNumber": 12,
+      "stage": "group",
+      "home": {
+        "code": "SWE",
+        "name": "Sweden"
+      },
+      "away": {
+        "code": "TUN",
+        "name": "Tunisia"
+      },
+      "startUtc": "2026-06-14T18:00:00.000Z",
+      "venue": "Estadio Monterrey",
+      "city": "Monterrey"
+    },
+    {
+      "id": "13",
+      "matchNumber": 13,
+      "stage": "group",
+      "home": {
+        "code": "ESP",
+        "name": "Spain"
+      },
+      "away": {
+        "code": "CPV",
+        "name": "Cape Verde"
+      },
+      "startUtc": "2026-06-15T17:00:00.000Z",
+      "venue": "Atlanta Stadium",
+      "city": "Atlanta"
+    },
+    {
+      "id": "14",
+      "matchNumber": 14,
+      "stage": "group",
+      "home": {
+        "code": "BEL",
+        "name": "Belgium"
+      },
+      "away": {
+        "code": "EGY",
+        "name": "Egypt"
+      },
+      "startUtc": "2026-06-15T23:00:00.000Z",
+      "venue": "Seattle Stadium",
+      "city": "Seattle"
+    },
+    {
+      "id": "15",
+      "matchNumber": 15,
+      "stage": "group",
+      "home": {
+        "code": "KSA",
+        "name": "Saudi Arabia"
+      },
+      "away": {
+        "code": "URU",
+        "name": "Uruguay"
+      },
+      "startUtc": "2026-06-15T23:00:00.000Z",
+      "venue": "Miami Stadium",
+      "city": "Miami"
+    },
+    {
+      "id": "16",
+      "matchNumber": 16,
+      "stage": "group",
+      "home": {
+        "code": "IRN",
+        "name": "Iran"
+      },
+      "away": {
+        "code": "NZL",
+        "name": "New Zealand"
+      },
+      "startUtc": "2026-06-15T20:00:00.000Z",
+      "venue": "Los Angeles Stadium",
+      "city": "Los Angeles"
+    },
+    {
+      "id": "17",
+      "matchNumber": 17,
+      "stage": "group",
+      "home": {
+        "code": "FRA",
+        "name": "France"
+      },
+      "away": {
+        "code": "SEN",
+        "name": "Senegal"
+      },
+      "startUtc": "2026-06-16T17:00:00.000Z",
+      "venue": "New York New Jersey Stadium",
+      "city": "New York/NJ"
+    },
+    {
+      "id": "18",
+      "matchNumber": 18,
+      "stage": "group",
+      "home": {
+        "code": "IRQ",
+        "name": "Iraq"
+      },
+      "away": {
+        "code": "NOR",
+        "name": "Norway"
+      },
+      "startUtc": "2026-06-16T20:00:00.000Z",
+      "venue": "Boston Stadium",
+      "city": "Boston"
+    },
+    {
+      "id": "19",
+      "matchNumber": 19,
+      "stage": "group",
+      "home": {
+        "code": "ARG",
+        "name": "Argentina"
+      },
+      "away": {
+        "code": "ALG",
+        "name": "Algeria"
+      },
+      "startUtc": "2026-06-16T00:00:00.000Z",
+      "venue": "Kansas City Stadium",
+      "city": "Kansas City"
+    },
+    {
+      "id": "20",
+      "matchNumber": 20,
+      "stage": "group",
+      "home": {
+        "code": "AUT",
+        "name": "Austria"
+      },
+      "away": {
+        "code": "JOR",
+        "name": "Jordan"
+      },
+      "startUtc": "2026-06-16T20:00:00.000Z",
+      "venue": "San Francisco Bay Area Stadium",
+      "city": "San Francisco Bay Area"
+    },
+    {
+      "id": "21",
+      "matchNumber": 21,
+      "stage": "group",
+      "home": {
+        "code": "POR",
+        "name": "Portugal"
+      },
+      "away": {
+        "code": "COD",
+        "name": "DR Congo"
+      },
+      "startUtc": "2026-06-17T18:00:00.000Z",
+      "venue": "Houston Stadium",
+      "city": "Houston"
+    },
+    {
+      "id": "22",
+      "matchNumber": 22,
+      "stage": "group",
+      "home": {
+        "code": "ENG",
+        "name": "England"
+      },
+      "away": {
+        "code": "CRO",
+        "name": "Croatia"
+      },
+      "startUtc": "2026-06-17T21:00:00.000Z",
+      "venue": "Dallas Stadium",
+      "city": "Dallas"
+    },
+    {
+      "id": "23",
+      "matchNumber": 23,
+      "stage": "group",
+      "home": {
+        "code": "GHA",
+        "name": "Ghana"
+      },
+      "away": {
+        "code": "PAN",
+        "name": "Panama"
+      },
+      "startUtc": "2026-06-17T23:00:00.000Z",
+      "venue": "Toronto Stadium",
+      "city": "Toronto"
+    },
+    {
+      "id": "24",
+      "matchNumber": 24,
+      "stage": "group",
+      "home": {
+        "code": "UZB",
+        "name": "Uzbekistan"
+      },
+      "away": {
+        "code": "COL",
+        "name": "Colombia"
+      },
+      "startUtc": "2026-06-17T18:00:00.000Z",
+      "venue": "Mexico City Stadium",
+      "city": "Mexico City"
+    },
+    {
+      "id": "25",
+      "matchNumber": 25,
+      "stage": "group",
+      "home": {
+        "code": "CZE",
+        "name": "Czech Republic"
+      },
+      "away": {
+        "code": "RSA",
+        "name": "South Africa"
+      },
+      "startUtc": "2026-06-18T17:00:00.000Z",
+      "venue": "Atlanta Stadium",
+      "city": "Atlanta"
+    },
+    {
+      "id": "26",
+      "matchNumber": 26,
+      "stage": "group",
+      "home": {
+        "code": "SUI",
+        "name": "Switzerland"
+      },
+      "away": {
+        "code": "BIH",
+        "name": "Bosnia and Herzegovina"
+      },
+      "startUtc": "2026-06-18T23:00:00.000Z",
+      "venue": "Los Angeles Stadium",
+      "city": "Los Angeles"
+    },
+    {
+      "id": "27",
+      "matchNumber": 27,
+      "stage": "group",
+      "home": {
+        "code": "CAN",
+        "name": "Canada"
+      },
+      "away": {
+        "code": "QAT",
+        "name": "Qatar"
+      },
+      "startUtc": "2026-06-18T02:00:00.000Z",
+      "venue": "BC Place Vancouver",
+      "city": "Vancouver"
+    },
+    {
+      "id": "28",
+      "matchNumber": 28,
+      "stage": "group",
+      "home": {
+        "code": "MEX",
+        "name": "Mexico"
+      },
+      "away": {
+        "code": "KOR",
+        "name": "South Korea"
+      },
+      "startUtc": "2026-06-18T18:00:00.000Z",
+      "venue": "Estadio Guadalajara",
+      "city": "Guadalajara"
+    },
+    {
+      "id": "29",
+      "matchNumber": 29,
+      "stage": "group",
+      "home": {
+        "code": "USA",
+        "name": "USA"
+      },
+      "away": {
+        "code": "AUS",
+        "name": "Australia"
+      },
+      "startUtc": "2026-06-19T20:00:00.000Z",
+      "venue": "Seattle Stadium",
+      "city": "Seattle"
+    },
+    {
+      "id": "30",
+      "matchNumber": 30,
+      "stage": "group",
+      "home": {
+        "code": "SCO",
+        "name": "Scotland"
+      },
+      "away": {
+        "code": "MAR",
+        "name": "Morocco"
+      },
+      "startUtc": "2026-06-19T20:00:00.000Z",
+      "venue": "Boston Stadium",
+      "city": "Boston"
+    },
+    {
+      "id": "31",
+      "matchNumber": 31,
+      "stage": "group",
+      "home": {
+        "code": "BRA",
+        "name": "Brazil"
+      },
+      "away": {
+        "code": "HAI",
+        "name": "Haiti"
+      },
+      "startUtc": "2026-06-19T23:00:00.000Z",
+      "venue": "Philadelphia Stadium",
+      "city": "Philadelphia"
+    },
+    {
+      "id": "32",
+      "matchNumber": 32,
+      "stage": "group",
+      "home": {
+        "code": "TUR",
+        "name": "Türkiye"
+      },
+      "away": {
+        "code": "PAR",
+        "name": "Paraguay"
+      },
+      "startUtc": "2026-06-19T20:00:00.000Z",
+      "venue": "San Francisco Bay Area Stadium",
+      "city": "San Francisco Bay Area"
+    },
+    {
+      "id": "33",
+      "matchNumber": 33,
+      "stage": "group",
+      "home": {
+        "code": "NED",
+        "name": "Netherlands"
+      },
+      "away": {
+        "code": "SWE",
+        "name": "Sweden"
+      },
+      "startUtc": "2026-06-20T18:00:00.000Z",
+      "venue": "Houston Stadium",
+      "city": "Houston"
+    },
+    {
+      "id": "34",
+      "matchNumber": 34,
+      "stage": "group",
+      "home": {
+        "code": "GER",
+        "name": "Germany"
+      },
+      "away": {
+        "code": "CIV",
+        "name": "Ivory Coast"
+      },
+      "startUtc": "2026-06-20T20:00:00.000Z",
+      "venue": "Toronto Stadium",
+      "city": "Toronto"
+    },
+    {
+      "id": "35",
+      "matchNumber": 35,
+      "stage": "group",
+      "home": {
+        "code": "ECU",
+        "name": "Ecuador"
+      },
+      "away": {
+        "code": "CUW",
+        "name": "Curaçao"
+      },
+      "startUtc": "2026-06-20T00:00:00.000Z",
+      "venue": "Kansas City Stadium",
+      "city": "Kansas City"
+    },
+    {
+      "id": "36",
+      "matchNumber": 36,
+      "stage": "group",
+      "home": {
+        "code": "TUN",
+        "name": "Tunisia"
+      },
+      "away": {
+        "code": "JPN",
+        "name": "Japan"
+      },
+      "startUtc": "2026-06-20T18:00:00.000Z",
+      "venue": "Estadio Monterrey",
+      "city": "Monterrey"
+    },
+    {
+      "id": "37",
+      "matchNumber": 37,
+      "stage": "group",
+      "home": {
+        "code": "ESP",
+        "name": "Spain"
+      },
+      "away": {
+        "code": "KSA",
+        "name": "Saudi Arabia"
+      },
+      "startUtc": "2026-06-21T17:00:00.000Z",
+      "venue": "Atlanta Stadium",
+      "city": "Atlanta"
+    },
+    {
+      "id": "38",
+      "matchNumber": 38,
+      "stage": "group",
+      "home": {
+        "code": "BEL",
+        "name": "Belgium"
+      },
+      "away": {
+        "code": "IRN",
+        "name": "Iran"
+      },
+      "startUtc": "2026-06-21T23:00:00.000Z",
+      "venue": "Los Angeles Stadium",
+      "city": "Los Angeles"
+    },
+    {
+      "id": "39",
+      "matchNumber": 39,
+      "stage": "group",
+      "home": {
+        "code": "URU",
+        "name": "Uruguay"
+      },
+      "away": {
+        "code": "CPV",
+        "name": "Cape Verde"
+      },
+      "startUtc": "2026-06-21T23:00:00.000Z",
+      "venue": "Miami Stadium",
+      "city": "Miami"
+    },
+    {
+      "id": "40",
+      "matchNumber": 40,
+      "stage": "group",
+      "home": {
+        "code": "NZL",
+        "name": "New Zealand"
+      },
+      "away": {
+        "code": "EGY",
+        "name": "Egypt"
+      },
+      "startUtc": "2026-06-21T20:00:00.000Z",
+      "venue": "BC Place Vancouver",
+      "city": "Vancouver"
+    },
+    {
+      "id": "41",
+      "matchNumber": 41,
+      "stage": "group",
+      "home": {
+        "code": "NOR",
+        "name": "Norway"
+      },
+      "away": {
+        "code": "SEN",
+        "name": "Senegal"
+      },
+      "startUtc": "2026-06-22T17:00:00.000Z",
+      "venue": "New York New Jersey Stadium",
+      "city": "New York/NJ"
+    },
+    {
+      "id": "42",
+      "matchNumber": 42,
+      "stage": "group",
+      "home": {
+        "code": "FRA",
+        "name": "France"
+      },
+      "away": {
+        "code": "IRQ",
+        "name": "Iraq"
+      },
+      "startUtc": "2026-06-22T20:00:00.000Z",
+      "venue": "Philadelphia Stadium",
+      "city": "Philadelphia"
+    },
+    {
+      "id": "43",
+      "matchNumber": 43,
+      "stage": "group",
+      "home": {
+        "code": "ARG",
+        "name": "Argentina"
+      },
+      "away": {
+        "code": "AUT",
+        "name": "Austria"
+      },
+      "startUtc": "2026-06-22T00:00:00.000Z",
+      "venue": "Dallas Stadium",
+      "city": "Dallas"
+    },
+    {
+      "id": "44",
+      "matchNumber": 44,
+      "stage": "group",
+      "home": {
+        "code": "JOR",
+        "name": "Jordan"
+      },
+      "away": {
+        "code": "ALG",
+        "name": "Algeria"
+      },
+      "startUtc": "2026-06-22T20:00:00.000Z",
+      "venue": "San Francisco Bay Area Stadium",
+      "city": "San Francisco Bay Area"
+    },
+    {
+      "id": "45",
+      "matchNumber": 45,
+      "stage": "group",
+      "home": {
+        "code": "ENG",
+        "name": "England"
+      },
+      "away": {
+        "code": "GHA",
+        "name": "Ghana"
+      },
+      "startUtc": "2026-06-23T17:00:00.000Z",
+      "venue": "Boston Stadium",
+      "city": "Boston"
+    },
+    {
+      "id": "46",
+      "matchNumber": 46,
+      "stage": "group",
+      "home": {
+        "code": "PAN",
+        "name": "Panama"
+      },
+      "away": {
+        "code": "CRO",
+        "name": "Croatia"
+      },
+      "startUtc": "2026-06-23T20:00:00.000Z",
+      "venue": "Toronto Stadium",
+      "city": "Toronto"
+    },
+    {
+      "id": "47",
+      "matchNumber": 47,
+      "stage": "group",
+      "home": {
+        "code": "POR",
+        "name": "Portugal"
+      },
+      "away": {
+        "code": "UZB",
+        "name": "Uzbekistan"
+      },
+      "startUtc": "2026-06-23T00:00:00.000Z",
+      "venue": "Houston Stadium",
+      "city": "Houston"
+    },
+    {
+      "id": "48",
+      "matchNumber": 48,
+      "stage": "group",
+      "home": {
+        "code": "COL",
+        "name": "Colombia"
+      },
+      "away": {
+        "code": "COD",
+        "name": "DR Congo"
+      },
+      "startUtc": "2026-06-23T18:00:00.000Z",
+      "venue": "Estadio Guadalajara",
+      "city": "Guadalajara"
+    },
+    {
+      "id": "49",
+      "matchNumber": 49,
+      "stage": "group",
+      "home": {
+        "code": "SCO",
+        "name": "Scotland"
+      },
+      "away": {
+        "code": "BRA",
+        "name": "Brazil"
+      },
+      "startUtc": "2026-06-24T17:00:00.000Z",
+      "venue": "Miami Stadium",
+      "city": "Miami"
+    },
+    {
+      "id": "50",
+      "matchNumber": 50,
+      "stage": "group",
+      "home": {
+        "code": "MAR",
+        "name": "Morocco"
+      },
+      "away": {
+        "code": "HAI",
+        "name": "Haiti"
+      },
+      "startUtc": "2026-06-24T20:00:00.000Z",
+      "venue": "Atlanta Stadium",
+      "city": "Atlanta"
+    },
+    {
+      "id": "51",
+      "matchNumber": 51,
+      "stage": "group",
+      "home": {
+        "code": "SUI",
+        "name": "Switzerland"
+      },
+      "away": {
+        "code": "CAN",
+        "name": "Canada"
+      },
+      "startUtc": "2026-06-24T02:00:00.000Z",
+      "venue": "BC Place Vancouver",
+      "city": "Vancouver"
+    },
+    {
+      "id": "52",
+      "matchNumber": 52,
+      "stage": "group",
+      "home": {
+        "code": "BIH",
+        "name": "Bosnia and Herzegovina"
+      },
+      "away": {
+        "code": "QAT",
+        "name": "Qatar"
+      },
+      "startUtc": "2026-06-24T20:00:00.000Z",
+      "venue": "Seattle Stadium",
+      "city": "Seattle"
+    },
+    {
+      "id": "53",
+      "matchNumber": 53,
+      "stage": "group",
+      "home": {
+        "code": "CZE",
+        "name": "Czech Republic"
+      },
+      "away": {
+        "code": "MEX",
+        "name": "Mexico"
+      },
+      "startUtc": "2026-06-24T21:00:00.000Z",
+      "venue": "Mexico City Stadium",
+      "city": "Mexico City"
+    },
+    {
+      "id": "54",
+      "matchNumber": 54,
+      "stage": "group",
+      "home": {
+        "code": "RSA",
+        "name": "South Africa"
+      },
+      "away": {
+        "code": "KOR",
+        "name": "South Korea"
+      },
+      "startUtc": "2026-06-24T00:00:00.000Z",
+      "venue": "Estadio Monterrey",
+      "city": "Monterrey"
+    },
+    {
+      "id": "55",
+      "matchNumber": 55,
+      "stage": "group",
+      "home": {
+        "code": "CUW",
+        "name": "Curaçao"
+      },
+      "away": {
+        "code": "CIV",
+        "name": "Ivory Coast"
+      },
+      "startUtc": "2026-06-25T17:00:00.000Z",
+      "venue": "Philadelphia Stadium",
+      "city": "Philadelphia"
+    },
+    {
+      "id": "56",
+      "matchNumber": 56,
+      "stage": "group",
+      "home": {
+        "code": "ECU",
+        "name": "Ecuador"
+      },
+      "away": {
+        "code": "GER",
+        "name": "Germany"
+      },
+      "startUtc": "2026-06-25T20:00:00.000Z",
+      "venue": "New York New Jersey Stadium",
+      "city": "New York/NJ"
+    },
+    {
+      "id": "57",
+      "matchNumber": 57,
+      "stage": "group",
+      "home": {
+        "code": "JPN",
+        "name": "Japan"
+      },
+      "away": {
+        "code": "SWE",
+        "name": "Sweden"
+      },
+      "startUtc": "2026-06-25T00:00:00.000Z",
+      "venue": "Dallas Stadium",
+      "city": "Dallas"
+    },
+    {
+      "id": "58",
+      "matchNumber": 58,
+      "stage": "group",
+      "home": {
+        "code": "TUN",
+        "name": "Tunisia"
+      },
+      "away": {
+        "code": "NED",
+        "name": "Netherlands"
+      },
+      "startUtc": "2026-06-25T18:00:00.000Z",
+      "venue": "Kansas City Stadium",
+      "city": "Kansas City"
+    },
+    {
+      "id": "59",
+      "matchNumber": 59,
+      "stage": "group",
+      "home": {
+        "code": "TUR",
+        "name": "Türkiye"
+      },
+      "away": {
+        "code": "USA",
+        "name": "USA"
+      },
+      "startUtc": "2026-06-25T23:00:00.000Z",
+      "venue": "Los Angeles Stadium",
+      "city": "Los Angeles"
+    },
+    {
+      "id": "60",
+      "matchNumber": 60,
+      "stage": "group",
+      "home": {
+        "code": "PAR",
+        "name": "Paraguay"
+      },
+      "away": {
+        "code": "AUS",
+        "name": "Australia"
+      },
+      "startUtc": "2026-06-25T02:00:00.000Z",
+      "venue": "San Francisco Bay Area Stadium",
+      "city": "San Francisco Bay Area"
+    },
+    {
+      "id": "61",
+      "matchNumber": 61,
+      "stage": "group",
+      "home": {
+        "code": "BEL",
+        "name": "Belgium"
+      },
+      "away": {
+        "code": "NZL",
+        "name": "New Zealand"
+      },
+      "startUtc": "2026-06-26T20:00:00.000Z",
+      "venue": "Seattle Stadium",
+      "city": "Seattle"
+    },
+    {
+      "id": "62",
+      "matchNumber": 62,
+      "stage": "group",
+      "home": {
+        "code": "IRN",
+        "name": "Iran"
+      },
+      "away": {
+        "code": "EGY",
+        "name": "Egypt"
+      },
+      "startUtc": "2026-06-26T23:00:00.000Z",
+      "venue": "BC Place Vancouver",
+      "city": "Vancouver"
+    },
+    {
+      "id": "63",
+      "matchNumber": 63,
+      "stage": "group",
+      "home": {
+        "code": "ESP",
+        "name": "Spain"
+      },
+      "away": {
+        "code": "URU",
+        "name": "Uruguay"
+      },
+      "startUtc": "2026-06-26T00:00:00.000Z",
+      "venue": "Mexico City Stadium",
+      "city": "Mexico City"
+    },
+    {
+      "id": "64",
+      "matchNumber": 64,
+      "stage": "group",
+      "home": {
+        "code": "CPV",
+        "name": "Cape Verde"
+      },
+      "away": {
+        "code": "KSA",
+        "name": "Saudi Arabia"
+      },
+      "startUtc": "2026-06-26T18:00:00.000Z",
+      "venue": "Estadio Guadalajara",
+      "city": "Guadalajara"
+    },
+    {
+      "id": "65",
+      "matchNumber": 65,
+      "stage": "group",
+      "home": {
+        "code": "FRA",
+        "name": "France"
+      },
+      "away": {
+        "code": "NOR",
+        "name": "Norway"
+      },
+      "startUtc": "2026-06-26T20:00:00.000Z",
+      "venue": "Boston Stadium",
+      "city": "Boston"
+    },
+    {
+      "id": "66",
+      "matchNumber": 66,
+      "stage": "group",
+      "home": {
+        "code": "SEN",
+        "name": "Senegal"
+      },
+      "away": {
+        "code": "IRQ",
+        "name": "Iraq"
+      },
+      "startUtc": "2026-06-26T23:00:00.000Z",
+      "venue": "Miami Stadium",
+      "city": "Miami"
+    },
+    {
+      "id": "67",
+      "matchNumber": 67,
+      "stage": "group",
+      "home": {
+        "code": "PAN",
+        "name": "Panama"
+      },
+      "away": {
+        "code": "ENG",
+        "name": "England"
+      },
+      "startUtc": "2026-06-27T17:00:00.000Z",
+      "venue": "New York New Jersey Stadium",
+      "city": "New York/NJ"
+    },
+    {
+      "id": "68",
+      "matchNumber": 68,
+      "stage": "group",
+      "home": {
+        "code": "CRO",
+        "name": "Croatia"
+      },
+      "away": {
+        "code": "GHA",
+        "name": "Ghana"
+      },
+      "startUtc": "2026-06-27T20:00:00.000Z",
+      "venue": "Philadelphia Stadium",
+      "city": "Philadelphia"
+    },
+    {
+      "id": "69",
+      "matchNumber": 69,
+      "stage": "group",
+      "home": {
+        "code": "JOR",
+        "name": "Jordan"
+      },
+      "away": {
+        "code": "ARG",
+        "name": "Argentina"
+      },
+      "startUtc": "2026-06-27T00:00:00.000Z",
+      "venue": "Dallas Stadium",
+      "city": "Dallas"
+    },
+    {
+      "id": "70",
+      "matchNumber": 70,
+      "stage": "group",
+      "home": {
+        "code": "ALG",
+        "name": "Algeria"
+      },
+      "away": {
+        "code": "AUT",
+        "name": "Austria"
+      },
+      "startUtc": "2026-06-27T18:00:00.000Z",
+      "venue": "Kansas City Stadium",
+      "city": "Kansas City"
+    },
+    {
+      "id": "71",
+      "matchNumber": 71,
+      "stage": "group",
+      "home": {
+        "code": "COL",
+        "name": "Colombia"
+      },
+      "away": {
+        "code": "POR",
+        "name": "Portugal"
+      },
+      "startUtc": "2026-06-27T20:00:00.000Z",
+      "venue": "Miami Stadium",
+      "city": "Miami"
+    },
+    {
+      "id": "72",
+      "matchNumber": 72,
+      "stage": "group",
+      "home": {
+        "code": "COD",
+        "name": "DR Congo"
+      },
+      "away": {
+        "code": "UZB",
+        "name": "Uzbekistan"
+      },
+      "startUtc": "2026-06-27T23:00:00.000Z",
+      "venue": "Atlanta Stadium",
+      "city": "Atlanta"
+    },
+    {
+      "id": "73",
+      "matchNumber": 73,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group A Runner-up"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Group B Runner-up"
+      },
+      "startUtc": "2026-06-28T20:00:00.000Z",
+      "venue": "Los Angeles Stadium",
+      "city": "Los Angeles"
+    },
+    {
+      "id": "74",
+      "matchNumber": 74,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group E Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "3rd Place (A/B/C/D/F)"
+      },
+      "startUtc": "2026-06-29T17:00:00.000Z",
+      "venue": "Boston Stadium",
+      "city": "Boston"
+    },
+    {
+      "id": "75",
+      "matchNumber": 75,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group F Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Group C Runner-up"
+      },
+      "startUtc": "2026-06-29T21:00:00.000Z",
+      "venue": "Estadio Monterrey",
+      "city": "Monterrey"
+    },
+    {
+      "id": "76",
+      "matchNumber": 76,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group C Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Group F Runner-up"
+      },
+      "startUtc": "2026-06-29T00:00:00.000Z",
+      "venue": "Houston Stadium",
+      "city": "Houston"
+    },
+    {
+      "id": "77",
+      "matchNumber": 77,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group I Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "3rd Place (C/D/F/G/H)"
+      },
+      "startUtc": "2026-06-30T17:00:00.000Z",
+      "venue": "New York New Jersey Stadium",
+      "city": "New York/NJ"
+    },
+    {
+      "id": "78",
+      "matchNumber": 78,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group E Runner-up"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Group I Runner-up"
+      },
+      "startUtc": "2026-06-30T21:00:00.000Z",
+      "venue": "Dallas Stadium",
+      "city": "Dallas"
+    },
+    {
+      "id": "79",
+      "matchNumber": 79,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group A Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "3rd Place (C/E/F/H/I)"
+      },
+      "startUtc": "2026-06-30T00:00:00.000Z",
+      "venue": "Mexico City Stadium",
+      "city": "Mexico City"
+    },
+    {
+      "id": "80",
+      "matchNumber": 80,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group L Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "3rd Place (E/H/I/J/K)"
+      },
+      "startUtc": "2026-07-01T17:00:00.000Z",
+      "venue": "Atlanta Stadium",
+      "city": "Atlanta"
+    },
+    {
+      "id": "81",
+      "matchNumber": 81,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group D Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "3rd Place (B/E/F/I/J)"
+      },
+      "startUtc": "2026-07-01T23:00:00.000Z",
+      "venue": "San Francisco Bay Area Stadium",
+      "city": "San Francisco Bay Area"
+    },
+    {
+      "id": "82",
+      "matchNumber": 82,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group G Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "3rd Place (A/E/H/I/J)"
+      },
+      "startUtc": "2026-07-01T02:00:00.000Z",
+      "venue": "Seattle Stadium",
+      "city": "Seattle"
+    },
+    {
+      "id": "83",
+      "matchNumber": 83,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group K Runner-up"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Group L Runner-up"
+      },
+      "startUtc": "2026-07-02T17:00:00.000Z",
+      "venue": "Toronto Stadium",
+      "city": "Toronto"
+    },
+    {
+      "id": "84",
+      "matchNumber": 84,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group H Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Group J Runner-up"
+      },
+      "startUtc": "2026-07-02T23:00:00.000Z",
+      "venue": "Los Angeles Stadium",
+      "city": "Los Angeles"
+    },
+    {
+      "id": "85",
+      "matchNumber": 85,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group B Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "3rd Place (E/F/G/I/J)"
+      },
+      "startUtc": "2026-07-02T02:00:00.000Z",
+      "venue": "BC Place Vancouver",
+      "city": "Vancouver"
+    },
+    {
+      "id": "86",
+      "matchNumber": 86,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group J Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Group H Runner-up"
+      },
+      "startUtc": "2026-07-03T17:00:00.000Z",
+      "venue": "Miami Stadium",
+      "city": "Miami"
+    },
+    {
+      "id": "87",
+      "matchNumber": 87,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group K Winner"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "3rd Place (D/E/I/J/L)"
+      },
+      "startUtc": "2026-07-03T21:00:00.000Z",
+      "venue": "Kansas City Stadium",
+      "city": "Kansas City"
+    },
+    {
+      "id": "88",
+      "matchNumber": 88,
+      "stage": "r32",
+      "home": {
+        "code": "TBD",
+        "name": "Group D Runner-up"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Group G Runner-up"
+      },
+      "startUtc": "2026-07-03T00:00:00.000Z",
+      "venue": "Dallas Stadium",
+      "city": "Dallas"
+    },
+    {
+      "id": "89",
+      "matchNumber": 89,
+      "stage": "r16",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 74"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 77"
+      },
+      "startUtc": "2026-07-04T17:00:00.000Z",
+      "venue": "Philadelphia Stadium",
+      "city": "Philadelphia"
+    },
+    {
+      "id": "90",
+      "matchNumber": 90,
+      "stage": "r16",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 73"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 75"
+      },
+      "startUtc": "2026-07-04T21:00:00.000Z",
+      "venue": "Houston Stadium",
+      "city": "Houston"
+    },
+    {
+      "id": "91",
+      "matchNumber": 91,
+      "stage": "r16",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 76"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 78"
+      },
+      "startUtc": "2026-07-05T17:00:00.000Z",
+      "venue": "New York New Jersey Stadium",
+      "city": "New York/NJ"
+    },
+    {
+      "id": "92",
+      "matchNumber": 92,
+      "stage": "r16",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 79"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 80"
+      },
+      "startUtc": "2026-07-05T21:00:00.000Z",
+      "venue": "Mexico City Stadium",
+      "city": "Mexico City"
+    },
+    {
+      "id": "93",
+      "matchNumber": 93,
+      "stage": "r16",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 83"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 84"
+      },
+      "startUtc": "2026-07-06T18:00:00.000Z",
+      "venue": "Dallas Stadium",
+      "city": "Dallas"
+    },
+    {
+      "id": "94",
+      "matchNumber": 94,
+      "stage": "r16",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 81"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 82"
+      },
+      "startUtc": "2026-07-06T23:00:00.000Z",
+      "venue": "Seattle Stadium",
+      "city": "Seattle"
+    },
+    {
+      "id": "95",
+      "matchNumber": 95,
+      "stage": "r16",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 86"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 88"
+      },
+      "startUtc": "2026-07-07T17:00:00.000Z",
+      "venue": "Atlanta Stadium",
+      "city": "Atlanta"
+    },
+    {
+      "id": "96",
+      "matchNumber": 96,
+      "stage": "r16",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 85"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 87"
+      },
+      "startUtc": "2026-07-07T23:00:00.000Z",
+      "venue": "BC Place Vancouver",
+      "city": "Vancouver"
+    },
+    {
+      "id": "97",
+      "matchNumber": 97,
+      "stage": "qf",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 89"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 90"
+      },
+      "startUtc": "2026-07-09T17:00:00.000Z",
+      "venue": "Boston Stadium",
+      "city": "Boston"
+    },
+    {
+      "id": "98",
+      "matchNumber": 98,
+      "stage": "qf",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 93"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 94"
+      },
+      "startUtc": "2026-07-10T20:00:00.000Z",
+      "venue": "Los Angeles Stadium",
+      "city": "Los Angeles"
+    },
+    {
+      "id": "99",
+      "matchNumber": 99,
+      "stage": "qf",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 91"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 92"
+      },
+      "startUtc": "2026-07-11T17:00:00.000Z",
+      "venue": "Miami Stadium",
+      "city": "Miami"
+    },
+    {
+      "id": "100",
+      "matchNumber": 100,
+      "stage": "qf",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 95"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 96"
+      },
+      "startUtc": "2026-07-11T21:00:00.000Z",
+      "venue": "Kansas City Stadium",
+      "city": "Kansas City"
+    },
+    {
+      "id": "101",
+      "matchNumber": 101,
+      "stage": "sf",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 97"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 98"
+      },
+      "startUtc": "2026-07-14T18:00:00.000Z",
+      "venue": "Dallas Stadium",
+      "city": "Dallas"
+    },
+    {
+      "id": "102",
+      "matchNumber": 102,
+      "stage": "sf",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 99"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 100"
+      },
+      "startUtc": "2026-07-15T17:00:00.000Z",
+      "venue": "Atlanta Stadium",
+      "city": "Atlanta"
+    },
+    {
+      "id": "103",
+      "matchNumber": 103,
+      "stage": "third",
+      "home": {
+        "code": "TBD",
+        "name": "Loser Match 101"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Loser Match 102"
+      },
+      "startUtc": "2026-07-18T19:00:00.000Z",
+      "venue": "Miami Stadium",
+      "city": "Miami"
+    },
+    {
+      "id": "104",
+      "matchNumber": 104,
+      "stage": "final",
+      "home": {
+        "code": "TBD",
+        "name": "Winner Match 101"
+      },
+      "away": {
+        "code": "TBD",
+        "name": "Winner Match 102"
+      },
+      "startUtc": "2026-07-19T19:00:00.000Z",
+      "venue": "New York New Jersey Stadium",
+      "city": "New York/NJ"
+    }
+  ]
+}
