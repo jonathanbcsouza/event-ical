@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Icon, Lightbulb, Moon } from "@/lib/icons";
 
 type Theme = "light" | "dark";
 
@@ -47,47 +48,13 @@ export function ThemeToggle() {
     >
       {mounted ? (
         isDark ? (
-          <BulbOnIcon />
+          <Icon icon={Lightbulb} className="text-amber-400" fill="currentColor" />
         ) : (
-          <BulbOffIcon />
+          <Icon icon={Moon} />
         )
       ) : (
         <span className="size-5" aria-hidden />
       )}
     </button>
-  );
-}
-
-function BulbOnIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="size-5 text-amber-400"
-      aria-hidden
-    >
-      <path d="M12 2.25a.75.75 0 01.75.75v.25a8.25 8.25 0 016.75 8.047.75.75 0 01-.75.753h-3.5a.75.75 0 00-.75.75v1.5a.75.75 0 01-.75.75h-1.5a.75.75 0 01-.75-.75v-1.5a.75.75 0 00-.75-.75h-3.5a.75.75 0 01-.75-.753A8.25 8.25 0 0111.25 3.25V3a.75.75 0 01.75-.75zM9.5 18.75a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75z" />
-    </svg>
-  );
-}
-
-function BulbOffIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      className="size-5"
-      aria-hidden
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 18v-1.5m0-12V3m-8.25 8.25h16.5M4.5 12.75A7.5 7.5 0 0112 4.5a7.5 7.5 0 017.5 8.25v.75a3 3 0 01-3 3h-7.5a3 3 0 01-3-3v-.75z"
-      />
-    </svg>
   );
 }

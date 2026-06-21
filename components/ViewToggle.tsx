@@ -1,12 +1,17 @@
 "use client";
 
 import { useRef } from "react";
+import { CalendarDays, Icon, List } from "@/lib/icons";
 
 export type ViewMode = "list" | "calendar";
 
-const OPTIONS: { id: ViewMode; label: string }[] = [
-  { id: "list", label: "List" },
-  { id: "calendar", label: "Calendar" },
+const OPTIONS: {
+  id: ViewMode;
+  label: string;
+  icon: typeof List;
+}[] = [
+  { id: "list", label: "List", icon: List },
+  { id: "calendar", label: "Calendar", icon: CalendarDays },
 ];
 
 type ViewToggleProps = {
@@ -46,12 +51,13 @@ export function ViewToggle({ value, onChange }: ViewToggleProps) {
             tabIndex={active ? 0 : -1}
             onClick={() => onChange(option.id)}
             onKeyDown={(e) => handleKeyDown(e, index)}
-            className={`flex-1 rounded-md px-4 py-2 text-sm font-medium transition-colors sm:flex-none sm:py-1.5 ${
+            className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-md px-4 py-2 text-sm font-medium transition-colors sm:flex-none sm:py-1.5 ${
               active
                 ? "bg-emerald-600 text-white shadow-sm"
                 : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             }`}
           >
+            <Icon icon={option.icon} className="size-4" />
             {option.label}
           </button>
         );

@@ -7,6 +7,13 @@ import {
   getClientBaseUrl,
 } from "@/lib/calendar-url";
 import { countByStage, getStageLabel, type MatchStage } from "@/lib/fixtures";
+import {
+  CalendarDays,
+  ChevronDown,
+  ChevronUp,
+  Download,
+  Icon,
+} from "@/lib/icons";
 
 type CalendarActionsProps = {
   selectedIds: string[];
@@ -32,7 +39,7 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
           href={hasSelection ? calendarUrl : undefined}
           download={hasSelection ? "world-cup-2026.ics" : undefined}
           aria-disabled={!hasSelection}
-          className={`inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors ${
+          className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors ${
             hasSelection
               ? "bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
               : "cursor-not-allowed bg-zinc-200 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500"
@@ -41,6 +48,7 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
             if (!hasSelection) e.preventDefault();
           }}
         >
+          <Icon icon={Download} className="size-4" />
           Download .ics
         </a>
         <a
@@ -48,7 +56,7 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
           target="_blank"
           rel="noopener noreferrer"
           aria-disabled={!hasSelection}
-          className={`inline-flex items-center justify-center rounded-lg border px-4 py-2.5 text-sm font-semibold transition-colors ${
+          className={`inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold transition-colors ${
             hasSelection
               ? "border-zinc-300 text-zinc-900 hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-100 dark:hover:bg-zinc-900"
               : "cursor-not-allowed border-zinc-200 text-zinc-400 dark:border-zinc-800 dark:text-zinc-500"
@@ -57,6 +65,7 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
             if (!hasSelection) e.preventDefault();
           }}
         >
+          <Icon icon={CalendarDays} className="size-4" />
           Add to Google Calendar
         </a>
       </div>
@@ -64,8 +73,12 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
       <button
         type="button"
         onClick={() => setShowImportHelp((v) => !v)}
-        className="mt-2 text-sm text-zinc-500 underline-offset-2 hover:text-zinc-700 hover:underline dark:hover:text-zinc-300"
+        className="mt-2 inline-flex items-center gap-1 text-sm text-zinc-500 underline-offset-2 hover:text-zinc-700 hover:underline dark:hover:text-zinc-300"
       >
+        <Icon
+          icon={showImportHelp ? ChevronUp : ChevronDown}
+          className="size-4"
+        />
         {showImportHelp ? "Hide" : "How to import manually"}
       </button>
 
