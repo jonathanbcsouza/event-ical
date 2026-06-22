@@ -1,15 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { DonatePrompt } from "@/components/DonatePrompt";
 import { StepPanel } from "@/components/StepPanel";
 import {
+  buildAppleSubscribeUrl,
   buildCalendarApiUrl,
+  buildGoogleAndroidIntentUrl,
   buildGoogleSubscribeUrl,
   buildOutlookSubscribeUrl,
   buildOutlookOfficeSubscribeUrl,
   getClientBaseUrl,
   ICS_FILENAME,
 } from "@/lib/calendar-url";
+import { getMobilePlatform, type MobilePlatform } from "@/lib/device";
 import { countByStage, getStageLabel, type MatchStage } from "@/lib/fixtures";
 import { getTimeZoneOffsetLabel } from "@/lib/timezones";
 import {
@@ -29,7 +33,7 @@ type CalendarActionsProps = {
 };
 
 type ExportAction = {
-  id: "google" | "outlook" | "download";
+  id: "google" | "outlook" | "apple" | "download";
   label: string;
   title: string;
   icon: typeof CalendarDays | typeof Download | typeof Mail;
@@ -37,7 +41,7 @@ type ExportAction = {
   enabled: boolean;
   href?: string;
   download?: string;
-  external?: boolean;
+  openInNewTab?: boolean;
 };
 
 export function CalendarActions({
@@ -45,44 +49,75 @@ export function CalendarActions({
   timeZone,
 }: CalendarActionsProps) {
   const [showImportHelp, setShowImportHelp] = useState(false);
+  const [mobilePlatform, setMobilePlatform] = useState<MobilePlatform | null>(
+    null,
+  );
+
+  useEffect(() => {
+    setMobilePlatform(getMobilePlatform());
+  }, []);
+
   const hasSelection = selectedIds.length > 0;
   const baseUrl = getClientBaseUrl();
   const calendarUrl = hasSelection
     ? buildCalendarApiUrl(baseUrl, selectedIds, timeZone)
     : "";
-  const googleUrl = hasSelection
+  const googleWebUrl = hasSelection
     ? buildGoogleSubscribeUrl(calendarUrl)
     : "";
+  const googleUrl =
+    mobilePlatform === "android" && hasSelection
+      ? buildGoogleAndroidIntentUrl(calendarUrl)
+      : googleWebUrl;
   const outlookUrl = hasSelection
     ? buildOutlookSubscribeUrl(calendarUrl)
     : "";
   const outlookOfficeUrl = hasSelection
     ? buildOutlookOfficeSubscribeUrl(calendarUrl)
     : "";
+  const appleUrl = hasSelection ? buildAppleSubscribeUrl(calendarUrl) : "";
+  const isMobile = mobilePlatform !== null;
 
   const exportActions: ExportAction[] = [
     {
       id: "google",
       label: "Add to Google Calendar",
-      title:
-        "Subscribe in Google Calendar — your selected matches stay up to date automatically",
+      title: isMobile
+        ? "Opens Google Calendar app when installed, otherwise the mobile site"
+        : "Subscribe in Google Calendar — your selected matches stay up to date automatically",
       icon: CalendarDays,
       variant: "primary",
       enabled: hasSelection,
       href: googleUrl,
-      external: true,
+      openInNewTab: !isMobile,
     },
     {
       id: "outlook",
       label: "Add to Outlook",
-      title:
-        "Subscribe in Outlook on the web — opens Outlook to add this calendar from the internet",
+      title: isMobile
+        ? "Opens Outlook app or mobile web to subscribe — syncs to the app after you confirm"
+        : "Subscribe in Outlook on the web — opens Outlook to add this calendar from the internet",
       icon: Mail,
       variant: "secondary",
       enabled: hasSelection,
       href: outlookUrl,
-      external: true,
+      openInNewTab: !isMobile,
     },
+    ...(mobilePlatform === "ios"
+      ? [
+          {
+            id: "apple" as const,
+            label: "Add to Apple Calendar",
+            title:
+              "Opens Apple Calendar directly on iPhone/iPad to subscribe to the live feed",
+            icon: CalendarDays,
+            variant: "secondary" as const,
+            enabled: hasSelection,
+            href: appleUrl,
+            openInNewTab: false,
+          },
+        ]
+      : []),
     {
       id: "download",
       label: "Download .ics",
@@ -126,6 +161,17 @@ export function CalendarActions({
         ))}
       </div>
 
+      {hasSelection && <DonatePrompt matchCount={selectedIds.length} />}
+
+      {hasSelection && isMobile && (
+        <p className="mt-3 text-xs text-zinc-500">
+          On mobile, links open your calendar app when installed. Google and
+          Outlook may still use the browser to confirm the subscription — it
+          then syncs to the app. For all past and future games in Outlook, use
+          Download .ics.
+        </p>
+      )}
+
       {hasSelection && timeZone && (
         <p className="mt-3 flex items-center gap-1.5 text-xs text-zinc-500">
           <Icon icon={Globe} className="size-3.5" />
@@ -154,6 +200,11 @@ export function CalendarActions({
           <li>
             Google and Outlook subscribe to a live feed — confirm once in your
             calendar app. Outlook refreshes subscribed calendars every few hours.
+          </li>
+          <li>
+            On mobile, Google and Outlook links try to open the native app.
+            If nothing happens, use Download .ics or subscribe from a desktop
+            browser — it syncs to your phone afterward.
           </li>
           <li>
             If Outlook says &ldquo;Couldn&apos;t import calendar&rdquo;, use
@@ -209,8 +260,8 @@ function ExportButton({ action }: { action: ExportAction }) {
     <a
       href={action.href}
       download={action.download}
-      target={action.external ? "_blank" : undefined}
-      rel={action.external ? "noopener noreferrer" : undefined}
+      target={action.openInNewTab ? "_blank" : undefined}
+      rel={action.openInNewTab ? "noopener noreferrer" : undefined}
       title={action.title}
       className={className}
     >

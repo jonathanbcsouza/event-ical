@@ -1,4 +1,4 @@
-import { Heart, Icon } from "@/lib/icons";
+import { CoffeeIcon } from "@/components/CoffeeIcon";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -19,23 +19,18 @@ export function DonateButton({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all",
+        "group inline-flex items-center justify-center gap-1.5 rounded-full font-semibold transition-all",
         isPrimary
-          ? "bg-rose-500 px-5 py-2.5 text-sm text-white shadow-sm hover:bg-rose-600 hover:shadow-md"
-          : "border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-600 hover:bg-rose-100 dark:border-rose-900/60 dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-950/70 sm:text-sm",
+          ? "bg-gradient-to-r from-amber-600 to-amber-500 px-5 py-2.5 text-sm text-white shadow-sm shadow-amber-900/20 hover:from-amber-700 hover:to-amber-600 hover:shadow-md"
+          : "border border-amber-300/80 bg-amber-50 px-2.5 py-2 text-[11px] text-amber-900 hover:bg-amber-100 dark:border-amber-700/50 dark:bg-amber-950/50 dark:text-amber-100 dark:hover:bg-amber-950/80 sm:gap-2 sm:px-3.5 sm:text-xs",
         className,
       )}
     >
-      <Icon
-        icon={Heart}
-        className={cn(
-          "size-4 transition-transform group-hover:scale-110",
-          isPrimary ? "fill-white/90" : "fill-rose-500/80",
-        )}
+      <CoffeeIcon
+        variant={isPrimary ? "light" : "inherit"}
+        className="transition-transform group-hover:-translate-y-0.5 group-hover:scale-110 sm:size-[18px]"
       />
-      <span className={isPrimary ? "" : "hidden sm:inline"}>
-        {isPrimary ? "Support this project" : "Donate"}
-      </span>
+      <span className="whitespace-nowrap">Buy me a coffee</span>
     </a>
   );
 }

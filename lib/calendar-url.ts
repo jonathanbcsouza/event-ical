@@ -23,6 +23,19 @@ export function buildGoogleSubscribeUrl(calendarUrl: string): string {
   return `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcalUrl)}`;
 }
 
+/** Android intent that tries the Google Calendar app, falling back to the web URL. */
+export function buildGoogleAndroidIntentUrl(calendarUrl: string): string {
+  const webUrl = buildGoogleSubscribeUrl(calendarUrl);
+  const webcalUrl = buildWebcalUrl(calendarUrl);
+  const cid = encodeURIComponent(webcalUrl);
+  const fallback = encodeURIComponent(webUrl);
+  return `intent://calendar.google.com/calendar/r?cid=${cid}#Intent;scheme=https;package=com.google.android.calendar;S.browser_fallback_url=${fallback};end`;
+}
+
+export function buildAppleSubscribeUrl(calendarUrl: string): string {
+  return buildWebcalUrl(calendarUrl);
+}
+
 export function buildOutlookSubscribeUrl(
   calendarUrl: string,
   name = "FIFA World Cup 2026",

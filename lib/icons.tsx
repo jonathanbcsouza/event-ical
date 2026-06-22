@@ -23,7 +23,6 @@ export {
   ChevronUp,
   Download,
   Globe,
-  Heart,
   Lightbulb,
   List,
   Mail,

@@ -59,3 +59,13 @@ body {
   animation: step-pending-pulse 1.4s ease-in-out infinite;
 }
 
+@keyframes cloud-drift {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(12%);
+  }
+}
+
