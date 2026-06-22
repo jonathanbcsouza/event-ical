@@ -3,10 +3,14 @@ import { SITE } from "./site";
 export function buildCalendarApiUrl(
   baseUrl: string,
   matchIds: string[],
+  timeZone?: string,
 ): string {
   if (matchIds.length === 0) return "";
   const ids = matchIds.join(",");
-  const path = `/api/calendar.ics?ids=${encodeURIComponent(ids)}`;
+  let path = `/api/calendar.ics?ids=${encodeURIComponent(ids)}`;
+  if (timeZone && timeZone !== "UTC") {
+    path += `&tz=${encodeURIComponent(timeZone)}`;
+  }
   return `${baseUrl.replace(/\/$/, "")}${path}`;
 }
 

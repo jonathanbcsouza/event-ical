@@ -22,6 +22,7 @@ export {
   ChevronDown,
   ChevronUp,
   Download,
+  Globe,
   Heart,
   Lightbulb,
   List,

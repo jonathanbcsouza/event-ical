@@ -8,6 +8,7 @@ type MatchListProps = {
   matches: Match[];
   selectedIds: string[];
   onSelectionChange: (ids: string[]) => void;
+  timeZone?: string;
 };
 
 function toggleId(ids: string[], id: string): string[] {
@@ -18,6 +19,7 @@ export function MatchList({
   matches,
   selectedIds,
   onSelectionChange,
+  timeZone,
 }: MatchListProps) {
   if (matches.length === 0) {
     return (
@@ -85,6 +87,7 @@ export function MatchList({
             match={match}
             checked={selectedIds.includes(match.id)}
             onToggle={() => onSelectionChange(toggleId(selectedIds, match.id))}
+            timeZone={timeZone}
           />
         ))}
       </ul>

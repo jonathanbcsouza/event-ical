@@ -10,12 +10,14 @@ import {
   type Match,
   type MatchStage,
 } from "@/lib/fixtures";
+import { dateKeyInTimeZone } from "@/lib/timezones";
 
 type CalendarViewProps = {
   matches: Match[];
   selectedTeams: string[];
   selectedIds: string[];
   onSelectionChange: (ids: string[]) => void;
+  timeZone?: string;
 };
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -27,8 +29,9 @@ function dateKey(d: Date): string {
   ).padStart(2, "0")}`;
 }
 
-function localDateKeyOf(match: Match): string {
-  return dateKey(new Date(match.startUtc));
+function matchDateKey(match: Match, timeZone?: string): string {
+  const date = new Date(match.startUtc);
+  return timeZone ? dateKeyInTimeZone(date, timeZone) : dateKey(date);
 }
 
 function toggleId(ids: string[], id: string): string[] {
@@ -42,15 +45,17 @@ type MonthGrid = {
   cells: (Date | null)[];
 };
 
-function buildMonths(matches: Match[]): MonthGrid[] {
+function buildMonths(matches: Match[], timeZone?: string): MonthGrid[] {
   if (matches.length === 0) return [];
-  const times = matches.map((m) => new Date(m.startUtc).getTime());
-  const min = new Date(Math.min(...times));
-  const max = new Date(Math.max(...times));
+  // Derive the visible month range from match dates in the selected timezone so
+  // the grid lines up with how matches are bucketed.
+  const keys = matches.map((m) => matchDateKey(m, timeZone)).sort();
+  const [minYear, minMonth] = keys[0].split("-").map(Number);
+  const [maxYear, maxMonth] = keys[keys.length - 1].split("-").map(Number);
 
   const months: MonthGrid[] = [];
-  const cursor = new Date(min.getFullYear(), min.getMonth(), 1);
-  const last = new Date(max.getFullYear(), max.getMonth(), 1);
+  const cursor = new Date(minYear, minMonth - 1, 1);
+  const last = new Date(maxYear, maxMonth - 1, 1);
 
   while (cursor <= last) {
     const year = cursor.getFullYear();
@@ -81,11 +86,12 @@ export function CalendarView({
   selectedTeams,
   selectedIds,
   onSelectionChange,
+  timeZone,
 }: CalendarViewProps) {
   const matchesByDay = useMemo(() => {
     const map = new Map<string, Match[]>();
     for (const m of matches) {
-      const key = localDateKeyOf(m);
+      const key = matchDateKey(m, timeZone);
       const list = map.get(key);
       if (list) list.push(m);
       else map.set(key, [m]);
@@ -97,9 +103,12 @@ export function CalendarView({
       );
     }
     return map;
-  }, [matches]);
+  }, [matches, timeZone]);
 
-  const months = useMemo(() => buildMonths(matches), [matches]);
+  const months = useMemo(
+    () => buildMonths(matches, timeZone),
+    [matches, timeZone],
+  );
   const selectedSet = useMemo(() => new Set(selectedIds), [selectedIds]);
 
   const [openDay, setOpenDay] = useState<string | null>(null);
@@ -240,6 +249,7 @@ export function CalendarView({
                   onSelectionChange(toggleId(selectedIds, match.id))
                 }
                 showDate={false}
+                timeZone={timeZone}
               />
             ))}
           </ul>

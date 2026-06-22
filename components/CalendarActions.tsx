@@ -11,11 +11,13 @@ import {
   ICS_FILENAME,
 } from "@/lib/calendar-url";
 import { countByStage, getStageLabel, type MatchStage } from "@/lib/fixtures";
+import { getTimeZoneOffsetLabel } from "@/lib/timezones";
 import {
   CalendarDays,
   ChevronDown,
   ChevronUp,
   Download,
+  Globe,
   Icon,
   Mail,
 } from "@/lib/icons";
@@ -23,6 +25,7 @@ import { cn } from "@/lib/utils";
 
 type CalendarActionsProps = {
   selectedIds: string[];
+  timeZone?: string;
 };
 
 type ExportAction = {
@@ -37,12 +40,15 @@ type ExportAction = {
   external?: boolean;
 };
 
-export function CalendarActions({ selectedIds }: CalendarActionsProps) {
+export function CalendarActions({
+  selectedIds,
+  timeZone,
+}: CalendarActionsProps) {
   const [showImportHelp, setShowImportHelp] = useState(false);
   const hasSelection = selectedIds.length > 0;
   const baseUrl = getClientBaseUrl();
   const calendarUrl = hasSelection
-    ? buildCalendarApiUrl(baseUrl, selectedIds)
+    ? buildCalendarApiUrl(baseUrl, selectedIds, timeZone)
     : "";
   const googleUrl = hasSelection
     ? buildGoogleSubscribeUrl(calendarUrl)
@@ -119,6 +125,17 @@ export function CalendarActions({ selectedIds }: CalendarActionsProps) {
           <ExportButton key={action.id} action={action} />
         ))}
       </div>
+
+      {hasSelection && timeZone && (
+        <p className="mt-3 flex items-center gap-1.5 text-xs text-zinc-500">
+          <Icon icon={Globe} className="size-3.5" />
+          Events use {timeZone.replace(/_/g, " ")}
+          {getTimeZoneOffsetLabel(timeZone)
+            ? ` (${getTimeZoneOffsetLabel(timeZone)})`
+            : ""}
+          . Change the timezone in step 2.
+        </p>
+      )}
 
       <button
         type="button"

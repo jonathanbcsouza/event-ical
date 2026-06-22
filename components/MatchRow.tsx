@@ -12,6 +12,7 @@ type MatchRowProps = {
   checked: boolean;
   onToggle: () => void;
   showDate?: boolean;
+  timeZone?: string;
 };
 
 export function MatchRow({
@@ -19,6 +20,7 @@ export function MatchRow({
   checked,
   onToggle,
   showDate = true,
+  timeZone,
 }: MatchRowProps) {
   const date = new Date(match.startUtc);
   const stageColor = getStageColor(match.stage);
@@ -53,6 +55,7 @@ export function MatchRow({
                   day: "numeric",
                   hour: "numeric",
                   minute: "2-digit",
+                  timeZone,
                 })}
               </span>
             )}
@@ -61,6 +64,7 @@ export function MatchRow({
                 {date.toLocaleTimeString(undefined, {
                   hour: "numeric",
                   minute: "2-digit",
+                  timeZone,
                 })}
               </span>
             )}

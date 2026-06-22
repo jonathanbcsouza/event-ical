@@ -24,7 +24,8 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const ics = generateCalendarIcs(matchIds);
+  const tz = request.nextUrl.searchParams.get("tz") ?? "UTC";
+  const ics = generateCalendarIcs(matchIds, tz);
   const download = request.nextUrl.searchParams.get("download") === "1";
 
   return new NextResponse(ics, {

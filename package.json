@@ -9,8 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@touch4it/ical-timezones": "^1.9.0",
+    "@types/luxon": "^3.7.2",
     "ical-generator": "^11.0.0",
     "lucide-react": "^1.21.0",
+    "luxon": "^3.7.2",
     "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4"
