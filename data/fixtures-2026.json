@@ -89,7 +89,7 @@
         "code": "RSA",
         "name": "South Africa"
       },
-      "startUtc": "2026-06-12T01:00:00.000Z",
+      "startUtc": "2026-06-11T19:00:00.000Z",
       "venue": "Mexico City Stadium",
       "city": "Mexico City"
     },
@@ -121,7 +121,7 @@
         "code": "BIH",
         "name": "Bosnia and Herzegovina"
       },
-      "startUtc": "2026-06-12T21:00:00.000Z",
+      "startUtc": "2026-06-12T19:00:00.000Z",
       "venue": "Toronto Stadium",
       "city": "Toronto"
     },
@@ -137,7 +137,7 @@
         "code": "PAR",
         "name": "Paraguay"
       },
-      "startUtc": "2026-06-13T06:00:00.000Z",
+      "startUtc": "2026-06-13T01:00:00.000Z",
       "venue": "Los Angeles Stadium",
       "city": "Los Angeles"
     },
@@ -153,7 +153,7 @@
         "code": "SUI",
         "name": "Switzerland"
       },
-      "startUtc": "2026-06-14T03:00:00.000Z",
+      "startUtc": "2026-06-13T19:00:00.000Z",
       "venue": "San Francisco Bay Area Stadium",
       "city": "San Francisco Bay Area"
     },
@@ -169,7 +169,7 @@
         "code": "MAR",
         "name": "Morocco"
       },
-      "startUtc": "2026-06-14T00:00:00.000Z",
+      "startUtc": "2026-06-13T22:00:00.000Z",
       "venue": "New York New Jersey Stadium",
       "city": "New York/NJ"
     },
@@ -185,7 +185,7 @@
         "code": "SCO",
         "name": "Scotland"
       },
-      "startUtc": "2026-06-14T03:00:00.000Z",
+      "startUtc": "2026-06-14T01:00:00.000Z",
       "venue": "Boston Stadium",
       "city": "Boston"
     },
@@ -201,7 +201,7 @@
         "code": "TUR",
         "name": "Türkiye"
       },
-      "startUtc": "2026-06-14T03:00:00.000Z",
+      "startUtc": "2026-06-14T04:00:00.000Z",
       "venue": "BC Place Vancouver",
       "city": "Vancouver"
     },
@@ -217,7 +217,7 @@
         "code": "CUW",
         "name": "Curaçao"
       },
-      "startUtc": "2026-06-14T23:00:00.000Z",
+      "startUtc": "2026-06-14T17:00:00.000Z",
       "venue": "Houston Stadium",
       "city": "Houston"
     },
@@ -233,7 +233,7 @@
         "code": "JPN",
         "name": "Japan"
       },
-      "startUtc": "2026-06-15T02:00:00.000Z",
+      "startUtc": "2026-06-14T20:00:00.000Z",
       "venue": "Dallas Stadium",
       "city": "Dallas"
     },
@@ -249,7 +249,7 @@
         "code": "ECU",
         "name": "Ecuador"
       },
-      "startUtc": "2026-06-15T03:00:00.000Z",
+      "startUtc": "2026-06-14T23:00:00.000Z",
       "venue": "Philadelphia Stadium",
       "city": "Philadelphia"
     },
@@ -265,7 +265,7 @@
         "code": "TUN",
         "name": "Tunisia"
       },
-      "startUtc": "2026-06-14T23:00:00.000Z",
+      "startUtc": "2026-06-15T02:00:00.000Z",
       "venue": "Estadio Monterrey",
       "city": "Monterrey"
     },
@@ -281,7 +281,7 @@
         "code": "CPV",
         "name": "Cape Verde"
       },
-      "startUtc": "2026-06-15T21:00:00.000Z",
+      "startUtc": "2026-06-15T16:00:00.000Z",
       "venue": "Atlanta Stadium",
       "city": "Atlanta"
     },
@@ -297,7 +297,7 @@
         "code": "EGY",
         "name": "Egypt"
       },
-      "startUtc": "2026-06-16T06:00:00.000Z",
+      "startUtc": "2026-06-15T19:00:00.000Z",
       "venue": "Seattle Stadium",
       "city": "Seattle"
     },
@@ -313,7 +313,7 @@
         "code": "URU",
         "name": "Uruguay"
       },
-      "startUtc": "2026-06-16T03:00:00.000Z",
+      "startUtc": "2026-06-15T22:00:00.000Z",
       "venue": "Miami Stadium",
       "city": "Miami"
     },
@@ -329,7 +329,7 @@
         "code": "NZL",
         "name": "New Zealand"
       },
-      "startUtc": "2026-06-16T03:00:00.000Z",
+      "startUtc": "2026-06-16T01:00:00.000Z",
       "venue": "Los Angeles Stadium",
       "city": "Los Angeles"
     },
@@ -345,7 +345,7 @@
         "code": "SEN",
         "name": "Senegal"
       },
-      "startUtc": "2026-06-16T21:00:00.000Z",
+      "startUtc": "2026-06-16T19:00:00.000Z",
       "venue": "New York New Jersey Stadium",
       "city": "New York/NJ"
     },
@@ -361,7 +361,7 @@
         "code": "NOR",
         "name": "Norway"
       },
-      "startUtc": "2026-06-17T00:00:00.000Z",
+      "startUtc": "2026-06-16T22:00:00.000Z",
       "venue": "Boston Stadium",
       "city": "Boston"
     },
@@ -377,7 +377,7 @@
         "code": "ALG",
         "name": "Algeria"
       },
-      "startUtc": "2026-06-16T05:00:00.000Z",
+      "startUtc": "2026-06-17T01:00:00.000Z",
       "venue": "Kansas City Stadium",
       "city": "Kansas City"
     },
@@ -393,7 +393,7 @@
         "code": "JOR",
         "name": "Jordan"
       },
-      "startUtc": "2026-06-17T03:00:00.000Z",
+      "startUtc": "2026-06-17T04:00:00.000Z",
       "venue": "San Francisco Bay Area Stadium",
       "city": "San Francisco Bay Area"
     },
@@ -409,7 +409,7 @@
         "code": "COD",
         "name": "DR Congo"
       },
-      "startUtc": "2026-06-17T23:00:00.000Z",
+      "startUtc": "2026-06-17T17:00:00.000Z",
       "venue": "Houston Stadium",
       "city": "Houston"
     },
@@ -425,7 +425,7 @@
         "code": "CRO",
         "name": "Croatia"
       },
-      "startUtc": "2026-06-18T02:00:00.000Z",
+      "startUtc": "2026-06-17T20:00:00.000Z",
       "venue": "Dallas Stadium",
       "city": "Dallas"
     },
@@ -441,7 +441,7 @@
         "code": "PAN",
         "name": "Panama"
       },
-      "startUtc": "2026-06-18T03:00:00.000Z",
+      "startUtc": "2026-06-17T23:00:00.000Z",
       "venue": "Toronto Stadium",
       "city": "Toronto"
     },
@@ -457,7 +457,7 @@
         "code": "COL",
         "name": "Colombia"
       },
-      "startUtc": "2026-06-17T23:00:00.000Z",
+      "startUtc": "2026-06-18T02:00:00.000Z",
       "venue": "Mexico City Stadium",
       "city": "Mexico City"
     },
@@ -473,7 +473,7 @@
         "code": "RSA",
         "name": "South Africa"
       },
-      "startUtc": "2026-06-18T21:00:00.000Z",
+      "startUtc": "2026-06-18T16:00:00.000Z",
       "venue": "Atlanta Stadium",
       "city": "Atlanta"
     },
@@ -489,7 +489,7 @@
         "code": "BIH",
         "name": "Bosnia and Herzegovina"
       },
-      "startUtc": "2026-06-19T06:00:00.000Z",
+      "startUtc": "2026-06-18T19:00:00.000Z",
       "venue": "Los Angeles Stadium",
       "city": "Los Angeles"
     },
@@ -505,7 +505,7 @@
         "code": "QAT",
         "name": "Qatar"
       },
-      "startUtc": "2026-06-18T09:00:00.000Z",
+      "startUtc": "2026-06-18T22:00:00.000Z",
       "venue": "BC Place Vancouver",
       "city": "Vancouver"
     },
@@ -521,7 +521,7 @@
         "code": "KOR",
         "name": "South Korea"
       },
-      "startUtc": "2026-06-18T23:00:00.000Z",
+      "startUtc": "2026-06-19T01:00:00.000Z",
       "venue": "Estadio Guadalajara",
       "city": "Guadalajara"
     },
@@ -537,7 +537,7 @@
         "code": "AUS",
         "name": "Australia"
       },
-      "startUtc": "2026-06-20T03:00:00.000Z",
+      "startUtc": "2026-06-19T19:00:00.000Z",
       "venue": "Seattle Stadium",
       "city": "Seattle"
     },
@@ -553,7 +553,7 @@
         "code": "MAR",
         "name": "Morocco"
       },
-      "startUtc": "2026-06-20T00:00:00.000Z",
+      "startUtc": "2026-06-19T22:00:00.000Z",
       "venue": "Boston Stadium",
       "city": "Boston"
     },
@@ -569,7 +569,7 @@
         "code": "HAI",
         "name": "Haiti"
       },
-      "startUtc": "2026-06-20T03:00:00.000Z",
+      "startUtc": "2026-06-20T00:30:00.000Z",
       "venue": "Philadelphia Stadium",
       "city": "Philadelphia"
     },
@@ -601,7 +601,7 @@
         "code": "SWE",
         "name": "Sweden"
       },
-      "startUtc": "2026-06-20T23:00:00.000Z",
+      "startUtc": "2026-06-20T17:00:00.000Z",
       "venue": "Houston Stadium",
       "city": "Houston"
     },
@@ -617,7 +617,7 @@
         "code": "CIV",
         "name": "Ivory Coast"
       },
-      "startUtc": "2026-06-21T00:00:00.000Z",
+      "startUtc": "2026-06-20T20:00:00.000Z",
       "venue": "Toronto Stadium",
       "city": "Toronto"
     },
@@ -633,7 +633,7 @@
         "code": "CUW",
         "name": "Curaçao"
       },
-      "startUtc": "2026-06-20T05:00:00.000Z",
+      "startUtc": "2026-06-21T00:00:00.000Z",
       "venue": "Kansas City Stadium",
       "city": "Kansas City"
     },
@@ -649,7 +649,7 @@
         "code": "JPN",
         "name": "Japan"
       },
-      "startUtc": "2026-06-20T23:00:00.000Z",
+      "startUtc": "2026-06-21T04:00:00.000Z",
       "venue": "Estadio Monterrey",
       "city": "Monterrey"
     },
@@ -665,7 +665,7 @@
         "code": "KSA",
         "name": "Saudi Arabia"
       },
-      "startUtc": "2026-06-21T21:00:00.000Z",
+      "startUtc": "2026-06-21T16:00:00.000Z",
       "venue": "Atlanta Stadium",
       "city": "Atlanta"
     },
@@ -681,7 +681,7 @@
         "code": "IRN",
         "name": "Iran"
       },
-      "startUtc": "2026-06-22T06:00:00.000Z",
+      "startUtc": "2026-06-21T19:00:00.000Z",
       "venue": "Los Angeles Stadium",
       "city": "Los Angeles"
     },
@@ -697,7 +697,7 @@
         "code": "CPV",
         "name": "Cape Verde"
       },
-      "startUtc": "2026-06-22T03:00:00.000Z",
+      "startUtc": "2026-06-21T22:00:00.000Z",
       "venue": "Miami Stadium",
       "city": "Miami"
     },
@@ -713,7 +713,7 @@
         "code": "EGY",
         "name": "Egypt"
       },
-      "startUtc": "2026-06-22T03:00:00.000Z",
+      "startUtc": "2026-06-22T01:00:00.000Z",
       "venue": "BC Place Vancouver",
       "city": "Vancouver"
     },
@@ -729,7 +729,7 @@
         "code": "SEN",
         "name": "Senegal"
       },
-      "startUtc": "2026-06-22T21:00:00.000Z",
+      "startUtc": "2026-06-23T00:00:00.000Z",
       "venue": "New York New Jersey Stadium",
       "city": "New York/NJ"
     },
@@ -745,7 +745,7 @@
         "code": "IRQ",
         "name": "Iraq"
       },
-      "startUtc": "2026-06-23T00:00:00.000Z",
+      "startUtc": "2026-06-22T21:00:00.000Z",
       "venue": "Philadelphia Stadium",
       "city": "Philadelphia"
     },
@@ -761,7 +761,7 @@
         "code": "AUT",
         "name": "Austria"
       },
-      "startUtc": "2026-06-22T05:00:00.000Z",
+      "startUtc": "2026-06-22T17:00:00.000Z",
       "venue": "Dallas Stadium",
       "city": "Dallas"
     },
@@ -793,7 +793,7 @@
         "code": "GHA",
         "name": "Ghana"
       },
-      "startUtc": "2026-06-23T21:00:00.000Z",
+      "startUtc": "2026-06-23T20:00:00.000Z",
       "venue": "Boston Stadium",
       "city": "Boston"
     },
@@ -809,7 +809,7 @@
         "code": "CRO",
         "name": "Croatia"
       },
-      "startUtc": "2026-06-24T00:00:00.000Z",
+      "startUtc": "2026-06-23T23:00:00.000Z",
       "venue": "Toronto Stadium",
       "city": "Toronto"
     },
@@ -825,7 +825,7 @@
         "code": "UZB",
         "name": "Uzbekistan"
       },
-      "startUtc": "2026-06-23T05:00:00.000Z",
+      "startUtc": "2026-06-23T17:00:00.000Z",
       "venue": "Houston Stadium",
       "city": "Houston"
     },
@@ -841,7 +841,7 @@
         "code": "COD",
         "name": "DR Congo"
       },
-      "startUtc": "2026-06-23T23:00:00.000Z",
+      "startUtc": "2026-06-24T02:00:00.000Z",
       "venue": "Estadio Guadalajara",
       "city": "Guadalajara"
     },
@@ -857,7 +857,7 @@
         "code": "BRA",
         "name": "Brazil"
       },
-      "startUtc": "2026-06-24T21:00:00.000Z",
+      "startUtc": "2026-06-24T22:00:00.000Z",
       "venue": "Miami Stadium",
       "city": "Miami"
     },
@@ -873,7 +873,7 @@
         "code": "HAI",
         "name": "Haiti"
       },
-      "startUtc": "2026-06-25T00:00:00.000Z",
+      "startUtc": "2026-06-24T22:00:00.000Z",
       "venue": "Atlanta Stadium",
       "city": "Atlanta"
     },
@@ -889,7 +889,7 @@
         "code": "CAN",
         "name": "Canada"
       },
-      "startUtc": "2026-06-24T09:00:00.000Z",
+      "startUtc": "2026-06-24T19:00:00.000Z",
       "venue": "BC Place Vancouver",
       "city": "Vancouver"
     },
@@ -905,7 +905,7 @@
         "code": "QAT",
         "name": "Qatar"
       },
-      "startUtc": "2026-06-25T03:00:00.000Z",
+      "startUtc": "2026-06-24T19:00:00.000Z",
       "venue": "Seattle Stadium",
       "city": "Seattle"
     },
@@ -921,7 +921,7 @@
         "code": "MEX",
         "name": "Mexico"
       },
-      "startUtc": "2026-06-25T02:00:00.000Z",
+      "startUtc": "2026-06-25T01:00:00.000Z",
       "venue": "Mexico City Stadium",
       "city": "Mexico City"
     },
@@ -937,7 +937,7 @@
         "code": "KOR",
         "name": "South Korea"
       },
-      "startUtc": "2026-06-24T05:00:00.000Z",
+      "startUtc": "2026-06-25T01:00:00.000Z",
       "venue": "Estadio Monterrey",
       "city": "Monterrey"
     },
@@ -953,7 +953,7 @@
         "code": "CIV",
         "name": "Ivory Coast"
       },
-      "startUtc": "2026-06-25T21:00:00.000Z",
+      "startUtc": "2026-06-25T20:00:00.000Z",
       "venue": "Philadelphia Stadium",
       "city": "Philadelphia"
     },
@@ -969,7 +969,7 @@
         "code": "GER",
         "name": "Germany"
       },
-      "startUtc": "2026-06-26T00:00:00.000Z",
+      "startUtc": "2026-06-25T20:00:00.000Z",
       "venue": "New York New Jersey Stadium",
       "city": "New York/NJ"
     },
@@ -985,7 +985,7 @@
         "code": "SWE",
         "name": "Sweden"
       },
-      "startUtc": "2026-06-25T05:00:00.000Z",
+      "startUtc": "2026-06-25T23:00:00.000Z",
       "venue": "Dallas Stadium",
       "city": "Dallas"
     },
@@ -1017,7 +1017,7 @@
         "code": "USA",
         "name": "USA"
       },
-      "startUtc": "2026-06-26T06:00:00.000Z",
+      "startUtc": "2026-06-26T02:00:00.000Z",
       "venue": "Los Angeles Stadium",
       "city": "Los Angeles"
     },
@@ -1033,7 +1033,7 @@
         "code": "AUS",
         "name": "Australia"
       },
-      "startUtc": "2026-06-25T09:00:00.000Z",
+      "startUtc": "2026-06-26T02:00:00.000Z",
       "venue": "San Francisco Bay Area Stadium",
       "city": "San Francisco Bay Area"
     },
@@ -1065,7 +1065,7 @@
         "code": "EGY",
         "name": "Egypt"
       },
-      "startUtc": "2026-06-27T06:00:00.000Z",
+      "startUtc": "2026-06-27T03:00:00.000Z",
       "venue": "BC Place Vancouver",
       "city": "Vancouver"
     },
@@ -1081,7 +1081,7 @@
         "code": "URU",
         "name": "Uruguay"
       },
-      "startUtc": "2026-06-26T05:00:00.000Z",
+      "startUtc": "2026-06-27T00:00:00.000Z",
       "venue": "Mexico City Stadium",
       "city": "Mexico City"
     },
@@ -1097,7 +1097,7 @@
         "code": "KSA",
         "name": "Saudi Arabia"
       },
-      "startUtc": "2026-06-26T23:00:00.000Z",
+      "startUtc": "2026-06-27T00:00:00.000Z",
       "venue": "Estadio Guadalajara",
       "city": "Guadalajara"
     },
@@ -1113,7 +1113,7 @@
         "code": "NOR",
         "name": "Norway"
       },
-      "startUtc": "2026-06-27T00:00:00.000Z",
+      "startUtc": "2026-06-26T19:00:00.000Z",
       "venue": "Boston Stadium",
       "city": "Boston"
     },
@@ -1129,7 +1129,7 @@
         "code": "IRQ",
         "name": "Iraq"
       },
-      "startUtc": "2026-06-27T03:00:00.000Z",
+      "startUtc": "2026-06-26T19:00:00.000Z",
       "venue": "Miami Stadium",
       "city": "Miami"
     },
@@ -1161,7 +1161,7 @@
         "code": "GHA",
         "name": "Ghana"
       },
-      "startUtc": "2026-06-28T00:00:00.000Z",
+      "startUtc": "2026-06-27T21:00:00.000Z",
       "venue": "Philadelphia Stadium",
       "city": "Philadelphia"
     },
@@ -1177,7 +1177,7 @@
         "code": "ARG",
         "name": "Argentina"
       },
-      "startUtc": "2026-06-27T05:00:00.000Z",
+      "startUtc": "2026-06-28T02:00:00.000Z",
       "venue": "Dallas Stadium",
       "city": "Dallas"
     },
@@ -1193,7 +1193,7 @@
         "code": "AUT",
         "name": "Austria"
       },
-      "startUtc": "2026-06-27T23:00:00.000Z",
+      "startUtc": "2026-06-28T02:00:00.000Z",
       "venue": "Kansas City Stadium",
       "city": "Kansas City"
     },
@@ -1209,7 +1209,7 @@
         "code": "POR",
         "name": "Portugal"
       },
-      "startUtc": "2026-06-28T00:00:00.000Z",
+      "startUtc": "2026-06-27T23:30:00.000Z",
       "venue": "Miami Stadium",
       "city": "Miami"
     },
@@ -1225,7 +1225,7 @@
         "code": "UZB",
         "name": "Uzbekistan"
       },
-      "startUtc": "2026-06-28T03:00:00.000Z",
+      "startUtc": "2026-06-27T23:30:00.000Z",
       "venue": "Atlanta Stadium",
       "city": "Atlanta"
     },
@@ -1241,7 +1241,7 @@
         "code": "TBD",
         "name": "Group B Runner-up"
       },
-      "startUtc": "2026-06-29T03:00:00.000Z",
+      "startUtc": "2026-06-28T19:00:00.000Z",
       "venue": "Los Angeles Stadium",
       "city": "Los Angeles"
     },
@@ -1257,7 +1257,7 @@
         "code": "TBD",
         "name": "3rd Place (A/B/C/D/F)"
       },
-      "startUtc": "2026-06-29T21:00:00.000Z",
+      "startUtc": "2026-06-29T20:30:00.000Z",
       "venue": "Boston Stadium",
       "city": "Boston"
     },
@@ -1273,7 +1273,7 @@
         "code": "TBD",
         "name": "Group C Runner-up"
       },
-      "startUtc": "2026-06-30T02:00:00.000Z",
+      "startUtc": "2026-06-30T01:00:00.000Z",
       "venue": "Estadio Monterrey",
       "city": "Monterrey"
     },
@@ -1289,7 +1289,7 @@
         "code": "TBD",
         "name": "Group F Runner-up"
       },
-      "startUtc": "2026-06-29T05:00:00.000Z",
+      "startUtc": "2026-06-29T17:00:00.000Z",
       "venue": "Houston Stadium",
       "city": "Houston"
     },
@@ -1321,7 +1321,7 @@
         "code": "TBD",
         "name": "Group I Runner-up"
       },
-      "startUtc": "2026-07-01T02:00:00.000Z",
+      "startUtc": "2026-06-30T17:00:00.000Z",
       "venue": "Dallas Stadium",
       "city": "Dallas"
     },
@@ -1337,7 +1337,7 @@
         "code": "TBD",
         "name": "3rd Place (C/E/F/H/I)"
       },
-      "startUtc": "2026-06-30T05:00:00.000Z",
+      "startUtc": "2026-07-01T01:00:00.000Z",
       "venue": "Mexico City Stadium",
       "city": "Mexico City"
     },
@@ -1353,7 +1353,7 @@
         "code": "TBD",
         "name": "3rd Place (E/H/I/J/K)"
       },
-      "startUtc": "2026-07-01T21:00:00.000Z",
+      "startUtc": "2026-07-01T16:00:00.000Z",
       "venue": "Atlanta Stadium",
       "city": "Atlanta"
     },
@@ -1369,7 +1369,7 @@
         "code": "TBD",
         "name": "3rd Place (B/E/F/I/J)"
       },
-      "startUtc": "2026-07-02T06:00:00.000Z",
+      "startUtc": "2026-07-02T00:00:00.000Z",
       "venue": "San Francisco Bay Area Stadium",
       "city": "San Francisco Bay Area"
     },
@@ -1385,7 +1385,7 @@
         "code": "TBD",
         "name": "3rd Place (A/E/H/I/J)"
       },
-      "startUtc": "2026-07-01T09:00:00.000Z",
+      "startUtc": "2026-07-01T20:00:00.000Z",
       "venue": "Seattle Stadium",
       "city": "Seattle"
     },
@@ -1401,7 +1401,7 @@
         "code": "TBD",
         "name": "Group L Runner-up"
       },
-      "startUtc": "2026-07-02T21:00:00.000Z",
+      "startUtc": "2026-07-02T23:00:00.000Z",
       "venue": "Toronto Stadium",
       "city": "Toronto"
     },
@@ -1417,7 +1417,7 @@
         "code": "TBD",
         "name": "Group J Runner-up"
       },
-      "startUtc": "2026-07-03T06:00:00.000Z",
+      "startUtc": "2026-07-02T19:00:00.000Z",
       "venue": "Los Angeles Stadium",
       "city": "Los Angeles"
     },
@@ -1433,7 +1433,7 @@
         "code": "TBD",
         "name": "3rd Place (E/F/G/I/J)"
       },
-      "startUtc": "2026-07-02T09:00:00.000Z",
+      "startUtc": "2026-07-03T03:00:00.000Z",
       "venue": "BC Place Vancouver",
       "city": "Vancouver"
     },
@@ -1449,7 +1449,7 @@
         "code": "TBD",
         "name": "Group H Runner-up"
       },
-      "startUtc": "2026-07-03T21:00:00.000Z",
+      "startUtc": "2026-07-03T22:00:00.000Z",
       "venue": "Miami Stadium",
       "city": "Miami"
     },
@@ -1465,7 +1465,7 @@
         "code": "TBD",
         "name": "3rd Place (D/E/I/J/L)"
       },
-      "startUtc": "2026-07-04T02:00:00.000Z",
+      "startUtc": "2026-07-04T01:30:00.000Z",
       "venue": "Kansas City Stadium",
       "city": "Kansas City"
     },
@@ -1481,7 +1481,7 @@
         "code": "TBD",
         "name": "Group G Runner-up"
       },
-      "startUtc": "2026-07-03T05:00:00.000Z",
+      "startUtc": "2026-07-03T18:00:00.000Z",
       "venue": "Dallas Stadium",
       "city": "Dallas"
     },
@@ -1513,7 +1513,7 @@
         "code": "TBD",
         "name": "Winner Match 75"
       },
-      "startUtc": "2026-07-05T02:00:00.000Z",
+      "startUtc": "2026-07-04T17:00:00.000Z",
       "venue": "Houston Stadium",
       "city": "Houston"
     },
@@ -1529,7 +1529,7 @@
         "code": "TBD",
         "name": "Winner Match 78"
       },
-      "startUtc": "2026-07-05T21:00:00.000Z",
+      "startUtc": "2026-07-05T20:00:00.000Z",
       "venue": "New York New Jersey Stadium",
       "city": "New York/NJ"
     },
@@ -1545,7 +1545,7 @@
         "code": "TBD",
         "name": "Winner Match 80"
       },
-      "startUtc": "2026-07-06T02:00:00.000Z",
+      "startUtc": "2026-07-06T00:00:00.000Z",
       "venue": "Mexico City Stadium",
       "city": "Mexico City"
     },
@@ -1561,7 +1561,7 @@
         "code": "TBD",
         "name": "Winner Match 84"
       },
-      "startUtc": "2026-07-06T23:00:00.000Z",
+      "startUtc": "2026-07-06T19:00:00.000Z",
       "venue": "Dallas Stadium",
       "city": "Dallas"
     },
@@ -1577,7 +1577,7 @@
         "code": "TBD",
         "name": "Winner Match 82"
       },
-      "startUtc": "2026-07-07T06:00:00.000Z",
+      "startUtc": "2026-07-07T00:00:00.000Z",
       "venue": "Seattle Stadium",
       "city": "Seattle"
     },
@@ -1593,7 +1593,7 @@
         "code": "TBD",
         "name": "Winner Match 88"
       },
-      "startUtc": "2026-07-07T21:00:00.000Z",
+      "startUtc": "2026-07-07T16:00:00.000Z",
       "venue": "Atlanta Stadium",
       "city": "Atlanta"
     },
@@ -1609,7 +1609,7 @@
         "code": "TBD",
         "name": "Winner Match 87"
       },
-      "startUtc": "2026-07-08T06:00:00.000Z",
+      "startUtc": "2026-07-07T20:00:00.000Z",
       "venue": "BC Place Vancouver",
       "city": "Vancouver"
     },
@@ -1625,7 +1625,7 @@
         "code": "TBD",
         "name": "Winner Match 90"
       },
-      "startUtc": "2026-07-09T21:00:00.000Z",
+      "startUtc": "2026-07-09T20:00:00.000Z",
       "venue": "Boston Stadium",
       "city": "Boston"
     },
@@ -1641,7 +1641,7 @@
         "code": "TBD",
         "name": "Winner Match 94"
       },
-      "startUtc": "2026-07-11T03:00:00.000Z",
+      "startUtc": "2026-07-10T19:00:00.000Z",
       "venue": "Los Angeles Stadium",
       "city": "Los Angeles"
     },
@@ -1673,7 +1673,7 @@
         "code": "TBD",
         "name": "Winner Match 96"
       },
-      "startUtc": "2026-07-12T02:00:00.000Z",
+      "startUtc": "2026-07-12T01:00:00.000Z",
       "venue": "Kansas City Stadium",
       "city": "Kansas City"
     },
@@ -1689,7 +1689,7 @@
         "code": "TBD",
         "name": "Winner Match 98"
       },
-      "startUtc": "2026-07-14T23:00:00.000Z",
+      "startUtc": "2026-07-14T19:00:00.000Z",
       "venue": "Dallas Stadium",
       "city": "Dallas"
     },
@@ -1705,7 +1705,7 @@
         "code": "TBD",
         "name": "Winner Match 100"
       },
-      "startUtc": "2026-07-15T21:00:00.000Z",
+      "startUtc": "2026-07-15T19:00:00.000Z",
       "venue": "Atlanta Stadium",
       "city": "Atlanta"
     },
@@ -1721,7 +1721,7 @@
         "code": "TBD",
         "name": "Loser Match 102"
       },
-      "startUtc": "2026-07-18T23:00:00.000Z",
+      "startUtc": "2026-07-18T21:00:00.000Z",
       "venue": "Miami Stadium",
       "city": "Miami"
     },
@@ -1737,7 +1737,7 @@
         "code": "TBD",
         "name": "Winner Match 102"
       },
-      "startUtc": "2026-07-19T23:00:00.000Z",
+      "startUtc": "2026-07-19T19:00:00.000Z",
       "venue": "New York New Jersey Stadium",
       "city": "New York/NJ"
     }

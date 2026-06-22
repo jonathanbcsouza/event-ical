@@ -1,9 +1,103 @@
-import { writeFileSync } from "fs";
+import { writeFileSync, readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { DateTime } from "luxon";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Official kickoff times (UTC) sourced from the published FIFA World Cup 2026
+// schedule. Keyed by team pairing for the group stage and by match number for
+// the knockout rounds (our internal match numbering differs from the official
+// numbering in the group stage, but knockout numbers align).
+const OFFICIAL_SCHEDULE = JSON.parse(
+  readFileSync(join(__dirname, "..", "data", "official-schedule-2026.json"), "utf8"),
+);
+
+// Map official feed team names to our internal codes (handles spelling diffs).
+const FEED_TEAM_CODES = {
+  Mexico: "MEX",
+  "South Africa": "RSA",
+  "Korea Republic": "KOR",
+  Czechia: "CZE",
+  Canada: "CAN",
+  "Bosnia and Herzegovina": "BIH",
+  USA: "USA",
+  Paraguay: "PAR",
+  Qatar: "QAT",
+  Switzerland: "SUI",
+  Brazil: "BRA",
+  Morocco: "MAR",
+  Haiti: "HAI",
+  Scotland: "SCO",
+  Australia: "AUS",
+  "Türkiye": "TUR",
+  Germany: "GER",
+  "Curaçao": "CUW",
+  Netherlands: "NED",
+  Japan: "JPN",
+  "Côte d'Ivoire": "CIV",
+  Ecuador: "ECU",
+  Sweden: "SWE",
+  Tunisia: "TUN",
+  Spain: "ESP",
+  "Cabo Verde": "CPV",
+  "Saudi Arabia": "KSA",
+  Uruguay: "URU",
+  Belgium: "BEL",
+  Egypt: "EGY",
+  "IR Iran": "IRN",
+  "New Zealand": "NZL",
+  France: "FRA",
+  Senegal: "SEN",
+  Iraq: "IRQ",
+  Norway: "NOR",
+  Argentina: "ARG",
+  Algeria: "ALG",
+  Austria: "AUT",
+  Jordan: "JOR",
+  Portugal: "POR",
+  "Congo DR": "COD",
+  England: "ENG",
+  Croatia: "CRO",
+  Ghana: "GHA",
+  Panama: "PAN",
+  Uzbekistan: "UZB",
+  Colombia: "COL",
+};
+
+function pairKey(codeA, codeB) {
+  return [codeA, codeB].sort().join("-");
+}
+
+function feedDateToUtcIso(dateUtc) {
+  // Feed format: "2026-06-22 01:00:00Z" -> ISO 8601
+  return new Date(dateUtc.replace(" ", "T")).toISOString();
+}
+
+const officialByPair = new Map();
+const officialByNumber = new Map();
+for (const m of OFFICIAL_SCHEDULE) {
+  officialByNumber.set(m.MatchNumber, feedDateToUtcIso(m.DateUtc));
+  const home = FEED_TEAM_CODES[m.HomeTeam];
+  const away = FEED_TEAM_CODES[m.AwayTeam];
+  if (home && away) {
+    officialByPair.set(pairKey(home, away), feedDateToUtcIso(m.DateUtc));
+  }
+}
+
+const unmatched = [];
+
+function officialStartUtc(id, stage, homeCode, awayCode, fallback) {
+  if (stage === "group") {
+    const hit = officialByPair.get(pairKey(homeCode, awayCode));
+    if (hit) return hit;
+  } else {
+    const hit = officialByNumber.get(id);
+    if (hit) return hit;
+  }
+  unmatched.push(`#${id} ${homeCode} vs ${awayCode} (${stage})`);
+  return fallback;
+}
 
 /** @type {Record<string, { code: string; name: string }>} */
 const TEAMS = {
@@ -250,32 +344,10 @@ const matches = ROWS.map(([id, date, stage, homeName, awayName, venue, city]) =>
   const slotIndex = daySlotCounter[dayKey]++;
   const home = team(homeName);
   const away = team(awayName);
-  let start = startUtc(date, city, slotIndex);
-  // Featured matches: 7 PM local kickoff
-  if (id === 1) {
-    start = DateTime.fromObject(
-      { year: 2026, month: 6, day: 11, hour: 19, minute: 0 },
-      { zone: "America/Mexico_City" },
-    )
-      .toUTC()
-      .toISO();
-  }
-  if (id === 103) {
-    start = DateTime.fromObject(
-      { year: 2026, month: 7, day: 18, hour: 19, minute: 0 },
-      { zone: "America/New_York" },
-    )
-      .toUTC()
-      .toISO();
-  }
-  if (id === 104) {
-    start = DateTime.fromObject(
-      { year: 2026, month: 7, day: 19, hour: 19, minute: 0 },
-      { zone: "America/New_York" },
-    )
-      .toUTC()
-      .toISO();
-  }
+  // Prefer the official kickoff time; fall back to the synthetic slot time only
+  // if a match can't be matched (reported below).
+  const fallback = startUtc(date, city, slotIndex);
+  const start = officialStartUtc(id, stage, home.code, away.code, fallback);
   return {
     id: String(id),
     matchNumber: id,
@@ -314,3 +386,12 @@ const output = {
 const outPath = join(__dirname, "..", "data", "fixtures-2026.json");
 writeFileSync(outPath, JSON.stringify(output, null, 2) + "\n");
 console.log(`Wrote ${matches.length} matches to ${outPath}`);
+
+if (unmatched.length > 0) {
+  console.warn(
+    `WARNING: ${unmatched.length} match(es) used fallback times (no official match found):`,
+  );
+  for (const u of unmatched) console.warn(`  - ${u}`);
+} else {
+  console.log("All matches mapped to official kickoff times.");
+}
