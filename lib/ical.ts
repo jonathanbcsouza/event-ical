@@ -5,12 +5,13 @@ import {
   formatMatchTitle,
   type Match,
 } from "./fixtures";
+import { SITE } from "./site";
 
 const MATCH_DURATION_HOURS = 2;
 const CALENDAR_COLOR = "#059669";
 const CALENDAR_DOMAIN =
   process.env.NEXT_PUBLIC_APP_URL?.replace(/^https?:\/\//, "") ??
-  "world-cup-ical.vercel.app";
+  SITE.productionUrl.replace(/^https?:\/\//, "");
 
 export function generateCalendarIcs(matchIds: string[]): string {
   const matches = getMatchesByIds(matchIds).sort(
@@ -22,7 +23,7 @@ export function generateCalendarIcs(matchIds: string[]): string {
     description: "Selected FIFA World Cup 2026 matches",
     timezone: "UTC",
     method: ICalCalendarMethod.PUBLISH,
-    prodId: { company: "event-ical", product: "wc2026" },
+    prodId: { company: "world-cup-ical", product: "wc2026" },
     color: CALENDAR_COLOR,
   });
 
@@ -30,11 +31,7 @@ export function generateCalendarIcs(matchIds: string[]): string {
     addMatchEvent(calendar, match);
   }
 
-  return applyEventColors(calendar.toString());
-}
-
-function applyEventColors(ics: string): string {
-  return ics.replace(/BEGIN:VEVENT\r\n/g, `BEGIN:VEVENT\r\nCOLOR:${CALENDAR_COLOR}\r\n`);
+  return calendar.toString();
 }
 
 function addMatchEvent(

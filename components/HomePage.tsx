@@ -6,13 +6,12 @@ import { CalendarView } from "@/components/CalendarView";
 import { Hero } from "@/components/Hero";
 import { MatchList } from "@/components/MatchList";
 import { SiteFooter } from "@/components/SiteFooter";
-import { StepHeader } from "@/components/StepHeader";
+import { StepPanel } from "@/components/StepPanel";
 import { TeamPicker } from "@/components/TeamPicker";
 import { ViewToggle, type ViewMode } from "@/components/ViewToggle";
 import {
   ALL_MATCHES,
   filterMatchesByTeams,
-  matchInvolvesTeam,
 } from "@/lib/fixtures";
 
 export function HomePage() {
@@ -32,13 +31,7 @@ export function HomePage() {
     }
     setSelectedMatchIds((prev) => {
       const filteredIds = new Set(filteredMatches.map((m) => m.id));
-      const kept = prev.filter((id) => filteredIds.has(id));
-      const autoSelect = filteredMatches
-        .filter((m) =>
-          selectedTeams.some((code) => matchInvolvesTeam(m, code)),
-        )
-        .map((m) => m.id);
-      return kept.length > 0 ? kept : autoSelect;
+      return prev.filter((id) => filteredIds.has(id));
     });
   }, [selectedTeams, filteredMatches]);
 
@@ -59,37 +52,51 @@ export function HomePage() {
         <div className="mt-8 space-y-6 sm:mt-10 sm:space-y-8">
           <TeamPicker selected={selectedTeams} onChange={setSelectedTeams} />
 
-          <section className="surface-card rounded-2xl px-4 py-4 sm:px-5">
-            <StepHeader
-              step={2}
-              title="Choose your matches"
-              description="These are the games that will land on your calendar."
-              action={<ViewToggle value={view} onChange={setView} />}
-            />
-
-            <div className="mt-4">
-              {view === "list" ? (
-                <div className="space-y-2">
-                  <MatchList
-                    matches={filteredMatches}
-                    selectedIds={selectedMatchIds}
-                    onSelectionChange={setSelectedMatchIds}
-                  />
-                  <StageBreakdown matches={selectedMatches} />
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  <CalendarView
-                    matches={ALL_MATCHES}
-                    selectedTeams={selectedTeams}
-                    selectedIds={selectedMatchIds}
-                    onSelectionChange={setSelectedMatchIds}
-                  />
-                  <StageBreakdown matches={selectedMatches} />
-                </div>
-              )}
-            </div>
-          </section>
+          <StepPanel
+            step={2}
+            title="Choose your matches"
+            description="These are the games that will land on your calendar."
+            summary={
+              selectedMatchIds.length === 0
+                ? "No matches selected"
+                : `${selectedMatchIds.length} ${selectedMatchIds.length === 1 ? "match" : "matches"} selected`
+            }
+            canComplete={selectedTeams.length > 0 && selectedMatchIds.length > 0}
+            pendingLabel={
+              selectedTeams.length === 0
+                ? "Pick teams first"
+                : "Select matches"
+            }
+            badge={
+              selectedMatchIds.length > 0 ? (
+                <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
+                  {selectedMatchIds.length}
+                </span>
+              ) : undefined
+            }
+            headerAction={<ViewToggle value={view} onChange={setView} />}
+          >
+            {view === "list" ? (
+              <div className="space-y-2">
+                <MatchList
+                  matches={filteredMatches}
+                  selectedIds={selectedMatchIds}
+                  onSelectionChange={setSelectedMatchIds}
+                />
+                <StageBreakdown matches={selectedMatches} />
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <CalendarView
+                  matches={ALL_MATCHES}
+                  selectedTeams={selectedTeams}
+                  selectedIds={selectedMatchIds}
+                  onSelectionChange={setSelectedMatchIds}
+                />
+                <StageBreakdown matches={selectedMatches} />
+              </div>
+            )}
+          </StepPanel>
 
           <CalendarActions selectedIds={selectedMatchIds} />
         </div>

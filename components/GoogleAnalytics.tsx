@@ -1,7 +1,8 @@
 import Script from "next/script";
+import { SITE } from "@/lib/site";
 
 const gaId =
-  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-BYRPBMKJ6M";
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? SITE.gaMeasurementId;
 
 export function GoogleAnalytics() {
   return (

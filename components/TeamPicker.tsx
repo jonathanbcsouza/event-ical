@@ -1,6 +1,6 @@
 "use client";
 
-import { StepHeader } from "@/components/StepHeader";
+import { StepPanel } from "@/components/StepPanel";
 import { getTeamsByGroup, type TeamRef } from "@/lib/fixtures";
 import { getFlag } from "@/lib/flags";
 
@@ -31,36 +31,48 @@ function displayName(name: string, compact: boolean): string {
   return SHORT_NAMES[name] ?? name;
 }
 
+function teamSummary(selected: string[]): string {
+  if (selected.length === 0) return "No teams selected";
+  const groups = getTeamsByGroup();
+  const names = groups
+    .flatMap(({ teams }) => teams)
+    .filter((t) => selected.includes(t.code))
+    .map((t) => t.name);
+  if (names.length <= 3) return names.join(", ");
+  return `${names.slice(0, 3).join(", ")} +${names.length - 3} more`;
+}
+
 export function TeamPicker({ selected, onChange }: TeamPickerProps) {
   const groups = getTeamsByGroup();
 
   return (
-    <section className="surface-card rounded-2xl px-4 py-4 sm:px-5">
-      <StepHeader
-        step={1}
-        title="Pick your teams"
-        description="Tap the nations you want to follow."
-        badge={
-          selected.length > 0 ? (
-            <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
-              {selected.length}
-            </span>
-          ) : undefined
-        }
-        action={
-          selected.length > 0 ? (
-            <button
-              type="button"
-              onClick={() => onChange([])}
-              className="shrink-0 py-1 text-xs text-zinc-500 underline-offset-2 hover:text-zinc-800 hover:underline dark:hover:text-zinc-200"
-            >
-              Clear all
-            </button>
-          ) : undefined
-        }
-      />
-
-      <div className="mt-4 divide-y divide-zinc-200 dark:divide-zinc-800">
+    <StepPanel
+      step={1}
+      title="Pick your teams"
+      description="Tap the nations you want to follow."
+      summary={teamSummary(selected)}
+      canComplete={selected.length > 0}
+      pendingLabel="Select teams"
+      badge={
+        selected.length > 0 ? (
+          <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
+            {selected.length}
+          </span>
+        ) : undefined
+      }
+      headerAction={
+        selected.length > 0 ? (
+          <button
+            type="button"
+            onClick={() => onChange([])}
+            className="shrink-0 py-1 text-xs text-zinc-500 underline-offset-2 hover:text-zinc-800 hover:underline dark:hover:text-zinc-200"
+          >
+            Clear all
+          </button>
+        ) : undefined
+      }
+    >
+      <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
         {groups.map(({ group, teams }) => (
           <div
             key={group}
@@ -85,7 +97,7 @@ export function TeamPicker({ selected, onChange }: TeamPickerProps) {
           </div>
         ))}
       </div>
-    </section>
+    </StepPanel>
   );
 }
 

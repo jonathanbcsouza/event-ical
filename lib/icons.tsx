@@ -25,6 +25,7 @@ export {
   Heart,
   Lightbulb,
   List,
+  Mail,
   MapPin,
   Moon,
   Sparkles,

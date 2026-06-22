@@ -18,7 +18,7 @@ export function Hero() {
       <div className="relative flex min-h-[16rem] flex-col justify-end gap-3 p-5 sm:min-h-[20rem] sm:p-8">
         <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow-sm">
           <Icon icon={Trophy} className="size-3.5" />
-          {SITE.name.replace(" Calendar", "")}
+          {SITE.shortName}
         </span>
 
         <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-white drop-shadow-sm sm:text-5xl">

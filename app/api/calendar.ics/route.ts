@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ALL_MATCHES } from "@/lib/fixtures";
 import { generateCalendarIcs } from "@/lib/ical";
+import { ICS_FILENAME } from "@/lib/calendar-url";
 
 export async function GET(request: NextRequest) {
   const idsParam = request.nextUrl.searchParams.get("ids");
@@ -24,12 +25,15 @@ export async function GET(request: NextRequest) {
   }
 
   const ics = generateCalendarIcs(matchIds);
+  const download = request.nextUrl.searchParams.get("download") === "1";
 
   return new NextResponse(ics, {
     status: 200,
     headers: {
       "Content-Type": "text/calendar; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="world-cup-2026.ics"',
+      "Content-Disposition": download
+        ? `attachment; filename="${ICS_FILENAME}"`
+        : `inline; filename="${ICS_FILENAME}"`,
       "Cache-Control": "public, max-age=3600",
     },
   });

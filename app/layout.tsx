@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { PitchBackground } from "@/components/PitchBackground";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SITE } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,9 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "World Cup 2026 - Calendar",
-  description:
-    "Pick your teams and matches, then download or subscribe to a FIFA World Cup 2026 calendar.",
+  title: SITE.name,
+  description: SITE.description,
 };
 
 const themeScript = `(function(){try{var t=localStorage.getItem("theme");var d=t!=="light"&&(t==="dark"||!t);if(d)document.documentElement.classList.add("dark");else document.documentElement.classList.remove("dark");}catch(e){document.documentElement.classList.add("dark");}})();`;
