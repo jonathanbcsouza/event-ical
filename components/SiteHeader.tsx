@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { DonateButton } from "@/components/DonateButton";
-import { GitHubIcon } from "@/components/GitHubIcon";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { SITE } from "@/lib/site";
 
 export function SiteHeader() {
   return (
@@ -28,15 +26,6 @@ export function SiteHeader() {
         </a>
 
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-          <a
-            href={SITE.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center gap-1.5 rounded-full border border-zinc-200 bg-white px-2.5 py-2 text-[11px] font-semibold text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 sm:gap-2 sm:px-3.5 sm:text-xs"
-          >
-            <GitHubIcon className="size-3.5 text-zinc-500 transition-colors group-hover:text-zinc-800 dark:text-zinc-400 dark:group-hover:text-zinc-100 sm:size-4" />
-            <span className="whitespace-nowrap">Contribute</span>
-          </a>
           <DonateButton variant="nav" />
           <ThemeToggle />
         </div>

@@ -19,6 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: SITE.name,
   description: SITE.description,
+  other: {
+    "google-adsense-account": SITE.adsenseClientId,
+  },
 };
 
 const themeScript = `(function(){try{var t=localStorage.getItem("theme");var d=t!=="light"&&(t==="dark"||!t);if(d)document.documentElement.classList.add("dark");else document.documentElement.classList.remove("dark");}catch(e){document.documentElement.classList.add("dark");}})();`;
@@ -37,6 +40,11 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <GoogleAnalytics />
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.adsenseClientId}`}
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-h-full flex flex-col text-zinc-900 dark:text-zinc-50">
         <PitchBackground />
