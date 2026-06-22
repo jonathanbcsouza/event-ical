@@ -1,6 +1,7 @@
 import { writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { DateTime } from "luxon";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -64,12 +65,33 @@ function team(name) {
   return { code: "TBD", name };
 }
 
-/** UTC hour slots by venue region (FIFA published schedule, approximate local kickoffs) */
+/** Local kickoff hour slots by venue region (FIFA published schedule) */
 const REGION_SLOTS = {
   Eastern: [17, 20, 23],
   Central: [18, 21, 0],
   Western: [20, 23, 2],
 };
+
+const REGION_TIMEZONE = {
+  Eastern: "America/New_York",
+  Central: "America/Chicago",
+  Western: "America/Los_Angeles",
+};
+
+/** Cities that don't follow the default region timezone */
+const CITY_TIMEZONE = {
+  "Mexico City Stadium": "America/Mexico_City",
+  "Estadio Guadalajara": "America/Mexico_City",
+  "Estadio Monterrey": "America/Monterrey",
+  "Toronto Stadium": "America/Toronto",
+  "BC Place Vancouver": "America/Vancouver",
+};
+
+function timezoneForCity(city) {
+  if (CITY_TIMEZONE[city]) return CITY_TIMEZONE[city];
+  const region = regionForCity(city);
+  return REGION_TIMEZONE[region];
+}
 
 function regionForCity(city) {
   if (
@@ -95,14 +117,21 @@ function regionForCity(city) {
 
 function startUtc(dateStr, city, slotIndex) {
   const region = regionForCity(city);
+  const tz = timezoneForCity(city);
   const slots = REGION_SLOTS[region];
   const hour = slots[slotIndex % slots.length];
-  const d = new Date(`${dateStr}T00:00:00Z`);
-  d.setUTCHours(hour, 0, 0, 0);
-  if (hour < 12) {
-    // early-morning UTC = previous evening US local
-  }
-  return d.toISOString();
+  const local = DateTime.fromObject(
+    {
+      year: Number(dateStr.slice(0, 4)),
+      month: Number(dateStr.slice(5, 7)),
+      day: Number(dateStr.slice(8, 10)),
+      hour,
+      minute: 0,
+      second: 0,
+    },
+    { zone: tz },
+  );
+  return local.toUTC().toISO();
 }
 
 /** Raw rows: [id, date, stage, home, away, venue, city] */
@@ -222,9 +251,31 @@ const matches = ROWS.map(([id, date, stage, homeName, awayName, venue, city]) =>
   const home = team(homeName);
   const away = team(awayName);
   let start = startUtc(date, city, slotIndex);
-  if (id === 1) start = "2026-06-11T19:00:00.000Z";
-  if (id === 104) start = "2026-07-19T19:00:00.000Z";
-  if (id === 103) start = "2026-07-18T19:00:00.000Z";
+  // Featured matches: 7 PM local kickoff
+  if (id === 1) {
+    start = DateTime.fromObject(
+      { year: 2026, month: 6, day: 11, hour: 19, minute: 0 },
+      { zone: "America/Mexico_City" },
+    )
+      .toUTC()
+      .toISO();
+  }
+  if (id === 103) {
+    start = DateTime.fromObject(
+      { year: 2026, month: 7, day: 18, hour: 19, minute: 0 },
+      { zone: "America/New_York" },
+    )
+      .toUTC()
+      .toISO();
+  }
+  if (id === 104) {
+    start = DateTime.fromObject(
+      { year: 2026, month: 7, day: 19, hour: 19, minute: 0 },
+      { zone: "America/New_York" },
+    )
+      .toUTC()
+      .toISO();
+  }
   return {
     id: String(id),
     matchNumber: id,
