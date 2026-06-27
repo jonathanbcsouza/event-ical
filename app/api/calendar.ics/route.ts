@@ -25,10 +25,13 @@ async function resolveCalendarMatches(request: NextRequest): Promise<Match[]> {
 
   const resolved = await getResolvedMatches();
 
+  // Live subscriptions (all/teams/stages) include past results with final
+  // scores so the calendar shows the full tournament, not just what's left.
   if (allParam === "1") {
-    return filterUpcomingMatches(resolved);
+    return resolved;
   }
 
+  // One-time .ics download is a snapshot of the checked (upcoming) matches only.
   if (idsParam) {
     const requestedIds = parseCsv(idsParam);
     const validIds = new Set(resolved.map((m) => m.id));
@@ -50,7 +53,7 @@ async function resolveCalendarMatches(request: NextRequest): Promise<Match[]> {
   }
 
   if (lists.length === 0) return [];
-  return filterUpcomingMatches(unionMatches(...lists));
+  return unionMatches(...lists);
 }
 
 export async function GET(request: NextRequest) {
