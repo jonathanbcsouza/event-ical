@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { PitchBackground } from "@/components/PitchBackground";
@@ -38,15 +39,18 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeScript}
+        </Script>
+      </head>
+      <body className="min-h-full flex flex-col text-zinc-900 dark:text-zinc-50">
         <GoogleAnalytics />
-        <script
-          async
+        <Script
+          id="adsense"
+          strategy="afterInteractive"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.adsenseClientId}`}
           crossOrigin="anonymous"
         />
-      </head>
-      <body className="min-h-full flex flex-col text-zinc-900 dark:text-zinc-50">
         <PitchBackground />
         <SiteHeader />
         {children}

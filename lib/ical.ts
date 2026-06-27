@@ -2,9 +2,9 @@ import ical, { ICalCalendarMethod } from "ical-generator";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 import { DateTime } from "luxon";
 import {
-  getMatchesByIds,
-  getStageLabel,
+  formatMatchScore,
   formatMatchTitle,
+  getStageLabel,
   type Match,
 } from "./fixtures";
 import { SITE } from "./site";
@@ -17,29 +17,27 @@ const CALENDAR_DOMAIN =
   SITE.productionUrl.replace(/^https?:\/\//, "");
 
 export function generateCalendarIcs(
-  matchIds: string[],
+  matches: Match[],
   timeZone = "UTC",
 ): string {
   const tz = isValidTimeZone(timeZone) ? timeZone : "UTC";
-  const matches = getMatchesByIds(matchIds).sort(
+  const sorted = [...matches].sort(
     (a, b) => new Date(a.startUtc).getTime() - new Date(b.startUtc).getTime(),
   );
 
   const calendar = ical({
     name: "FIFA World Cup 2026",
-    description: "Selected FIFA World Cup 2026 matches",
+    description: "FIFA World Cup 2026 matches",
     method: ICalCalendarMethod.PUBLISH,
     prodId: { company: "world-cup-ical", product: "wc2026" },
     color: CALENDAR_COLOR,
   });
 
-  // UTC needs no VTIMEZONE; other zones emit a proper VTIMEZONE block so the
-  // TZID-anchored events are valid across Google, Apple, and Outlook.
   if (tz !== "UTC") {
     calendar.timezone({ name: tz, generator: getVtimezoneComponent });
   }
 
-  for (const match of matches) {
+  for (const match of sorted) {
     addMatchEvent(calendar, match, tz);
   }
 
@@ -51,22 +49,27 @@ function addMatchEvent(
   match: Match,
   timeZone: string,
 ): void {
-  // startUtc is an absolute instant. We hand ical-generator a zone-aware Luxon
-  // DateTime so it emits the correct local time anchored to TZID (a plain JS
-  // Date would be misinterpreted using the server's system timezone).
   const start = DateTime.fromJSDate(new Date(match.startUtc)).setZone(timeZone);
   const end = start.plus({ hours: MATCH_DURATION_HOURS });
+  const score = formatMatchScore(match);
+
+  const descriptionLines = [
+    getStageLabel(match.stage),
+    `Match ${match.matchNumber}`,
+    `${match.home.name} vs ${match.away.name}`,
+  ];
+  if (score) {
+    descriptionLines.push(`Final score: ${score}`);
+  }
 
   calendar.createEvent({
     id: `wc2026-match-${match.id}@${CALENDAR_DOMAIN}`,
     start,
     end,
-    summary: formatMatchTitle(match),
-    description: [
-      getStageLabel(match.stage),
-      `Match ${match.matchNumber}`,
-      `${match.home.name} vs ${match.away.name}`,
-    ].join("\n"),
+    summary: score
+      ? `${formatMatchTitle(match)} (${score})`
+      : formatMatchTitle(match),
+    description: descriptionLines.join("\n"),
     location: `${match.venue}, ${match.city}`,
     timezone: timeZone,
   });

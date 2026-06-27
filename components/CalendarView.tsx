@@ -6,6 +6,7 @@ import { getFlag } from "@/lib/flags";
 import {
   getStageColor,
   getStageLabel,
+  isMatchUpcoming,
   matchInvolvesTeam,
   type Match,
   type MatchStage,
@@ -18,10 +19,19 @@ type CalendarViewProps = {
   selectedIds: string[];
   onSelectionChange: (ids: string[]) => void;
   timeZone?: string;
+  now?: number;
 };
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const LEGEND_STAGES: MatchStage[] = ["group", "r32", "r16", "qf", "sf", "final"];
+const LEGEND_STAGES: MatchStage[] = [
+  "group",
+  "r32",
+  "r16",
+  "qf",
+  "sf",
+  "third",
+  "final",
+];
 
 function dateKey(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
@@ -87,6 +97,7 @@ export function CalendarView({
   selectedIds,
   onSelectionChange,
   timeZone,
+  now,
 }: CalendarViewProps) {
   const matchesByDay = useMemo(() => {
     const map = new Map<string, Match[]>();
@@ -113,6 +124,9 @@ export function CalendarView({
 
   const [openDay, setOpenDay] = useState<string | null>(null);
   const openDayMatches = openDay ? (matchesByDay.get(openDay) ?? []) : [];
+  const upcomingOpenDayMatches = openDayMatches.filter((m) =>
+    isMatchUpcoming(m, now),
+  );
 
   function dayInvolvesSelectedTeam(dayMatches: Match[]): boolean {
     if (selectedTeams.length === 0) return false;
@@ -224,19 +238,20 @@ export function CalendarView({
             </h3>
             <button
               type="button"
+              disabled={upcomingOpenDayMatches.length === 0}
               onClick={() =>
                 onSelectionChange(
                   Array.from(
                     new Set([
                       ...selectedIds,
-                      ...openDayMatches.map((mt) => mt.id),
+                      ...upcomingOpenDayMatches.map((mt) => mt.id),
                     ]),
                   ),
                 )
               }
-              className="rounded-lg border border-zinc-200 px-3 py-1 text-xs text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+              className="rounded-lg border border-zinc-200 px-3 py-1 text-xs text-zinc-700 hover:bg-zinc-50 disabled:opacity-40 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
             >
-              Add all
+              Add upcoming
             </button>
           </div>
           <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
@@ -250,6 +265,7 @@ export function CalendarView({
                 }
                 showDate={false}
                 timeZone={timeZone}
+                now={now}
               />
             ))}
           </ul>
@@ -258,7 +274,7 @@ export function CalendarView({
 
       {!openDay && (
         <p className="text-center text-sm text-zinc-400">
-          Tap a highlighted day to see and select its matches.
+          Tap a highlighted day to see scores or select upcoming matches.
         </p>
       )}
     </section>

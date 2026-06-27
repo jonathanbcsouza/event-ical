@@ -1,17 +1,70 @@
+import type { MatchStage } from "./fixtures";
 import { SITE } from "./site";
 
+export type CalendarSubscriptionParams = {
+  teamCodes?: string[];
+  stages?: MatchStage[];
+  matchIds?: string[];
+  includeAll?: boolean;
+  timeZone?: string;
+  download?: boolean;
+};
+
+function appendTimeZone(path: string, timeZone?: string): string {
+  if (timeZone && timeZone !== "UTC") {
+    return `${path}&tz=${encodeURIComponent(timeZone)}`;
+  }
+  return path;
+}
+
 export function buildCalendarApiUrl(
+  baseUrl: string,
+  params: CalendarSubscriptionParams,
+): string {
+  const {
+    teamCodes = [],
+    stages = [],
+    matchIds = [],
+    includeAll = false,
+    timeZone,
+    download,
+  } = params;
+
+  const parts: string[] = [];
+
+  if (matchIds.length > 0) {
+    parts.push(`ids=${encodeURIComponent(matchIds.join(","))}`);
+  } else if (includeAll) {
+    parts.push("all=1");
+  } else {
+    if (teamCodes.length > 0) {
+      parts.push(`teams=${encodeURIComponent(teamCodes.join(","))}`);
+    }
+    if (stages.length > 0) {
+      parts.push(`stages=${encodeURIComponent(stages.join(","))}`);
+    }
+  }
+
+  if (parts.length === 0) return "";
+
+  let path = `/api/calendar.ics?${parts.join("&")}`;
+  path = appendTimeZone(path, timeZone);
+  if (download) path += "&download=1";
+  return `${baseUrl.replace(/\/$/, "")}${path}`;
+}
+
+/** @deprecated Use buildCalendarApiUrl with CalendarSubscriptionParams */
+export function buildCalendarApiUrlFromIds(
   baseUrl: string,
   matchIds: string[],
   timeZone?: string,
 ): string {
-  if (matchIds.length === 0) return "";
-  const ids = matchIds.join(",");
-  let path = `/api/calendar.ics?ids=${encodeURIComponent(ids)}`;
-  if (timeZone && timeZone !== "UTC") {
-    path += `&tz=${encodeURIComponent(timeZone)}`;
-  }
-  return `${baseUrl.replace(/\/$/, "")}${path}`;
+  return buildCalendarApiUrl(baseUrl, {
+    teamCodes: [],
+    stages: [],
+    matchIds,
+    timeZone,
+  });
 }
 
 export function buildWebcalUrl(calendarUrl: string): string {
@@ -23,7 +76,6 @@ export function buildGoogleSubscribeUrl(calendarUrl: string): string {
   return `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcalUrl)}`;
 }
 
-/** Android intent that tries the Google Calendar app, falling back to the web URL. */
 export function buildGoogleAndroidIntentUrl(calendarUrl: string): string {
   const webUrl = buildGoogleSubscribeUrl(calendarUrl);
   const webcalUrl = buildWebcalUrl(calendarUrl);
@@ -40,10 +92,6 @@ export function buildOutlookSubscribeUrl(
   calendarUrl: string,
   name = "FIFA World Cup 2026",
 ): string {
-  // Outlook on the web "Subscribe from web" expects an https:// ICS URL.
-  // Microsoft moderator guidance: replace webcal:// with https:// (Q&A 4563216).
-  // Deep link pattern is community-documented; Microsoft only documents manual
-  // Add calendar → Subscribe from web → paste URL → Import.
   const params = new URLSearchParams({ url: calendarUrl, name });
   return `https://outlook.live.com/calendar/0/addfromweb?${params.toString()}`;
 }

@@ -5,72 +5,37 @@ import { DateTime } from "luxon";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Official kickoff times (UTC) sourced from the published FIFA World Cup 2026
-// schedule. Keyed by team pairing for the group stage and by match number for
-// the knockout rounds (our internal match numbering differs from the official
-// numbering in the group stage, but knockout numbers align).
+import { writeFileSync, readFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+import { DateTime } from "luxon";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const TEAMS_DATA = JSON.parse(
+  readFileSync(join(__dirname, "..", "data", "teams.json"), "utf8"),
+);
+
 const OFFICIAL_SCHEDULE = JSON.parse(
   readFileSync(join(__dirname, "..", "data", "official-schedule-2026.json"), "utf8"),
 );
 
-// Map official feed team names to our internal codes (handles spelling diffs).
-const FEED_TEAM_CODES = {
-  Mexico: "MEX",
-  "South Africa": "RSA",
-  "Korea Republic": "KOR",
-  Czechia: "CZE",
-  Canada: "CAN",
-  "Bosnia and Herzegovina": "BIH",
-  USA: "USA",
-  Paraguay: "PAR",
-  Qatar: "QAT",
-  Switzerland: "SUI",
-  Brazil: "BRA",
-  Morocco: "MAR",
-  Haiti: "HAI",
-  Scotland: "SCO",
-  Australia: "AUS",
-  "Türkiye": "TUR",
-  Germany: "GER",
-  "Curaçao": "CUW",
-  Netherlands: "NED",
-  Japan: "JPN",
-  "Côte d'Ivoire": "CIV",
-  Ecuador: "ECU",
-  Sweden: "SWE",
-  Tunisia: "TUN",
-  Spain: "ESP",
-  "Cabo Verde": "CPV",
-  "Saudi Arabia": "KSA",
-  Uruguay: "URU",
-  Belgium: "BEL",
-  Egypt: "EGY",
-  "IR Iran": "IRN",
-  "New Zealand": "NZL",
-  France: "FRA",
-  Senegal: "SEN",
-  Iraq: "IRQ",
-  Norway: "NOR",
-  Argentina: "ARG",
-  Algeria: "ALG",
-  Austria: "AUT",
-  Jordan: "JOR",
-  Portugal: "POR",
-  "Congo DR": "COD",
-  England: "ENG",
-  Croatia: "CRO",
-  Ghana: "GHA",
-  Panama: "PAN",
-  Uzbekistan: "UZB",
-  Colombia: "COL",
-};
+/** @type {Record<string, string>} */
+const ALIASES = TEAMS_DATA.aliases;
+
+/** @type {Record<string, { code: string; name: string }>} */
+const TEAMS_BY_CODE = TEAMS_DATA.teams;
+
+function feedNameToCode(name) {
+  const code = ALIASES[name];
+  return code && TEAMS_BY_CODE[code] ? code : undefined;
+}
 
 function pairKey(codeA, codeB) {
   return [codeA, codeB].sort().join("-");
 }
 
 function feedDateToUtcIso(dateUtc) {
-  // Feed format: "2026-06-22 01:00:00Z" -> ISO 8601
   return new Date(dateUtc.replace(" ", "T")).toISOString();
 }
 
@@ -78,8 +43,8 @@ const officialByPair = new Map();
 const officialByNumber = new Map();
 for (const m of OFFICIAL_SCHEDULE) {
   officialByNumber.set(m.MatchNumber, feedDateToUtcIso(m.DateUtc));
-  const home = FEED_TEAM_CODES[m.HomeTeam];
-  const away = FEED_TEAM_CODES[m.AwayTeam];
+  const home = feedNameToCode(m.HomeTeam);
+  const away = feedNameToCode(m.AwayTeam);
   if (home && away) {
     officialByPair.set(pairKey(home, away), feedDateToUtcIso(m.DateUtc));
   }
@@ -100,59 +65,12 @@ function officialStartUtc(id, stage, homeCode, awayCode, fallback) {
 }
 
 /** @type {Record<string, { code: string; name: string }>} */
-const TEAMS = {
-  Mexico: { code: "MEX", name: "Mexico" },
-  "South Africa": { code: "RSA", name: "South Africa" },
-  "South Korea": { code: "KOR", name: "South Korea" },
-  "Czech Republic": { code: "CZE", name: "Czech Republic" },
-  Canada: { code: "CAN", name: "Canada" },
-  "Bosnia and Herzegovina": { code: "BIH", name: "Bosnia and Herzegovina" },
-  USA: { code: "USA", name: "USA" },
-  Paraguay: { code: "PAR", name: "Paraguay" },
-  Qatar: { code: "QAT", name: "Qatar" },
-  Switzerland: { code: "SUI", name: "Switzerland" },
-  Brazil: { code: "BRA", name: "Brazil" },
-  Morocco: { code: "MAR", name: "Morocco" },
-  Haiti: { code: "HAI", name: "Haiti" },
-  Scotland: { code: "SCO", name: "Scotland" },
-  Australia: { code: "AUS", name: "Australia" },
-  Türkiye: { code: "TUR", name: "Türkiye" },
-  Germany: { code: "GER", name: "Germany" },
-  Curaçao: { code: "CUW", name: "Curaçao" },
-  "Ivory Coast": { code: "CIV", name: "Ivory Coast" },
-  Ecuador: { code: "ECU", name: "Ecuador" },
-  Netherlands: { code: "NED", name: "Netherlands" },
-  Japan: { code: "JPN", name: "Japan" },
-  Sweden: { code: "SWE", name: "Sweden" },
-  Tunisia: { code: "TUN", name: "Tunisia" },
-  Spain: { code: "ESP", name: "Spain" },
-  "Cape Verde": { code: "CPV", name: "Cape Verde" },
-  "Cabo Verde": { code: "CPV", name: "Cape Verde" },
-  "Saudi Arabia": { code: "KSA", name: "Saudi Arabia" },
-  Uruguay: { code: "URU", name: "Uruguay" },
-  Belgium: { code: "BEL", name: "Belgium" },
-  Egypt: { code: "EGY", name: "Egypt" },
-  Iran: { code: "IRN", name: "Iran" },
-  "New Zealand": { code: "NZL", name: "New Zealand" },
-  France: { code: "FRA", name: "France" },
-  Senegal: { code: "SEN", name: "Senegal" },
-  Iraq: { code: "IRQ", name: "Iraq" },
-  Norway: { code: "NOR", name: "Norway" },
-  Argentina: { code: "ARG", name: "Argentina" },
-  Algeria: { code: "ALG", name: "Algeria" },
-  Austria: { code: "AUT", name: "Austria" },
-  Jordan: { code: "JOR", name: "Jordan" },
-  Portugal: { code: "POR", name: "Portugal" },
-  "DR Congo": { code: "COD", name: "DR Congo" },
-  England: { code: "ENG", name: "England" },
-  Croatia: { code: "CRO", name: "Croatia" },
-  Ghana: { code: "GHA", name: "Ghana" },
-  Panama: { code: "PAN", name: "Panama" },
-  Uzbekistan: { code: "UZB", name: "Uzbekistan" },
-  Colombia: { code: "COL", name: "Colombia" },
-};
-
-const TBD = { code: "TBD", name: "TBD" };
+const TEAMS = {};
+for (const [alias, code] of Object.entries(ALIASES)) {
+  if (TEAMS_BY_CODE[code]) {
+    TEAMS[alias] = TEAMS_BY_CODE[code];
+  }
+}
 
 function team(name) {
   if (TEAMS[name]) return TEAMS[name];

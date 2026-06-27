@@ -14,7 +14,11 @@ import {
   ICS_FILENAME,
 } from "@/lib/calendar-url";
 import { getMobilePlatform, type MobilePlatform } from "@/lib/device";
-import { countByStage, getStageLabel, type MatchStage } from "@/lib/fixtures";
+import {
+  countByStage,
+  getStageLabel,
+  type MatchStage,
+} from "@/lib/fixtures";
 import { getTimeZoneOffsetLabel } from "@/lib/timezones";
 import {
   CalendarDays,
@@ -28,7 +32,10 @@ import {
 import { cn } from "@/lib/utils";
 
 type CalendarActionsProps = {
+  selectedTeams: string[];
   selectedIds: string[];
+  includeAllTeams: boolean;
+  matchCount: number;
   timeZone?: string;
 };
 
@@ -45,7 +52,10 @@ type ExportAction = {
 };
 
 export function CalendarActions({
+  selectedTeams,
   selectedIds,
+  includeAllTeams,
+  matchCount,
   timeZone,
 }: CalendarActionsProps) {
   const [showImportHelp, setShowImportHelp] = useState(false);
@@ -57,25 +67,40 @@ export function CalendarActions({
     setMobilePlatform(getMobilePlatform());
   }, []);
 
-  const hasSelection = selectedIds.length > 0;
+  const canSubscribe = selectedTeams.length > 0;
+  const canDownload = selectedIds.length > 0;
+
   const baseUrl = getClientBaseUrl();
-  const calendarUrl = hasSelection
-    ? buildCalendarApiUrl(baseUrl, selectedIds, timeZone)
+  const subscribeUrl = canSubscribe
+    ? buildCalendarApiUrl(baseUrl, {
+        ...(includeAllTeams
+          ? { includeAll: true }
+          : { teamCodes: selectedTeams }),
+        timeZone,
+      })
     : "";
-  const googleWebUrl = hasSelection
-    ? buildGoogleSubscribeUrl(calendarUrl)
+  const downloadUrl = canDownload
+    ? buildCalendarApiUrl(baseUrl, {
+        matchIds: selectedIds,
+        timeZone,
+        download: true,
+      })
+    : "";
+
+  const googleWebUrl = subscribeUrl
+    ? buildGoogleSubscribeUrl(subscribeUrl)
     : "";
   const googleUrl =
-    mobilePlatform === "android" && hasSelection
-      ? buildGoogleAndroidIntentUrl(calendarUrl)
+    mobilePlatform === "android" && subscribeUrl
+      ? buildGoogleAndroidIntentUrl(subscribeUrl)
       : googleWebUrl;
-  const outlookUrl = hasSelection
-    ? buildOutlookSubscribeUrl(calendarUrl)
+  const outlookUrl = subscribeUrl
+    ? buildOutlookSubscribeUrl(subscribeUrl)
     : "";
-  const outlookOfficeUrl = hasSelection
-    ? buildOutlookOfficeSubscribeUrl(calendarUrl)
+  const outlookOfficeUrl = subscribeUrl
+    ? buildOutlookOfficeSubscribeUrl(subscribeUrl)
     : "";
-  const appleUrl = hasSelection ? buildAppleSubscribeUrl(calendarUrl) : "";
+  const appleUrl = subscribeUrl ? buildAppleSubscribeUrl(subscribeUrl) : "";
   const isMobile = mobilePlatform !== null;
 
   const exportActions: ExportAction[] = [
@@ -84,10 +109,10 @@ export function CalendarActions({
       label: "Add to Google Calendar",
       title: isMobile
         ? "Opens Google Calendar app when installed, otherwise the mobile site"
-        : "Subscribe in Google Calendar — your selected matches stay up to date automatically",
+        : "Subscribe in Google Calendar — knockout teams update automatically as results come in",
       icon: CalendarDays,
       variant: "primary",
-      enabled: hasSelection,
+      enabled: canSubscribe,
       href: googleUrl,
       openInNewTab: !isMobile,
     },
@@ -96,10 +121,10 @@ export function CalendarActions({
       label: "Add to Outlook",
       title: isMobile
         ? "Opens Outlook app or mobile web to subscribe — syncs to the app after you confirm"
-        : "Subscribe in Outlook on the web — opens Outlook to add this calendar from the internet",
+        : "Subscribe in Outlook on the web — knockout teams update automatically as results come in",
       icon: Mail,
       variant: "secondary",
-      enabled: hasSelection,
+      enabled: canSubscribe,
       href: outlookUrl,
       openInNewTab: !isMobile,
     },
@@ -112,7 +137,7 @@ export function CalendarActions({
               "Opens Apple Calendar directly on iPhone/iPad to subscribe to the live feed",
             icon: CalendarDays,
             variant: "secondary" as const,
-            enabled: hasSelection,
+            enabled: canSubscribe,
             href: appleUrl,
             openInNewTab: false,
           },
@@ -122,11 +147,11 @@ export function CalendarActions({
       id: "download",
       label: "Download .ics",
       title:
-        "Download a one-time .ics file for Apple Calendar or manual import",
+        "Download a one-time snapshot of your selected matches",
       icon: Download,
       variant: "secondary",
-      enabled: hasSelection,
-      href: `${calendarUrl}&download=1`,
+      enabled: canDownload,
+      href: downloadUrl,
       download: ICS_FILENAME,
     },
   ];
@@ -136,21 +161,21 @@ export function CalendarActions({
       step={3}
       title="Export your calendar"
       description={
-        hasSelection
-          ? "Subscribe in Google or Outlook, or download a file for Apple Calendar."
-          : "Complete step 2 to choose which matches to export."
+        canSubscribe
+          ? "Subscribe for a live feed — knockout opponents fill in as your teams advance."
+          : "Pick teams in step 2 first."
       }
       summary={
-        hasSelection
-          ? `${selectedIds.length} ${selectedIds.length === 1 ? "match" : "matches"} ready to export`
-          : "Select matches in step 2 first"
+        canSubscribe
+          ? `${matchCount} upcoming ${matchCount === 1 ? "match" : "matches"} in your live feed`
+          : "Pick teams in step 2 first"
       }
-      canComplete={hasSelection}
+      canComplete={canSubscribe}
       pendingLabel="Complete step 2"
       badge={
-        hasSelection ? (
+        canSubscribe ? (
           <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
-            {selectedIds.length}
+            {matchCount}
           </span>
         ) : undefined
       }
@@ -161,18 +186,26 @@ export function CalendarActions({
         ))}
       </div>
 
-      {hasSelection && <DonatePrompt matchCount={selectedIds.length} />}
-
-      {hasSelection && isMobile && (
+      {canSubscribe && (
         <p className="mt-3 text-xs text-zinc-500">
-          On mobile, links open your calendar app when installed. Google and
-          Outlook may still use the browser to confirm the subscription — it
-          then syncs to the app. For all past and future games in Outlook, use
-          Download .ics.
+          {includeAllTeams
+            ? "Your subscription includes all upcoming games. Download .ics uses your checked games only."
+            : "Your subscription follows the teams you picked through the bracket. Download .ics uses checked games only."}{" "}
+          Past games show scores only.
         </p>
       )}
 
-      {hasSelection && timeZone && (
+      {canSubscribe && <DonatePrompt matchCount={matchCount} />}
+
+      {canSubscribe && isMobile && (
+        <p className="mt-3 text-xs text-zinc-500">
+          On mobile, links open your calendar app when installed. Google and
+          Outlook may still use the browser to confirm the subscription — it
+          then syncs to the app.
+        </p>
+      )}
+
+      {canSubscribe && timeZone && (
         <p className="mt-3 flex items-center gap-1.5 text-xs text-zinc-500">
           <Icon icon={Globe} className="size-3.5" />
           Events use {timeZone.replace(/_/g, " ")}
@@ -199,7 +232,7 @@ export function CalendarActions({
         <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-zinc-600 dark:text-zinc-400">
           <li>
             Google and Outlook subscribe to a live feed — confirm once in your
-            calendar app. Outlook refreshes subscribed calendars every few hours.
+            calendar app. Knockout match names update as teams are confirmed.
           </li>
           <li>
             On mobile, Google and Outlook links try to open the native app.
@@ -213,7 +246,7 @@ export function CalendarActions({
           </li>
           <li>
             Work or school account?{" "}
-            {hasSelection ? (
+            {canSubscribe ? (
               <a
                 href={outlookOfficeUrl}
                 target="_blank"

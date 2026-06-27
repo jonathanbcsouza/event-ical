@@ -14,6 +14,12 @@ export type TeamRef = {
   name: string;
 };
 
+export type MatchResult = {
+  homeScore: number;
+  awayScore: number;
+  winner: "home" | "away" | "draw";
+};
+
 export type Match = {
   id: string;
   matchNumber: number;
@@ -23,6 +29,8 @@ export type Match = {
   startUtc: string;
   venue: string;
   city: string;
+  result?: MatchResult;
+  status?: "scheduled" | "finished";
 };
 
 export type GroupId = keyof typeof fixtureData.groups;
@@ -143,6 +151,75 @@ export function getMatchesByIds(ids: string[]): Match[] {
 
 export function formatMatchTitle(match: Match): string {
   return `${match.home.name} vs ${match.away.name}`;
+}
+
+export function formatMatchScore(match: Match): string | undefined {
+  if (!match.result) return undefined;
+  const { homeScore, awayScore } = match.result;
+  return `${homeScore}–${awayScore}`;
+}
+
+const MATCH_DURATION_MS = 2 * 60 * 60 * 1000;
+
+export function isMatchFinished(match: Match): boolean {
+  return match.status === "finished" || !!match.result;
+}
+
+export function isMatchUpcoming(match: Match, now = Date.now()): boolean {
+  if (isMatchFinished(match)) return false;
+  return new Date(match.startUtc).getTime() + MATCH_DURATION_MS > now;
+}
+
+export function isMatchSelectable(match: Match, now = Date.now()): boolean {
+  return isMatchUpcoming(match, now);
+}
+
+export function partitionMatches(
+  matches: Match[],
+  now = Date.now(),
+): {
+  upcoming: Match[];
+  results: Match[];
+} {
+  const upcoming: Match[] = [];
+  const results: Match[] = [];
+  for (const match of matches) {
+    if (isMatchFinished(match) || !isMatchUpcoming(match, now)) {
+      results.push(match);
+    } else {
+      upcoming.push(match);
+    }
+  }
+  return { upcoming, results };
+}
+
+export function filterUpcomingMatches(matches: Match[], now = Date.now()): Match[] {
+  return matches.filter((m) => isMatchUpcoming(m, now));
+}
+
+export const KNOCKOUT_STAGES: MatchStage[] = [
+  "r32",
+  "r16",
+  "qf",
+  "sf",
+  "third",
+  "final",
+];
+
+export function isKnockoutStage(stage: MatchStage): boolean {
+  return KNOCKOUT_STAGES.includes(stage);
+}
+
+export function parseStageList(param: string | null): MatchStage[] {
+  if (!param) return [];
+  const valid = new Set<MatchStage>([
+    "group",
+    ...KNOCKOUT_STAGES,
+  ]);
+  return param
+    .split(",")
+    .map((s) => s.trim())
+    .filter((s): s is MatchStage => valid.has(s as MatchStage));
 }
 
 export function countByStage(matches: Match[]): Record<MatchStage, number> {
