@@ -46,21 +46,19 @@ function parseFeedRow(raw: RawFeedRow): FeedRow {
   };
 }
 
-async function fetchLiveScheduleUncached(): Promise<Map<
-  number,
-  FeedRow
-> | null> {
+// IMPORTANT: unstable_cache JSON-serializes its return value, so we must cache a
+// plain array here. A Map does not survive serialization (it deserializes to
+// `{}`), which previously caused intermittent `feedMap.get is not a function`
+// 500s on cache hits. We rebuild the Map from the array in getLiveSchedule().
+async function fetchLiveScheduleUncached(): Promise<FeedRow[] | null> {
   try {
     const res = await fetch(LIVE_FEED_URL, {
       next: { revalidate: REVALIDATE_SECONDS, tags: ["live-schedule"] },
     });
     if (!res.ok) return null;
     const data = (await res.json()) as RawFeedRow[];
-    const map = new Map<number, FeedRow>();
-    for (const row of data) {
-      map.set(row.MatchNumber, parseFeedRow(row));
-    }
-    return map;
+    if (!Array.isArray(data)) return null;
+    return data.map(parseFeedRow);
   } catch {
     return null;
   }
@@ -73,7 +71,13 @@ const getCachedLiveSchedule = unstable_cache(
 );
 
 export async function getLiveSchedule(): Promise<Map<number, FeedRow> | null> {
-  return getCachedLiveSchedule();
+  const rows = await getCachedLiveSchedule();
+  if (!rows || !Array.isArray(rows)) return null;
+  const map = new Map<number, FeedRow>();
+  for (const row of rows) {
+    map.set(row.matchNumber, row);
+  }
+  return map;
 }
 
 export function feedDateToUtcIso(dateUtc: string): string {

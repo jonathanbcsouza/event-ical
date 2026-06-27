@@ -66,18 +66,23 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  // An empty result must still return a valid (empty) calendar with a 200 so
+  // that subscribed calendar apps can import/refresh it. Returning a 400 here
+  // makes Google/Apple/Outlook fail to import the feed whenever a team has no
+  // upcoming matches (between rounds, eliminated, or end of tournament).
   const matches = await resolveCalendarMatches(request);
 
-  if (matches.length === 0) {
-    return NextResponse.json(
-      { error: "No matching fixtures found" },
-      { status: 400 },
-    );
-  }
-
   const tz = request.nextUrl.searchParams.get("tz") ?? "UTC";
-  const ics = generateCalendarIcs(matches, tz);
   const download = request.nextUrl.searchParams.get("download") === "1";
+
+  let ics: string;
+  try {
+    ics = generateCalendarIcs(matches, tz);
+  } catch {
+    // Fall back to UTC if timezone-specific generation ever fails, so the feed
+    // still imports rather than returning a 500 the calendar app can't parse.
+    ics = generateCalendarIcs(matches, "UTC");
+  }
 
   return new NextResponse(ics, {
     status: 200,
