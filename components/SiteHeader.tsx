@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { DonateButton } from "@/components/DonateButton";
+import { GitHubLink } from "@/components/GitHubLink";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function SiteHeader() {
@@ -27,6 +28,7 @@ export function SiteHeader() {
 
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <DonateButton variant="nav" />
+          <GitHubLink />
           <ThemeToggle />
         </div>
       </div>
