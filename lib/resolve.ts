@@ -1,9 +1,11 @@
 import resultsData from "@/data/results-2026.json";
 import {
   ALL_MATCHES,
+  GROUPS,
   type Match,
   type MatchResult,
   type MatchStage,
+  type TeamRef,
 } from "@/lib/fixtures";
 
 type ResultRow = {
@@ -61,8 +63,165 @@ function overlayResult(match: Match): Match {
   };
 }
 
+const TEAM_GROUP = new Map<string, string>();
+const TEAM_NAME = new Map<string, string>();
+for (const [group, codes] of Object.entries(GROUPS)) {
+  for (const code of codes) TEAM_GROUP.set(code, group);
+}
+for (const match of ALL_MATCHES) {
+  if (match.home.code !== "TBD") TEAM_NAME.set(match.home.code, match.home.name);
+  if (match.away.code !== "TBD") TEAM_NAME.set(match.away.code, match.away.name);
+}
+
+type Standing = { code: string; pts: number; gd: number; gf: number };
+
+const compareStandings = (a: Standing, b: Standing): number =>
+  b.pts - a.pts || b.gd - a.gd || b.gf - a.gf || a.code.localeCompare(b.code);
+
+function teamRef(code: string): TeamRef {
+  return { code, name: TEAM_NAME.get(code) ?? code };
+}
+
+function computeGroupStandings(matches: Match[]): Record<string, Standing[]> {
+  const stats = new Map<string, Standing>();
+  for (const code of TEAM_GROUP.keys()) {
+    stats.set(code, { code, pts: 0, gd: 0, gf: 0 });
+  }
+  for (const m of matches) {
+    if (m.stage !== "group" || !m.result) continue;
+    const home = stats.get(m.home.code);
+    const away = stats.get(m.away.code);
+    if (!home || !away) continue;
+    const { homeScore, awayScore } = m.result;
+    home.gf += homeScore;
+    home.gd += homeScore - awayScore;
+    away.gf += awayScore;
+    away.gd += awayScore - homeScore;
+    if (homeScore > awayScore) home.pts += 3;
+    else if (awayScore > homeScore) away.pts += 3;
+    else {
+      home.pts += 1;
+      away.pts += 1;
+    }
+  }
+  const standings: Record<string, Standing[]> = {};
+  for (const [group, codes] of Object.entries(GROUPS)) {
+    standings[group] = codes
+      .map((code) => stats.get(code)!)
+      .sort(compareStandings);
+  }
+  return standings;
+}
+
+// Assign the best third-placed teams to their R32 slots, honouring the
+// group-letter set permitted for each slot (deterministic bipartite matching).
+function assignBestThirds(
+  matches: Match[],
+  standings: Record<string, Standing[]>,
+): Map<string, string> {
+  const thirds = Object.entries(standings)
+    .map(([group, arr]) => ({ group, ...arr[2] }))
+    .sort(compareStandings)
+    .slice(0, 8);
+  const qualifiedByGroup = new Map(thirds.map((t) => [t.group, t.code]));
+
+  type Slot = { matchId: string; side: "home" | "away"; allowed: string[] };
+  const slots: Slot[] = [];
+  for (const m of matches) {
+    if (m.stage !== "r32") continue;
+    for (const side of ["home", "away"] as const) {
+      const found = m[side].name.match(/3rd Place \(([A-L/]+)\)/);
+      if (found) slots.push({ matchId: m.id, side, allowed: found[1].split("/") });
+    }
+  }
+
+  const slotToGroup = new Map<number, string>();
+  const groupToSlot = new Map<string, number>();
+  const tryAssign = (si: number, seen: Set<string>): boolean => {
+    for (const group of slots[si].allowed) {
+      if (!qualifiedByGroup.has(group) || seen.has(group)) continue;
+      seen.add(group);
+      const occupied = groupToSlot.get(group);
+      if (occupied === undefined || tryAssign(occupied, seen)) {
+        groupToSlot.set(group, si);
+        slotToGroup.set(si, group);
+        return true;
+      }
+    }
+    return false;
+  };
+  slots.forEach((_, i) => tryAssign(i, new Set()));
+
+  const assignment = new Map<string, string>();
+  slots.forEach((slot, i) => {
+    const group = slotToGroup.get(i);
+    if (group) assignment.set(`${slot.matchId}:${slot.side}`, qualifiedByGroup.get(group)!);
+  });
+  return assignment;
+}
+
+function winnerCode(match: Match): string | undefined {
+  if (!match.result || match.home.code === "TBD" || match.away.code === "TBD") {
+    return undefined;
+  }
+  if (match.result.winner === "home") return match.home.code;
+  if (match.result.winner === "away") return match.away.code;
+  return undefined;
+}
+
+// Fill TBD knockout slots from group standings and earlier-round winners.
+function resolveKnockoutTeams(matches: Match[]): Match[] {
+  const standings = computeGroupStandings(matches);
+  const thirdAssignment = assignBestThirds(matches, standings);
+  const byNumber = new Map(matches.map((m) => [m.matchNumber, m]));
+
+  const resolveFeeder = (
+    match: Match,
+    side: "home" | "away",
+  ): string | undefined => {
+    const name = match[side].name;
+    let found: RegExpMatchArray | null;
+    if ((found = name.match(/^Group ([A-L]) Winner$/))) {
+      return standings[found[1]]?.[0]?.code;
+    }
+    if ((found = name.match(/^Group ([A-L]) Runner-up$/))) {
+      return standings[found[1]]?.[1]?.code;
+    }
+    if (name.match(/3rd Place/)) {
+      return thirdAssignment.get(`${match.id}:${side}`);
+    }
+    if ((found = name.match(/^Winner Match (\d+)$/))) {
+      const source = byNumber.get(Number(found[1]));
+      return source ? winnerCode(source) : undefined;
+    }
+    return undefined;
+  };
+
+  // Iterate to a fixpoint so later rounds resolve once earlier ones are known.
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const match of matches) {
+      if (match.stage === "group") continue;
+      for (const side of ["home", "away"] as const) {
+        if (match[side].code !== "TBD") continue;
+        const code = resolveFeeder(match, side);
+        if (code && code !== "TBD") {
+          match[side] = teamRef(code);
+          changed = true;
+        }
+      }
+    }
+  }
+  return matches;
+}
+
 export function resolveMatches(staticMatches: Match[]): Match[] {
-  return staticMatches.map(overlayResult);
+  // Clone so in-place knockout resolution never mutates shared fixture data.
+  let matches = staticMatches.map((m) => ({ ...overlayResult(m) }));
+  matches = resolveKnockoutTeams(matches);
+  // Overlay again so any results for freshly-resolved knockout pairs apply.
+  return matches.map(overlayResult);
 }
 
 export function getResolvedMatches(): Match[] {
