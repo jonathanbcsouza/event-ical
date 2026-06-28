@@ -59,6 +59,32 @@ body {
   animation: step-pending-pulse 1.4s ease-in-out infinite;
 }
 
+@keyframes step-card-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.step-card-enter {
+  animation: step-card-in 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-pending {
+    animation: none;
+  }
+
+  .step-card-enter {
+    animation: none;
+  }
+}
+
 @keyframes cloud-drift {
   0% {
     transform: translateX(0);

@@ -1,7 +1,6 @@
 "use client";
 
-import { StepPanel } from "@/components/StepPanel";
-import { getTeamsByGroup, type TeamRef } from "@/lib/fixtures";
+import { getAllTeams, getTeamsByGroup, type TeamRef } from "@/lib/fixtures";
 import { getFlag } from "@/lib/flags";
 
 type TeamPickerProps = {
@@ -31,7 +30,7 @@ function displayName(name: string, compact: boolean): string {
   return SHORT_NAMES[name] ?? name;
 }
 
-function teamSummary(selected: string[]): string {
+export function teamSummary(selected: string[]): string {
   if (selected.length === 0) return "No teams selected";
   const groups = getTeamsByGroup();
   const names = groups
@@ -42,62 +41,61 @@ function teamSummary(selected: string[]): string {
   return `${names.slice(0, 3).join(", ")} +${names.length - 3} more`;
 }
 
+export function TeamPickerControls({ selected, onChange }: TeamPickerProps) {
+  const allCodes = getAllTeams().map((t) => t.code);
+  const allSelected = selected.length === allCodes.length;
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => onChange(allSelected ? [] : allCodes)}
+        className="shrink-0 rounded-lg border border-zinc-200 px-3 py-1.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+      >
+        {allSelected ? "Deselect all" : "Select all"}
+      </button>
+      {selected.length > 0 && (
+        <button
+          type="button"
+          onClick={() => onChange([])}
+          className="shrink-0 py-1 text-xs text-zinc-500 underline-offset-2 hover:text-zinc-800 hover:underline dark:hover:text-zinc-200"
+        >
+          Clear
+        </button>
+      )}
+    </>
+  );
+}
+
 export function TeamPicker({ selected, onChange }: TeamPickerProps) {
   const groups = getTeamsByGroup();
 
   return (
-    <StepPanel
-      step={1}
-      title="Pick your teams"
-      description="Tap the nations you want to follow."
-      summary={teamSummary(selected)}
-      canComplete={selected.length > 0}
-      pendingLabel="Select teams"
-      badge={
-        selected.length > 0 ? (
-          <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
-            {selected.length}
+    <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
+      {groups.map(({ group, teams }) => (
+        <div
+          key={group}
+          className="grid grid-cols-[2rem_1fr] items-center gap-x-2 py-2.5 first:pt-0 last:pb-0 sm:gap-x-3"
+        >
+          <span
+            aria-hidden
+            className="flex size-7 items-center justify-center rounded-md bg-zinc-100 text-xs font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+          >
+            {group}
           </span>
-        ) : undefined
-      }
-      headerAction={
-        selected.length > 0 ? (
-          <button
-            type="button"
-            onClick={() => onChange([])}
-            className="shrink-0 py-1 text-xs text-zinc-500 underline-offset-2 hover:text-zinc-800 hover:underline dark:hover:text-zinc-200"
-          >
-            Clear all
-          </button>
-        ) : undefined
-      }
-    >
-      <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
-        {groups.map(({ group, teams }) => (
-          <div
-            key={group}
-            className="grid grid-cols-[2rem_1fr] items-center gap-x-2 py-2.5 first:pt-0 last:pb-0 sm:gap-x-3"
-          >
-            <span
-              aria-hidden
-              className="flex size-7 items-center justify-center rounded-md bg-zinc-100 text-xs font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
-            >
-              {group}
-            </span>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-1.5">
-              {teams.map((team) => (
-                <TeamChip
-                  key={team.code}
-                  team={team}
-                  active={selected.includes(team.code)}
-                  onToggle={() => onChange(toggleTeam(selected, team.code))}
-                />
-              ))}
-            </div>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-1.5">
+            {teams.map((team) => (
+              <TeamChip
+                key={team.code}
+                team={team}
+                active={selected.includes(team.code)}
+                onToggle={() => onChange(toggleTeam(selected, team.code))}
+              />
+            ))}
           </div>
-        ))}
-      </div>
-    </StepPanel>
+        </div>
+      ))}
+    </div>
   );
 }
 

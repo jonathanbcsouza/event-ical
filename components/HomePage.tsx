@@ -11,8 +11,9 @@ import {
 } from "@/components/MatchBrowser";
 import { MatchList } from "@/components/MatchList";
 import { SiteFooter } from "@/components/SiteFooter";
-import { StepPanel } from "@/components/StepPanel";
-import { TeamPicker } from "@/components/TeamPicker";
+import { StepCard } from "@/components/StepCard";
+import { StepRail, type StepRailItem } from "@/components/StepRail";
+import { TeamPicker, TeamPickerControls, teamSummary } from "@/components/TeamPicker";
 import { TimezonePicker } from "@/components/TimezonePicker";
 import { ViewToggle, type ViewMode } from "@/components/ViewToggle";
 import {
@@ -37,6 +38,7 @@ type HomePageProps = {
 export function HomePage({ matches, serverNow }: HomePageProps) {
   const [selectedTeams, setSelectedTeams] = useState<string[]>([]);
   const [selectedMatchIds, setSelectedMatchIds] = useState<string[]>([]);
+  const [activeStep, setActiveStep] = useState(1);
   const [matchTab, setMatchTab] = useState<MatchBrowserTab>("next");
   const [teamScope, setTeamScope] = useState<TeamScope>("selected");
   const [view, setView] = useState<ViewMode>("list");
@@ -102,6 +104,7 @@ export function HomePage({ matches, serverNow }: HomePageProps) {
     if (!hasTeams) {
       setSelectedMatchIds([]);
       setTeamScope("selected");
+      setActiveStep(1);
       return;
     }
     const allowedIds = new Set(
@@ -116,140 +119,214 @@ export function HomePage({ matches, serverNow }: HomePageProps) {
 
   const showList = view === "list" || matchTab === "past";
 
+  const steps: StepRailItem[] = [
+    {
+      n: 1,
+      label: "Teams",
+      summary: teamSummary(selectedTeams),
+      status: activeStep === 1 ? "active" : "done",
+    },
+    {
+      n: 2,
+      label: "Matches",
+      summary: hasTeams
+        ? `${nextMatches.length} upcoming · ${pastMatches.length} past`
+        : "Pick teams first",
+      status: !hasTeams
+        ? "locked"
+        : activeStep === 2
+          ? "active"
+          : activeStep > 2
+            ? "done"
+            : "todo",
+    },
+    {
+      n: 3,
+      label: "Export",
+      summary: hasTeams
+        ? `${exportMatchCount} ${exportMatchCount === 1 ? "match" : "matches"} live`
+        : "Pick teams first",
+      status: !hasTeams ? "locked" : activeStep === 3 ? "active" : "todo",
+    },
+  ];
+
+  function goToStep(step: number) {
+    if (step !== 1 && !hasTeams) return;
+    setActiveStep(step);
+  }
+
   return (
     <>
       <main className="mx-auto flex min-h-full w-full max-w-4xl flex-col px-3 pb-8 pt-5 sm:px-6 sm:pb-12 sm:pt-8">
         <Hero />
 
-        <div className="mt-8 space-y-6 sm:mt-10 sm:space-y-8">
-          <TeamPicker selected={selectedTeams} onChange={setSelectedTeams} />
+        <div className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">
+          <StepRail steps={steps} onSelect={goToStep} />
 
-          <StepPanel
-            step={2}
-            title="Choose your matches"
-            description="Pick your teams, then review games or past results. Scores update every 30 minutes."
-            summary={
-              !hasTeams
-                ? "No teams selected"
-                : matchTab === "next"
-                  ? `${nextMatches.length} upcoming ${nextMatches.length === 1 ? "game" : "games"}`
-                  : `${pastMatches.length} past ${pastMatches.length === 1 ? "result" : "results"}`
-            }
-            canComplete={hasTeams}
-            pendingLabel={!hasTeams ? "Pick teams above" : "Review matches"}
-            badge={
-              (matchTab === "next" ? nextMatches : pastMatches).length > 0 ? (
-                <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
-                  {matchTab === "next" ? nextMatches.length : pastMatches.length}
-                </span>
-              ) : undefined
-            }
-            headerAction={
-              matchTab === "next" ? (
-                <ViewToggle value={view} onChange={setView} />
-              ) : undefined
-            }
-          >
-            <div className="mb-4 space-y-4">
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 dark:border-zinc-800 dark:bg-zinc-900/50">
-                <TimezonePicker
-                  value={timeZone}
-                  detected={detectedTimeZone}
-                  onChange={handleTimeZoneChange}
+          {activeStep === 1 && (
+            <StepCard
+              step={1}
+              title="Pick your teams"
+              description="Choose the national teams you want to follow, or select all."
+              canComplete={hasTeams}
+              pendingLabel="Pick at least one team"
+              doneLabel="Next"
+              onDone={() => goToStep(2)}
+              headerAction={
+                <TeamPickerControls
+                  selected={selectedTeams}
+                  onChange={setSelectedTeams}
+                />
+              }
+            >
+              <TeamPicker selected={selectedTeams} onChange={setSelectedTeams} />
+            </StepCard>
+          )}
+
+          {activeStep === 2 && (
+            <StepCard
+              step={2}
+              title="Choose your matches"
+              description="Review upcoming games or past results. Scores update every 30 minutes."
+              canComplete={hasTeams}
+              pendingLabel="Pick teams first"
+              doneLabel="Next"
+              onDone={() => goToStep(3)}
+              badge={
+                (matchTab === "next" ? nextMatches : pastMatches).length > 0 ? (
+                  <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
+                    {matchTab === "next" ? nextMatches.length : pastMatches.length}
+                  </span>
+                ) : undefined
+              }
+              headerAction={
+                matchTab === "next" ? (
+                  <ViewToggle value={view} onChange={setView} />
+                ) : undefined
+              }
+            >
+              <div className="mb-4 space-y-4">
+                <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 dark:border-zinc-800 dark:bg-zinc-900/50">
+                  <TimezonePicker
+                    value={timeZone}
+                    detected={detectedTimeZone}
+                    onChange={handleTimeZoneChange}
+                  />
+                </div>
+
+                <MatchBrowser
+                  activeTab={matchTab}
+                  onActiveTabChange={setMatchTab}
+                  teamScope={teamScope}
+                  onTeamScopeChange={setTeamScope}
+                  hasTeams={hasTeams}
+                  nextCount={nextMatches.length}
+                  pastCount={pastMatches.length}
                 />
               </div>
 
-              <MatchBrowser
-                activeTab={matchTab}
-                onActiveTabChange={setMatchTab}
-                teamScope={teamScope}
-                onTeamScopeChange={setTeamScope}
-                hasTeams={hasTeams}
-                nextCount={nextMatches.length}
-                pastCount={pastMatches.length}
-              />
-            </div>
-
-            {showList ? (
-              <div className="space-y-4">
-                {matchTab === "next" ? (
-                  hasTeams ? (
+              {showList ? (
+                <div className="space-y-4">
+                  {matchTab === "next" ? (
+                    hasTeams ? (
+                      <MatchList
+                        title="Next games"
+                        matches={scopedMatches}
+                        mode="upcoming"
+                        now={now}
+                        selectedIds={selectedMatchIds}
+                        onSelectionChange={setSelectedMatchIds}
+                        timeZone={timeZone}
+                        emptyMessage={
+                          useAllTeams
+                            ? "No upcoming games right now."
+                            : "No upcoming games for your teams."
+                        }
+                      />
+                    ) : (
+                      <MatchList
+                        matches={[]}
+                        now={now}
+                        selectedIds={selectedMatchIds}
+                        onSelectionChange={setSelectedMatchIds}
+                        timeZone={timeZone}
+                      />
+                    )
+                  ) : hasTeams ? (
                     <MatchList
-                      title="Next games"
+                      title="Past results"
                       matches={scopedMatches}
-                      mode="upcoming"
+                      mode="results"
                       now={now}
-                      selectedIds={selectedMatchIds}
-                      onSelectionChange={setSelectedMatchIds}
+                      selectedIds={[]}
+                      onSelectionChange={() => {}}
                       timeZone={timeZone}
                       emptyMessage={
                         useAllTeams
-                          ? "No upcoming games right now."
-                          : "No upcoming games for your teams."
+                          ? "No results yet."
+                          : "No results for your teams yet."
                       }
                     />
                   ) : (
                     <MatchList
                       matches={[]}
+                      mode="results"
                       now={now}
-                      selectedIds={selectedMatchIds}
-                      onSelectionChange={setSelectedMatchIds}
+                      selectedIds={[]}
+                      onSelectionChange={() => {}}
                       timeZone={timeZone}
+                      emptyMessage="Pick teams above to see results."
                     />
-                  )
-                ) : hasTeams ? (
-                  <MatchList
-                    title="Past results"
-                    matches={scopedMatches}
-                    mode="results"
-                    now={now}
-                    selectedIds={[]}
-                    onSelectionChange={() => {}}
-                    timeZone={timeZone}
-                    emptyMessage={
-                      useAllTeams
-                        ? "No results yet."
-                        : "No results for your teams yet."
-                    }
-                  />
-                ) : (
-                  <MatchList
-                    matches={[]}
-                    mode="results"
-                    now={now}
-                    selectedIds={[]}
-                    onSelectionChange={() => {}}
-                    timeZone={timeZone}
-                    emptyMessage="Pick teams above to see results."
-                  />
-                )}
+                  )}
 
-                <StageBreakdown
-                  matches={matchTab === "next" ? nextMatches : pastMatches}
-                />
-              </div>
-            ) : (
-              <div className="space-y-2">
-                <CalendarView
-                  matches={matches}
-                  selectedTeams={selectedTeams}
-                  selectedIds={selectedMatchIds}
-                  onSelectionChange={setSelectedMatchIds}
-                  timeZone={timeZone}
-                  now={now}
-                />
-                <StageBreakdown matches={nextMatches} />
-              </div>
-            )}
-          </StepPanel>
+                  <StageBreakdown
+                    matches={matchTab === "next" ? nextMatches : pastMatches}
+                  />
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <CalendarView
+                    matches={matches}
+                    selectedTeams={selectedTeams}
+                    selectedIds={selectedMatchIds}
+                    onSelectionChange={setSelectedMatchIds}
+                    timeZone={timeZone}
+                    now={now}
+                  />
+                  <StageBreakdown matches={nextMatches} />
+                </div>
+              )}
+            </StepCard>
+          )}
 
-          <CalendarActions
-            selectedTeams={selectedTeams}
-            selectedIds={selectedMatchIds}
-            includeAllTeams={useAllTeams}
-            matchCount={exportMatchCount}
-            timeZone={timeZone}
-          />
+          {activeStep === 3 && (
+            <StepCard
+              step={3}
+              title="Export your calendar"
+              description={
+                hasTeams
+                  ? "Subscribe for a live feed — knockout opponents fill in as your teams advance."
+                  : "Pick teams first."
+              }
+              canComplete={hasTeams}
+              isLastStep
+              badge={
+                hasTeams ? (
+                  <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
+                    {exportMatchCount}
+                  </span>
+                ) : undefined
+              }
+            >
+              <CalendarActions
+                selectedTeams={selectedTeams}
+                selectedIds={selectedMatchIds}
+                includeAllTeams={useAllTeams}
+                matchCount={exportMatchCount}
+                timeZone={timeZone}
+              />
+            </StepCard>
+          )}
         </div>
       </main>
 

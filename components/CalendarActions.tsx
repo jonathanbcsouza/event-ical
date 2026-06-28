@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { DonatePrompt } from "@/components/DonatePrompt";
-import { StepPanel } from "@/components/StepPanel";
 import {
   buildAppleSubscribeUrl,
   buildCalendarApiUrl,
@@ -157,29 +156,7 @@ export function CalendarActions({
   ];
 
   return (
-    <StepPanel
-      step={3}
-      title="Export your calendar"
-      description={
-        canSubscribe
-          ? "Subscribe for a live feed — knockout opponents fill in as your teams advance."
-          : "Pick teams in step 2 first."
-      }
-      summary={
-        canSubscribe
-          ? `${matchCount} upcoming ${matchCount === 1 ? "match" : "matches"} in your live feed`
-          : "Pick teams in step 2 first"
-      }
-      canComplete={canSubscribe}
-      pendingLabel="Complete step 2"
-      badge={
-        canSubscribe ? (
-          <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
-            {matchCount}
-          </span>
-        ) : undefined
-      }
-    >
+    <div>
       <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
         {exportActions.map((action) => (
           <ExportButton key={action.id} action={action} />
@@ -266,7 +243,7 @@ export function CalendarActions({
           </li>
         </ol>
       )}
-    </StepPanel>
+    </div>
   );
 }
 
