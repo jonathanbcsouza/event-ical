@@ -25,8 +25,10 @@ import {
 import {
   DEFAULT_TIME_ZONE,
   detectTimeZone,
+  fetchTimeZoneFromIp,
   getTimeZoneDisplayName,
   isValidTimeZone,
+  resolveTimeZonePreference,
 } from "@/lib/timezones";
 
 const TIME_ZONE_STORAGE_KEY = "wc2026-timezone";
@@ -34,16 +36,23 @@ const TIME_ZONE_STORAGE_KEY = "wc2026-timezone";
 type HomePageProps = {
   matches: Match[];
   serverNow: number;
+  requestTimeZone: string | null;
 };
 
-export function HomePage({ matches, serverNow }: HomePageProps) {
+export function HomePage({
+  matches,
+  serverNow,
+  requestTimeZone,
+}: HomePageProps) {
   const [selectedTeams, setSelectedTeams] = useState<string[]>([]);
   const [selectedMatchIds, setSelectedMatchIds] = useState<string[]>([]);
   const [activeStep, setActiveStep] = useState(1);
   const [matchTab, setMatchTab] = useState<MatchBrowserTab>("next");
   const [teamScope, setTeamScope] = useState<TeamScope>("selected");
   const [view, setView] = useState<ViewMode>("list");
-  const [timeZone, setTimeZone] = useState(DEFAULT_TIME_ZONE);
+  const [timeZone, setTimeZone] = useState(
+    () => requestTimeZone ?? DEFAULT_TIME_ZONE,
+  );
   const [detectedTimeZone, setDetectedTimeZone] = useState(DEFAULT_TIME_ZONE);
   const [now, setNow] = useState(serverNow);
 
@@ -54,16 +63,47 @@ export function HomePage({ matches, serverNow }: HomePageProps) {
   }, []);
 
   useEffect(() => {
-    const detected = detectTimeZone();
-    setDetectedTimeZone(detected);
-    let stored: string | null = null;
-    try {
-      stored = window.localStorage.getItem(TIME_ZONE_STORAGE_KEY);
-    } catch {
-      stored = null;
+    let cancelled = false;
+
+    async function initTimeZone() {
+      const deviceTimeZone = detectTimeZone();
+      setDetectedTimeZone(deviceTimeZone);
+
+      let stored: string | null = null;
+      try {
+        stored = window.localStorage.getItem(TIME_ZONE_STORAGE_KEY);
+      } catch {
+        stored = null;
+      }
+
+      if (stored && isValidTimeZone(stored)) {
+        if (!cancelled) setTimeZone(stored);
+        return;
+      }
+
+      if (requestTimeZone && isValidTimeZone(requestTimeZone)) {
+        if (!cancelled) setTimeZone(requestTimeZone);
+        return;
+      }
+
+      const ipTimeZone = await fetchTimeZoneFromIp();
+      if (cancelled) return;
+
+      setTimeZone(
+        resolveTimeZonePreference({
+          stored: null,
+          requestTimeZone: null,
+          ipTimeZone,
+          deviceTimeZone,
+        }),
+      );
     }
-    setTimeZone(stored && isValidTimeZone(stored) ? stored : detected);
-  }, []);
+
+    void initTimeZone();
+    return () => {
+      cancelled = true;
+    };
+  }, [requestTimeZone]);
 
   function handleTimeZoneChange(tz: string) {
     setTimeZone(tz);

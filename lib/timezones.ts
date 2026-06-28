@@ -95,6 +95,50 @@ export function detectTimeZone(): string {
   }
 }
 
+/** Vercel sets this from the visitor IP on each request. */
+export function getRequestTimeZone(
+  getHeader: (name: string) => string | null | undefined,
+): string | null {
+  const tz = getHeader("x-vercel-ip-timezone");
+  return isValidTimeZone(tz) ? tz : null;
+}
+
+export function resolveTimeZonePreference({
+  stored,
+  requestTimeZone,
+  ipTimeZone,
+  deviceTimeZone,
+}: {
+  stored: string | null;
+  requestTimeZone: string | null;
+  ipTimeZone: string | null;
+  deviceTimeZone: string;
+}): string {
+  if (isValidTimeZone(stored)) return stored;
+  if (isValidTimeZone(requestTimeZone)) return requestTimeZone;
+  if (isValidTimeZone(ipTimeZone)) return ipTimeZone;
+  if (isValidTimeZone(deviceTimeZone)) return deviceTimeZone;
+  return DEFAULT_TIME_ZONE;
+}
+
+export async function fetchTimeZoneFromIp(): Promise<string | null> {
+  try {
+    const res = await fetch("https://ipwho.is/", {
+      signal: AbortSignal.timeout(4000),
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as {
+      success?: boolean;
+      timezone?: { id?: string };
+    };
+    if (data.success === false) return null;
+    const tz = data.timezone?.id;
+    return isValidTimeZone(tz) ? tz : null;
+  } catch {
+    return null;
+  }
+}
+
 export function getTimeZoneOffsetLabel(
   tz: string,
   reference: Date = OFFSET_REFERENCE,
