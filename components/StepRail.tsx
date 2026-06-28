@@ -19,16 +19,16 @@ type StepRailProps = {
 
 export function StepRail({ steps, onSelect }: StepRailProps) {
   return (
-    <nav aria-label="Progress" className="surface-card rounded-2xl p-2 sm:p-3">
-      <ol className="flex items-stretch gap-1 sm:gap-2">
+    <nav aria-label="Progress" className="surface-card overflow-hidden rounded-2xl p-1.5 sm:p-3">
+      <ol className="flex min-w-0 items-stretch">
         {steps.map((step, index) => (
-          <li key={step.n} className="flex flex-1 items-center">
+          <li key={step.n} className="flex min-w-0 flex-1 items-center">
             <StepRailButton step={step} onSelect={onSelect} />
             {index < steps.length - 1 && (
               <span
                 aria-hidden
                 className={cn(
-                  "mx-1 h-px w-3 shrink-0 rounded sm:w-6 transition-colors",
+                  "mx-0.5 h-px w-2 shrink-0 rounded sm:mx-1 sm:w-5 transition-colors",
                   step.status === "done"
                     ? "bg-emerald-500"
                     : "bg-zinc-200 dark:bg-zinc-700",
@@ -58,9 +58,10 @@ function StepRailButton({
       type="button"
       disabled={isLocked}
       aria-current={isActive ? "step" : undefined}
+      aria-label={step.label}
       onClick={() => onSelect(step.n)}
       className={cn(
-        "group flex min-w-0 flex-1 items-center gap-2 rounded-xl px-2 py-2 text-left transition-colors sm:px-3",
+        "group flex min-w-0 flex-1 items-center justify-center gap-2 rounded-xl px-1 py-1.5 transition-colors sm:justify-start sm:px-3 sm:py-2",
         isActive && "bg-emerald-600/10 dark:bg-emerald-500/15",
         !isActive && !isLocked && "hover:bg-zinc-100 dark:hover:bg-zinc-800/70",
         isLocked && "cursor-not-allowed opacity-55",
@@ -68,7 +69,7 @@ function StepRailButton({
     >
       <span
         className={cn(
-          "flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors sm:size-8",
+          "flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-colors sm:size-8 sm:text-sm",
           isActive && "bg-emerald-600 text-white",
           isDone && "bg-emerald-600/15 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400",
           (isLocked || step.status === "todo") &&
@@ -76,17 +77,17 @@ function StepRailButton({
         )}
       >
         {isDone ? (
-          <Icon icon={Check} className="size-4" />
+          <Icon icon={Check} className="size-3.5 sm:size-4" />
         ) : isLocked ? (
-          <Icon icon={Lock} className="size-3.5" />
+          <Icon icon={Lock} className="size-3 sm:size-3.5" />
         ) : (
           step.n
         )}
       </span>
-      <span className="min-w-0 flex-1">
+      <span className="hidden min-w-0 flex-1 sm:block">
         <span
           className={cn(
-            "block truncate text-xs font-semibold sm:text-[0.95rem]",
+            "block truncate text-[0.95rem] font-semibold",
             isActive
               ? "text-zinc-900 dark:text-zinc-50"
               : "text-zinc-600 dark:text-zinc-300",
@@ -95,7 +96,7 @@ function StepRailButton({
           {step.label}
         </span>
         {step.summary && (
-          <span className="hidden truncate text-xs text-zinc-500 sm:block">
+          <span className="block truncate text-xs text-zinc-500">
             {step.summary}
           </span>
         )}
