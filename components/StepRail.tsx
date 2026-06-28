@@ -86,7 +86,7 @@ function StepRailButton({
       <span className="min-w-0 flex-1">
         <span
           className={cn(
-            "block truncate text-sm font-semibold sm:text-[0.95rem]",
+            "block truncate text-xs font-semibold sm:text-[0.95rem]",
             isActive
               ? "text-zinc-900 dark:text-zinc-50"
               : "text-zinc-600 dark:text-zinc-300",

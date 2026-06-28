@@ -12,7 +12,7 @@ import {
 import { MatchList } from "@/components/MatchList";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StepCard } from "@/components/StepCard";
-import { StepRail, type StepRailItem } from "@/components/StepRail";
+import { StepRail, type StepRailItem, type StepStatus } from "@/components/StepRail";
 import { TeamPicker, TeamPickerControls, teamSummary } from "@/components/TeamPicker";
 import { TimezonePicker } from "@/components/TimezonePicker";
 import { ViewToggle, type ViewMode } from "@/components/ViewToggle";
@@ -25,6 +25,7 @@ import {
 import {
   DEFAULT_TIME_ZONE,
   detectTimeZone,
+  getTimeZoneDisplayName,
   isValidTimeZone,
 } from "@/lib/timezones";
 
@@ -119,34 +120,41 @@ export function HomePage({ matches, serverNow }: HomePageProps) {
 
   const showList = view === "list" || matchTab === "past";
 
+  function getStepStatus(step: number): StepStatus {
+    if (!hasTeams && step > 1) return "locked";
+    if (activeStep === step) return "active";
+    if (activeStep > step) return "done";
+    return "todo";
+  }
+
   const steps: StepRailItem[] = [
     {
       n: 1,
       label: "Teams",
       summary: teamSummary(selectedTeams),
-      status: activeStep === 1 ? "active" : "done",
+      status: getStepStatus(1),
     },
     {
       n: 2,
+      label: "Timezone",
+      summary: getTimeZoneDisplayName(timeZone),
+      status: getStepStatus(2),
+    },
+    {
+      n: 3,
       label: "Matches",
       summary: hasTeams
         ? `${nextMatches.length} upcoming · ${pastMatches.length} past`
         : "Pick teams first",
-      status: !hasTeams
-        ? "locked"
-        : activeStep === 2
-          ? "active"
-          : activeStep > 2
-            ? "done"
-            : "todo",
+      status: getStepStatus(3),
     },
     {
-      n: 3,
+      n: 4,
       label: "Export",
       summary: hasTeams
         ? `${exportMatchCount} ${exportMatchCount === 1 ? "match" : "matches"} live`
         : "Pick teams first",
-      status: !hasTeams ? "locked" : activeStep === 3 ? "active" : "todo",
+      status: getStepStatus(4),
     },
   ];
 
@@ -186,12 +194,31 @@ export function HomePage({ matches, serverNow }: HomePageProps) {
           {activeStep === 2 && (
             <StepCard
               step={2}
+              title="Choose your timezone"
+              description="Set when kickoffs and calendar events appear for you."
+              canComplete={hasTeams}
+              pendingLabel="Pick teams first"
+              doneLabel="Next"
+              onDone={() => goToStep(3)}
+            >
+              <TimezonePicker
+                layout="step"
+                value={timeZone}
+                detected={detectedTimeZone}
+                onChange={handleTimeZoneChange}
+              />
+            </StepCard>
+          )}
+
+          {activeStep === 3 && (
+            <StepCard
+              step={3}
               title="Choose your matches"
               description="Review upcoming games or past results. Scores update every 30 minutes."
               canComplete={hasTeams}
               pendingLabel="Pick teams first"
               doneLabel="Next"
-              onDone={() => goToStep(3)}
+              onDone={() => goToStep(4)}
               badge={
                 (matchTab === "next" ? nextMatches : pastMatches).length > 0 ? (
                   <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
@@ -205,15 +232,7 @@ export function HomePage({ matches, serverNow }: HomePageProps) {
                 ) : undefined
               }
             >
-              <div className="mb-4 space-y-4">
-                <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 dark:border-zinc-800 dark:bg-zinc-900/50">
-                  <TimezonePicker
-                    value={timeZone}
-                    detected={detectedTimeZone}
-                    onChange={handleTimeZoneChange}
-                  />
-                </div>
-
+              <div className="mb-4">
                 <MatchBrowser
                   activeTab={matchTab}
                   onActiveTabChange={setMatchTab}
@@ -299,9 +318,9 @@ export function HomePage({ matches, serverNow }: HomePageProps) {
             </StepCard>
           )}
 
-          {activeStep === 3 && (
+          {activeStep === 4 && (
             <StepCard
-              step={3}
+              step={4}
               title="Export your calendar"
               description={
                 hasTeams

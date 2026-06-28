@@ -118,6 +118,18 @@ export function getTimeZoneLabel(option: TimeZoneOption): string {
   return offset ? `${option.city} (${offset})` : option.city;
 }
 
+export function getTimeZoneDisplayName(tz: string): string {
+  const extra = ensureKnownTimeZone(tz);
+  if (extra.length > 0) return getTimeZoneLabel(extra[0]);
+  for (const group of TIME_ZONE_GROUPS) {
+    const zone = group.zones.find((z) => z.id === tz);
+    if (zone) return getTimeZoneLabel(zone);
+  }
+  const offset = getTimeZoneOffsetLabel(tz);
+  const city = tz.replace(/_/g, " ");
+  return offset ? `${city} (${offset})` : city;
+}
+
 export function ensureKnownTimeZone(tz: string): TimeZoneOption[] {
   // If the detected/selected zone isn't in the curated list, expose it so the
   // picker can still show and select it.
