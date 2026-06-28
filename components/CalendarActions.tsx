@@ -70,12 +70,22 @@ export function CalendarActions({
   const canDownload = selectedIds.length > 0;
 
   const baseUrl = getClientBaseUrl();
-  const subscribeUrl = canSubscribe
+  const googleSubscribeUrl = canSubscribe
     ? buildCalendarApiUrl(baseUrl, {
         ...(includeAllTeams
           ? { includeAll: true }
           : { teamCodes: selectedTeams }),
         timeZone,
+        client: "google",
+      })
+    : "";
+  const outlookSubscribeUrl = canSubscribe
+    ? buildCalendarApiUrl(baseUrl, {
+        ...(includeAllTeams
+          ? { includeAll: true }
+          : { teamCodes: selectedTeams }),
+        timeZone,
+        client: "outlook",
       })
     : "";
   const downloadUrl = canDownload
@@ -83,23 +93,26 @@ export function CalendarActions({
         matchIds: selectedIds,
         timeZone,
         download: true,
+        client: "outlook",
       })
     : "";
 
-  const googleWebUrl = subscribeUrl
-    ? buildGoogleSubscribeUrl(subscribeUrl)
+  const googleWebUrl = googleSubscribeUrl
+    ? buildGoogleSubscribeUrl(googleSubscribeUrl)
     : "";
   const googleUrl =
-    mobilePlatform === "android" && subscribeUrl
-      ? buildGoogleAndroidIntentUrl(subscribeUrl)
+    mobilePlatform === "android" && googleSubscribeUrl
+      ? buildGoogleAndroidIntentUrl(googleSubscribeUrl)
       : googleWebUrl;
-  const outlookUrl = subscribeUrl
-    ? buildOutlookSubscribeUrl(subscribeUrl)
+  const outlookUrl = outlookSubscribeUrl
+    ? buildOutlookSubscribeUrl(outlookSubscribeUrl)
     : "";
-  const outlookOfficeUrl = subscribeUrl
-    ? buildOutlookOfficeSubscribeUrl(subscribeUrl)
+  const outlookOfficeUrl = outlookSubscribeUrl
+    ? buildOutlookOfficeSubscribeUrl(outlookSubscribeUrl)
     : "";
-  const appleUrl = subscribeUrl ? buildAppleSubscribeUrl(subscribeUrl) : "";
+  const appleUrl = outlookSubscribeUrl
+    ? buildAppleSubscribeUrl(outlookSubscribeUrl)
+    : "";
   const isMobile = mobilePlatform !== null;
 
   const exportActions: ExportAction[] = [

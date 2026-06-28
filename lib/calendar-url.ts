@@ -8,6 +8,8 @@ export type CalendarSubscriptionParams = {
   includeAll?: boolean;
   timeZone?: string;
   download?: boolean;
+  /** google = HTML links in DESCRIPTION; outlook = plain DESCRIPTION + X-ALT-DESC */
+  client?: "google" | "outlook";
 };
 
 function appendTimeZone(path: string, timeZone?: string): string {
@@ -28,6 +30,7 @@ export function buildCalendarApiUrl(
     includeAll = false,
     timeZone,
     download,
+    client,
   } = params;
 
   const parts: string[] = [];
@@ -50,7 +53,8 @@ export function buildCalendarApiUrl(
   let path = `/api/calendar.ics?${parts.join("&")}`;
   path = appendTimeZone(path, timeZone);
   if (download) path += "&download=1";
-  path += "&rev=4";
+  if (client) path += `&client=${client}`;
+  path += "&rev=5";
   return `${baseUrl.replace(/\/$/, "")}${path}`;
 }
 

@@ -77,14 +77,19 @@ export async function GET(request: NextRequest) {
 
   const tz = request.nextUrl.searchParams.get("tz") ?? "UTC";
   const download = request.nextUrl.searchParams.get("download") === "1";
+  const clientParam = request.nextUrl.searchParams.get("client");
+  const format =
+    clientParam === "google" || clientParam === "outlook"
+      ? clientParam
+      : "outlook";
 
   let ics: string;
   try {
-    ics = generateCalendarIcs(matches, tz);
+    ics = generateCalendarIcs(matches, tz, format);
   } catch {
     // Fall back to UTC if timezone-specific generation ever fails, so the feed
     // still imports rather than returning a 500 the calendar app can't parse.
-    ics = generateCalendarIcs(matches, "UTC");
+    ics = generateCalendarIcs(matches, "UTC", format);
   }
 
   return new NextResponse(ics, {

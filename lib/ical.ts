@@ -16,7 +16,16 @@ const CALENDAR_DOMAIN =
   process.env.NEXT_PUBLIC_APP_URL?.replace(/^https?:\/\//, "") ??
   SITE.productionUrl.replace(/^https?:\/\//, "");
 
-const DONATE_LINE = `Enjoying this calendar? <a href="${SITE.donateUrl}">Buy me a coffee</a> :)`;
+/** How event descriptions are encoded for different calendar clients. */
+export type CalendarDescriptionFormat = "google" | "outlook";
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
 function formatCalendarTitle(match: Match): string {
   const home = `${getFlag(match.home.code)} ${match.home.name}`;
@@ -38,9 +47,22 @@ function unfoldIcsLines(ics: string): string {
   return unfolded.join("\r\n");
 }
 
+/**
+ * Outlook reads DESCRIPTION as plain text and mangles HTML tags. It renders
+ * rich links from X-ALT-DESC;FMTTYPE=text/html (Microsoft extension).
+ */
+function buildOutlookHtmlDescription(lines: string[]): string {
+  const body = lines
+    .map((line) => `<P>${escapeHtml(line)}</P>`)
+    .join("");
+  const donate = `<P>Enjoying this calendar? <A HREF="${SITE.donateUrl}">Buy me a coffee</A> :)</P>`;
+  return `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN"><HTML><BODY>${body}${donate}</BODY></HTML>`;
+}
+
 function buildEventDescription(
   match: Match,
   score: string | undefined,
+  format: CalendarDescriptionFormat,
 ): { plain: string; html: string } {
   const lines = [
     getStageLabel(match.stage),
@@ -49,16 +71,26 @@ function buildEventDescription(
   ];
   if (score) lines.push(`Final score: ${score}`);
 
-  // Google Calendar subscriptions ignore X-ALT-DESC; use HTML <a> in
-  // DESCRIPTION (supported by Google Calendar for links per their docs).
-  const plain = [...lines, "", DONATE_LINE].join("\n");
-  const html = `${lines.join("<br>")}<br><br>${DONATE_LINE}`;
+  const donateAnchor = `Enjoying this calendar? <a href="${SITE.donateUrl}">Buy me a coffee</a> :)`;
+
+  if (format === "google") {
+    // Google Calendar subscriptions read DESCRIPTION and support basic HTML links.
+    const plain = [...lines, "", donateAnchor].join("\n");
+    const html = `${lines.join("<br>")}<br><br>${donateAnchor}`;
+    return { plain, html };
+  }
+
+  // Outlook: DESCRIPTION must be plain text only; HTML lives in X-ALT-DESC.
+  const donatePlain = `Enjoying this calendar? Buy me a coffee: ${SITE.donateUrl} :)`;
+  const plain = [...lines, "", donatePlain].join("\n");
+  const html = buildOutlookHtmlDescription(lines);
   return { plain, html };
 }
 
 export function generateCalendarIcs(
   matches: Match[],
   timeZone = "UTC",
+  format: CalendarDescriptionFormat = "outlook",
 ): string {
   const tz = isValidTimeZone(timeZone) ? timeZone : "UTC";
   const sorted = [...matches].sort(
@@ -78,7 +110,7 @@ export function generateCalendarIcs(
   }
 
   for (const match of sorted) {
-    addMatchEvent(calendar, match, tz);
+    addMatchEvent(calendar, match, tz, format);
   }
 
   return unfoldIcsLines(calendar.toString());
@@ -88,11 +120,12 @@ function addMatchEvent(
   calendar: ReturnType<typeof ical>,
   match: Match,
   timeZone: string,
+  format: CalendarDescriptionFormat,
 ): void {
   const start = DateTime.fromJSDate(new Date(match.startUtc)).setZone(timeZone);
   const end = start.plus({ hours: MATCH_DURATION_HOURS });
   const score = formatMatchScore(match);
-  const description = buildEventDescription(match, score);
+  const description = buildEventDescription(match, score, format);
   const title = formatCalendarTitle(match);
   const now = new Date();
 
@@ -105,7 +138,7 @@ function addMatchEvent(
     location: `${match.venue}, ${match.city}`,
     timezone: timeZone,
     url: SITE.donateUrl,
-    sequence: 4,
+    sequence: 5,
     stamp: now,
     lastModified: now,
   });
