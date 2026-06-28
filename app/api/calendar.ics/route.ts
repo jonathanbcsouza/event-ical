@@ -94,7 +94,7 @@ export async function GET(request: NextRequest) {
       "Content-Disposition": download
         ? `attachment; filename="${ICS_FILENAME}"`
         : `inline; filename="${ICS_FILENAME}"`,
-      "Cache-Control": "public, max-age=1800, s-maxage=1800",
+      "Cache-Control": "public, max-age=300, s-maxage=300",
     },
   });
 }

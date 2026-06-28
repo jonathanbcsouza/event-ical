@@ -50,6 +50,7 @@ export function buildCalendarApiUrl(
   let path = `/api/calendar.ics?${parts.join("&")}`;
   path = appendTimeZone(path, timeZone);
   if (download) path += "&download=1";
+  path += "&rev=4";
   return `${baseUrl.replace(/\/$/, "")}${path}`;
 }
 
