@@ -23,7 +23,7 @@ async function resolveCalendarMatches(request: NextRequest): Promise<Match[]> {
   const stagesParam = request.nextUrl.searchParams.get("stages");
   const allParam = request.nextUrl.searchParams.get("all");
 
-  const resolved = await getResolvedMatches();
+  const resolved = getResolvedMatches();
 
   // Live subscriptions (all/teams/stages) include past results with final
   // scores so the calendar shows the full tournament, not just what's left.

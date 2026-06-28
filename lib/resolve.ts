@@ -1,103 +1,72 @@
+import resultsData from "@/data/results-2026.json";
 import {
   ALL_MATCHES,
   type Match,
   type MatchResult,
   type MatchStage,
-  type TeamRef,
 } from "@/lib/fixtures";
-import {
-  feedDateToUtcIso,
-  getLiveSchedule,
-  type FeedRow,
-} from "@/lib/live-schedule";
-import { resolveTeam } from "@/lib/teams";
 
-function overlayTeam(staticTeam: TeamRef, feedName: string): TeamRef {
-  const resolved = resolveTeam(feedName);
-  if (resolved.code !== "TBD") return resolved;
-  return staticTeam;
+type ResultRow = {
+  pair: string;
+  date: string;
+  scores: Record<string, number>;
+  winner: string;
+};
+
+const ROWS = resultsData as unknown as ResultRow[];
+
+function pairKey(a: string, b: string): string {
+  return [a, b].sort().join("-");
 }
 
-function parseResult(
-  feed: FeedRow,
-  home: TeamRef,
-  away: TeamRef,
-): MatchResult | undefined {
-  if (
-    feed.homeTeamScore === null ||
-    feed.awayTeamScore === null ||
-    !feed.winner ||
-    feed.winner === "Draw"
-  ) {
-    if (
-      feed.homeTeamScore !== null &&
-      feed.awayTeamScore !== null &&
-      feed.winner === "Draw"
-    ) {
-      return {
-        homeScore: feed.homeTeamScore,
-        awayScore: feed.awayTeamScore,
-        winner: "draw",
-      };
-    }
-    return undefined;
-  }
-
-  let winner: MatchResult["winner"] = "draw";
-  const homeResolved = resolveTeam(feed.homeTeam);
-  const awayResolved = resolveTeam(feed.awayTeam);
-  const winnerResolved = resolveTeam(feed.winner);
-
-  if (winnerResolved.code !== "TBD") {
-    if (winnerResolved.code === homeResolved.code) winner = "home";
-    else if (winnerResolved.code === awayResolved.code) winner = "away";
-    else if (feed.winner === home.name || feed.winner === feed.homeTeam)
-      winner = "home";
-    else if (feed.winner === away.name || feed.winner === feed.awayTeam)
-      winner = "away";
-  } else if (feed.winner === feed.homeTeam) {
-    winner = "home";
-  } else if (feed.winner === feed.awayTeam) {
-    winner = "away";
-  }
-
-  return {
-    homeScore: feed.homeTeamScore,
-    awayScore: feed.awayTeamScore,
-    winner,
-  };
+const RESULTS_BY_PAIR = new Map<string, ResultRow[]>();
+for (const row of ROWS) {
+  const list = RESULTS_BY_PAIR.get(row.pair);
+  if (list) list.push(row);
+  else RESULTS_BY_PAIR.set(row.pair, [row]);
 }
 
-export function resolveMatches(
-  staticMatches: Match[],
-  feedMap: Map<number, FeedRow> | null,
-): Match[] {
-  if (!feedMap) return staticMatches;
-
-  return staticMatches.map((match) => {
-    const feed = feedMap.get(match.matchNumber);
-    if (!feed) return match;
-
-    const home = overlayTeam(match.home, feed.homeTeam);
-    const away = overlayTeam(match.away, feed.awayTeam);
-    const result = parseResult(feed, home, away);
-    const startUtc = feed.dateUtc
-      ? feedDateToUtcIso(feed.dateUtc)
-      : match.startUtc;
-
-    return {
-      ...match,
-      home,
-      away,
-      startUtc,
-      ...(result ? { result, status: "finished" as const } : {}),
-    };
+function pickResult(rows: ResultRow[], startUtc: string): ResultRow {
+  if (rows.length === 1) return rows[0];
+  const target = new Date(startUtc).getTime();
+  return rows.reduce((best, row) => {
+    const bestDiff = Math.abs(new Date(best.date).getTime() - target);
+    const rowDiff = Math.abs(new Date(row.date).getTime() - target);
+    return rowDiff < bestDiff ? row : best;
   });
 }
 
-export async function getResolvedMatches(): Promise<Match[]> {
-  const feedMap = await getLiveSchedule();
-  return resolveMatches(ALL_MATCHES, feedMap);
+function overlayResult(match: Match): Match {
+  if (match.home.code === "TBD" || match.away.code === "TBD") return match;
+
+  const rows = RESULTS_BY_PAIR.get(pairKey(match.home.code, match.away.code));
+  if (!rows || rows.length === 0) return match;
+
+  const row = pickResult(rows, match.startUtc);
+  const homeScore = row.scores[match.home.code];
+  const awayScore = row.scores[match.away.code];
+  if (homeScore == null || awayScore == null) return match;
+
+  const winner: MatchResult["winner"] =
+    row.winner === "draw"
+      ? "draw"
+      : row.winner === match.home.code
+        ? "home"
+        : "away";
+
+  return {
+    ...match,
+    result: { homeScore, awayScore, winner },
+    status: "finished",
+  };
+}
+
+export function resolveMatches(staticMatches: Match[]): Match[] {
+  return staticMatches.map(overlayResult);
+}
+
+export function getResolvedMatches(): Match[] {
+  return resolveMatches(ALL_MATCHES);
 }
 
 export function filterMatchesByStages(

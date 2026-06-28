@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync-results": "node scripts/sync-results.mjs"
   },
   "dependencies": {
     "@touch4it/ical-timezones": "^1.9.0",

@@ -214,7 +214,7 @@ export function HomePage({ matches, serverNow }: HomePageProps) {
             <StepCard
               step={3}
               title="Choose your matches"
-              description="Review upcoming games or past results. Scores update every 30 minutes."
+              description="Review upcoming games or past results."
               canComplete={hasTeams}
               pendingLabel="Pick teams first"
               doneLabel="Next"

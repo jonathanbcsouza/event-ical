@@ -20,8 +20,7 @@ export function SiteFooter() {
         </div>
 
         <p className="mt-8 text-center text-xs text-zinc-400">
-          Not affiliated with FIFA. Match data for informational use only. Scores
-          update every 30 minutes.{" "}
+          Not affiliated with FIFA. Match data for informational use only.{" "}
           <Link
             href="/privacy"
             className="underline hover:text-zinc-500 dark:hover:text-zinc-300"

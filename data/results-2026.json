@@ -1,0 +1,650 @@
+[
+  {
+    "pair": "MEX-RSA",
+    "date": "2026-06-11",
+    "scores": {
+      "MEX": 2,
+      "RSA": 0
+    },
+    "winner": "MEX"
+  },
+  {
+    "pair": "CZE-KOR",
+    "date": "2026-06-11",
+    "scores": {
+      "KOR": 2,
+      "CZE": 1
+    },
+    "winner": "KOR"
+  },
+  {
+    "pair": "BIH-CAN",
+    "date": "2026-06-12",
+    "scores": {
+      "CAN": 1,
+      "BIH": 1
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "PAR-USA",
+    "date": "2026-06-12",
+    "scores": {
+      "USA": 4,
+      "PAR": 1
+    },
+    "winner": "USA"
+  },
+  {
+    "pair": "QAT-SUI",
+    "date": "2026-06-13",
+    "scores": {
+      "QAT": 1,
+      "SUI": 1
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "BRA-MAR",
+    "date": "2026-06-13",
+    "scores": {
+      "BRA": 1,
+      "MAR": 1
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "HAI-SCO",
+    "date": "2026-06-13",
+    "scores": {
+      "HAI": 0,
+      "SCO": 1
+    },
+    "winner": "SCO"
+  },
+  {
+    "pair": "AUS-TUR",
+    "date": "2026-06-13",
+    "scores": {
+      "AUS": 2,
+      "TUR": 0
+    },
+    "winner": "AUS"
+  },
+  {
+    "pair": "CUW-GER",
+    "date": "2026-06-14",
+    "scores": {
+      "GER": 7,
+      "CUW": 1
+    },
+    "winner": "GER"
+  },
+  {
+    "pair": "CIV-ECU",
+    "date": "2026-06-14",
+    "scores": {
+      "CIV": 1,
+      "ECU": 0
+    },
+    "winner": "CIV"
+  },
+  {
+    "pair": "JPN-NED",
+    "date": "2026-06-14",
+    "scores": {
+      "NED": 2,
+      "JPN": 2
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "SWE-TUN",
+    "date": "2026-06-14",
+    "scores": {
+      "SWE": 5,
+      "TUN": 1
+    },
+    "winner": "SWE"
+  },
+  {
+    "pair": "BEL-EGY",
+    "date": "2026-06-15",
+    "scores": {
+      "BEL": 1,
+      "EGY": 1
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "IRN-NZL",
+    "date": "2026-06-15",
+    "scores": {
+      "IRN": 2,
+      "NZL": 2
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "CPV-ESP",
+    "date": "2026-06-15",
+    "scores": {
+      "ESP": 0,
+      "CPV": 0
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "KSA-URU",
+    "date": "2026-06-15",
+    "scores": {
+      "KSA": 1,
+      "URU": 1
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "FRA-SEN",
+    "date": "2026-06-16",
+    "scores": {
+      "FRA": 3,
+      "SEN": 1
+    },
+    "winner": "FRA"
+  },
+  {
+    "pair": "IRQ-NOR",
+    "date": "2026-06-16",
+    "scores": {
+      "IRQ": 1,
+      "NOR": 4
+    },
+    "winner": "NOR"
+  },
+  {
+    "pair": "ALG-ARG",
+    "date": "2026-06-16",
+    "scores": {
+      "ARG": 3,
+      "ALG": 0
+    },
+    "winner": "ARG"
+  },
+  {
+    "pair": "AUT-JOR",
+    "date": "2026-06-16",
+    "scores": {
+      "AUT": 3,
+      "JOR": 1
+    },
+    "winner": "AUT"
+  },
+  {
+    "pair": "COD-POR",
+    "date": "2026-06-17",
+    "scores": {
+      "POR": 1,
+      "COD": 1
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "COL-UZB",
+    "date": "2026-06-17",
+    "scores": {
+      "UZB": 1,
+      "COL": 3
+    },
+    "winner": "COL"
+  },
+  {
+    "pair": "CRO-ENG",
+    "date": "2026-06-17",
+    "scores": {
+      "ENG": 4,
+      "CRO": 2
+    },
+    "winner": "ENG"
+  },
+  {
+    "pair": "GHA-PAN",
+    "date": "2026-06-17",
+    "scores": {
+      "GHA": 1,
+      "PAN": 0
+    },
+    "winner": "GHA"
+  },
+  {
+    "pair": "CZE-RSA",
+    "date": "2026-06-18",
+    "scores": {
+      "CZE": 1,
+      "RSA": 1
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "KOR-MEX",
+    "date": "2026-06-18",
+    "scores": {
+      "MEX": 1,
+      "KOR": 0
+    },
+    "winner": "MEX"
+  },
+  {
+    "pair": "BIH-SUI",
+    "date": "2026-06-18",
+    "scores": {
+      "SUI": 4,
+      "BIH": 1
+    },
+    "winner": "SUI"
+  },
+  {
+    "pair": "CAN-QAT",
+    "date": "2026-06-18",
+    "scores": {
+      "CAN": 6,
+      "QAT": 0
+    },
+    "winner": "CAN"
+  },
+  {
+    "pair": "MAR-SCO",
+    "date": "2026-06-19",
+    "scores": {
+      "SCO": 0,
+      "MAR": 1
+    },
+    "winner": "MAR"
+  },
+  {
+    "pair": "BRA-HAI",
+    "date": "2026-06-19",
+    "scores": {
+      "BRA": 3,
+      "HAI": 0
+    },
+    "winner": "BRA"
+  },
+  {
+    "pair": "AUS-USA",
+    "date": "2026-06-19",
+    "scores": {
+      "USA": 2,
+      "AUS": 0
+    },
+    "winner": "USA"
+  },
+  {
+    "pair": "PAR-TUR",
+    "date": "2026-06-19",
+    "scores": {
+      "TUR": 0,
+      "PAR": 1
+    },
+    "winner": "PAR"
+  },
+  {
+    "pair": "CIV-GER",
+    "date": "2026-06-20",
+    "scores": {
+      "GER": 2,
+      "CIV": 1
+    },
+    "winner": "GER"
+  },
+  {
+    "pair": "CUW-ECU",
+    "date": "2026-06-20",
+    "scores": {
+      "ECU": 0,
+      "CUW": 0
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "NED-SWE",
+    "date": "2026-06-20",
+    "scores": {
+      "NED": 5,
+      "SWE": 1
+    },
+    "winner": "NED"
+  },
+  {
+    "pair": "JPN-TUN",
+    "date": "2026-06-20",
+    "scores": {
+      "TUN": 0,
+      "JPN": 4
+    },
+    "winner": "JPN"
+  },
+  {
+    "pair": "BEL-IRN",
+    "date": "2026-06-21",
+    "scores": {
+      "BEL": 0,
+      "IRN": 0
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "EGY-NZL",
+    "date": "2026-06-21",
+    "scores": {
+      "NZL": 1,
+      "EGY": 3
+    },
+    "winner": "EGY"
+  },
+  {
+    "pair": "ESP-KSA",
+    "date": "2026-06-21",
+    "scores": {
+      "ESP": 4,
+      "KSA": 0
+    },
+    "winner": "ESP"
+  },
+  {
+    "pair": "CPV-URU",
+    "date": "2026-06-21",
+    "scores": {
+      "URU": 2,
+      "CPV": 2
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "FRA-IRQ",
+    "date": "2026-06-22",
+    "scores": {
+      "FRA": 3,
+      "IRQ": 0
+    },
+    "winner": "FRA"
+  },
+  {
+    "pair": "NOR-SEN",
+    "date": "2026-06-22",
+    "scores": {
+      "NOR": 3,
+      "SEN": 2
+    },
+    "winner": "NOR"
+  },
+  {
+    "pair": "ARG-AUT",
+    "date": "2026-06-22",
+    "scores": {
+      "ARG": 2,
+      "AUT": 0
+    },
+    "winner": "ARG"
+  },
+  {
+    "pair": "ALG-JOR",
+    "date": "2026-06-22",
+    "scores": {
+      "JOR": 1,
+      "ALG": 2
+    },
+    "winner": "ALG"
+  },
+  {
+    "pair": "POR-UZB",
+    "date": "2026-06-23",
+    "scores": {
+      "POR": 5,
+      "UZB": 0
+    },
+    "winner": "POR"
+  },
+  {
+    "pair": "COD-COL",
+    "date": "2026-06-23",
+    "scores": {
+      "COL": 1,
+      "COD": 0
+    },
+    "winner": "COL"
+  },
+  {
+    "pair": "ENG-GHA",
+    "date": "2026-06-23",
+    "scores": {
+      "ENG": 0,
+      "GHA": 0
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "CRO-PAN",
+    "date": "2026-06-23",
+    "scores": {
+      "PAN": 0,
+      "CRO": 1
+    },
+    "winner": "CRO"
+  },
+  {
+    "pair": "CZE-MEX",
+    "date": "2026-06-24",
+    "scores": {
+      "CZE": 0,
+      "MEX": 3
+    },
+    "winner": "MEX"
+  },
+  {
+    "pair": "KOR-RSA",
+    "date": "2026-06-24",
+    "scores": {
+      "RSA": 1,
+      "KOR": 0
+    },
+    "winner": "RSA"
+  },
+  {
+    "pair": "CAN-SUI",
+    "date": "2026-06-24",
+    "scores": {
+      "SUI": 2,
+      "CAN": 1
+    },
+    "winner": "SUI"
+  },
+  {
+    "pair": "BIH-QAT",
+    "date": "2026-06-24",
+    "scores": {
+      "BIH": 3,
+      "QAT": 1
+    },
+    "winner": "BIH"
+  },
+  {
+    "pair": "BRA-SCO",
+    "date": "2026-06-24",
+    "scores": {
+      "SCO": 0,
+      "BRA": 3
+    },
+    "winner": "BRA"
+  },
+  {
+    "pair": "HAI-MAR",
+    "date": "2026-06-24",
+    "scores": {
+      "MAR": 4,
+      "HAI": 2
+    },
+    "winner": "MAR"
+  },
+  {
+    "pair": "TUR-USA",
+    "date": "2026-06-25",
+    "scores": {
+      "TUR": 3,
+      "USA": 2
+    },
+    "winner": "TUR"
+  },
+  {
+    "pair": "AUS-PAR",
+    "date": "2026-06-25",
+    "scores": {
+      "PAR": 0,
+      "AUS": 0
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "CIV-CUW",
+    "date": "2026-06-25",
+    "scores": {
+      "CUW": 0,
+      "CIV": 2
+    },
+    "winner": "CIV"
+  },
+  {
+    "pair": "ECU-GER",
+    "date": "2026-06-25",
+    "scores": {
+      "ECU": 2,
+      "GER": 1
+    },
+    "winner": "ECU"
+  },
+  {
+    "pair": "JPN-SWE",
+    "date": "2026-06-25",
+    "scores": {
+      "JPN": 1,
+      "SWE": 1
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "NED-TUN",
+    "date": "2026-06-25",
+    "scores": {
+      "TUN": 1,
+      "NED": 3
+    },
+    "winner": "NED"
+  },
+  {
+    "pair": "EGY-IRN",
+    "date": "2026-06-26",
+    "scores": {
+      "EGY": 1,
+      "IRN": 1
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "BEL-NZL",
+    "date": "2026-06-26",
+    "scores": {
+      "NZL": 1,
+      "BEL": 5
+    },
+    "winner": "BEL"
+  },
+  {
+    "pair": "CPV-KSA",
+    "date": "2026-06-26",
+    "scores": {
+      "CPV": 0,
+      "KSA": 0
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "ESP-URU",
+    "date": "2026-06-26",
+    "scores": {
+      "URU": 0,
+      "ESP": 1
+    },
+    "winner": "ESP"
+  },
+  {
+    "pair": "FRA-NOR",
+    "date": "2026-06-26",
+    "scores": {
+      "NOR": 1,
+      "FRA": 4
+    },
+    "winner": "FRA"
+  },
+  {
+    "pair": "IRQ-SEN",
+    "date": "2026-06-26",
+    "scores": {
+      "SEN": 5,
+      "IRQ": 0
+    },
+    "winner": "SEN"
+  },
+  {
+    "pair": "ALG-AUT",
+    "date": "2026-06-27",
+    "scores": {
+      "ALG": 3,
+      "AUT": 3
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "ARG-JOR",
+    "date": "2026-06-27",
+    "scores": {
+      "JOR": 1,
+      "ARG": 3
+    },
+    "winner": "ARG"
+  },
+  {
+    "pair": "COL-POR",
+    "date": "2026-06-27",
+    "scores": {
+      "COL": 0,
+      "POR": 0
+    },
+    "winner": "draw"
+  },
+  {
+    "pair": "COD-UZB",
+    "date": "2026-06-27",
+    "scores": {
+      "COD": 3,
+      "UZB": 1
+    },
+    "winner": "COD"
+  },
+  {
+    "pair": "ENG-PAN",
+    "date": "2026-06-27",
+    "scores": {
+      "PAN": 0,
+      "ENG": 2
+    },
+    "winner": "ENG"
+  },
+  {
+    "pair": "CRO-GHA",
+    "date": "2026-06-27",
+    "scores": {
+      "CRO": 2,
+      "GHA": 1
+    },
+    "winner": "CRO"
+  }
+]
