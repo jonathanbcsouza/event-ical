@@ -127,6 +127,21 @@ export function HomePage({
     [scopedMatches, now],
   );
 
+  const selectableUpcomingIds = useMemo(
+    () => new Set(nextMatches.map((m) => m.id)),
+    [nextMatches],
+  );
+
+  const hasSelectedMatches = useMemo(
+    () => selectedMatchIds.some((id) => selectableUpcomingIds.has(id)),
+    [selectedMatchIds, selectableUpcomingIds],
+  );
+
+  const selectedUpcomingCount = useMemo(
+    () => selectedMatchIds.filter((id) => selectableUpcomingIds.has(id)).length,
+    [selectedMatchIds, selectableUpcomingIds],
+  );
+
   const upcomingTeamMatches = useMemo(
     () =>
       filterUpcomingMatches(
@@ -154,6 +169,12 @@ export function HomePage({
     setSelectedMatchIds((prev) => prev.filter((id) => allowedIds.has(id)));
   }, [hasTeams, upcomingScopedIds]);
 
+  useEffect(() => {
+    if (activeStep >= 4 && hasTeams && !hasSelectedMatches) {
+      setActiveStep(3);
+    }
+  }, [activeStep, hasTeams, hasSelectedMatches]);
+
   const exportMatchCount = useAllTeams
     ? nextMatches.length
     : upcomingTeamMatches.length;
@@ -162,6 +183,7 @@ export function HomePage({
 
   function getStepStatus(step: number): StepStatus {
     if (!hasTeams && step > 1) return "locked";
+    if (step === 4 && hasTeams && !hasSelectedMatches) return "locked";
     if (activeStep === step) return "active";
     if (activeStep > step) return "done";
     return "todo";
@@ -192,7 +214,9 @@ export function HomePage({
       n: 4,
       label: "Export",
       summary: hasTeams
-        ? `${exportMatchCount} ${exportMatchCount === 1 ? "match" : "matches"} live`
+        ? hasSelectedMatches
+          ? `${selectedUpcomingCount} selected for download`
+          : "Select games in step 3"
         : "Pick teams first",
       status: getStepStatus(4),
     },
@@ -200,7 +224,13 @@ export function HomePage({
 
   function goToStep(step: number) {
     if (step !== 1 && !hasTeams) return;
+    if (step >= 4 && !hasSelectedMatches) return;
     setActiveStep(step);
+  }
+
+  function completeStep3() {
+    if (!hasSelectedMatches) return;
+    goToStep(4);
   }
 
   return (
@@ -217,7 +247,7 @@ export function HomePage({
               title="Pick your teams"
               description="Choose the national teams you want to follow, or select all."
               canComplete={hasTeams}
-              pendingLabel="Pick at least one team"
+              pendingLabel="Pick at least one team to continue"
               doneLabel="Next"
               onDone={() => goToStep(2)}
               headerAction={
@@ -237,7 +267,7 @@ export function HomePage({
               title="Choose your timezone"
               description="Set when kickoffs and calendar events appear for you."
               canComplete={hasTeams}
-              pendingLabel="Pick teams first"
+              pendingLabel="Pick at least one team to continue"
               doneLabel="Next"
               onDone={() => goToStep(3)}
             >
@@ -255,10 +285,10 @@ export function HomePage({
               step={3}
               title="Choose your matches"
               description="Review upcoming games or past results."
-              canComplete={hasTeams}
-              pendingLabel="Pick teams first"
+              canComplete={hasTeams && hasSelectedMatches}
+              pendingLabel="Select at least one game to export"
               doneLabel="Next"
-              onDone={() => goToStep(4)}
+              onDone={() => completeStep3()}
               badge={
                 (matchTab === "next" ? nextMatches : pastMatches).length > 0 ? (
                   <span className="shrink-0 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
