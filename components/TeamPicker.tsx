@@ -9,6 +9,22 @@ type TeamPickerProps = {
   onChange: (codes: string[]) => void;
 };
 
+/** Teams with long names that have a dedicated mobile short label in messages. */
+const SHORT_NAME_CODES = [
+  "BIH",
+  "CZE",
+  "RSA",
+  "KOR",
+  "CIV",
+  "NZL",
+  "KSA",
+  "COD",
+] as const;
+
+type ShortNameCode = (typeof SHORT_NAME_CODES)[number];
+
+const shortNameCodeSet = new Set<string>(SHORT_NAME_CODES);
+
 function toggleTeam(selected: string[], code: string): string[] {
   return selected.includes(code)
     ? selected.filter((c) => c !== code)
@@ -66,8 +82,8 @@ export function TeamPicker({ selected, onChange }: TeamPickerProps) {
 
   function displayName(team: TeamRef, compact: boolean): string {
     if (!compact) return team.name;
-    const short = tShort(team.code as keyof typeof tShort);
-    return short || team.name;
+    if (!shortNameCodeSet.has(team.code)) return team.name;
+    return tShort(team.code as ShortNameCode);
   }
 
   return (
