@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { CoffeeIcon } from "@/components/CoffeeIcon";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -11,6 +12,7 @@ export function DonateButton({
   variant = "nav",
   className,
 }: DonateButtonProps) {
+  const t = useTranslations("donate");
   const isPrimary = variant === "primary";
 
   return (
@@ -30,7 +32,7 @@ export function DonateButton({
         variant={isPrimary ? "light" : "inherit"}
         className="transition-transform group-hover:-translate-y-0.5 group-hover:scale-110 sm:size-[18px]"
       />
-      <span className="whitespace-nowrap">Buy me a coffee</span>
+      <span className="whitespace-nowrap">{t("button")}</span>
     </a>
   );
 }

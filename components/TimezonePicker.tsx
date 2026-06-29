@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Globe, Icon } from "@/lib/icons";
 import {
   TIME_ZONE_GROUPS,
@@ -8,6 +9,14 @@ import {
   getTimeZoneOffsetLabel,
 } from "@/lib/timezones";
 import { cn } from "@/lib/utils";
+
+const REGION_KEYS: Record<string, string> = {
+  "World Cup 2026 hosts": "hosts",
+  Americas: "americas",
+  "Europe & Africa": "europeAfrica",
+  "Asia & Pacific": "asiaPacific",
+  Other: "other",
+};
 
 type TimezonePickerProps = {
   value: string;
@@ -22,6 +31,8 @@ export function TimezonePicker({
   onChange,
   layout = "inline",
 }: TimezonePickerProps) {
+  const t = useTranslations("timezone");
+
   const extra = ensureKnownTimeZone(value);
   const detectedExtra =
     detected !== value ? ensureKnownTimeZone(detected) : [];
@@ -47,7 +58,10 @@ export function TimezonePicker({
           </option>
         ))}
         {TIME_ZONE_GROUPS.map((group) => (
-          <optgroup key={group.region} label={group.region}>
+          <optgroup
+            key={group.region}
+            label={t(`regions.${REGION_KEYS[group.region] ?? "other"}`)}
+          >
             {group.zones.map((z) => (
               <option key={z.id} value={z.id}>
                 {getTimeZoneLabel(z)}
@@ -70,7 +84,7 @@ export function TimezonePicker({
             <Icon icon={Globe} className="size-6" />
           </span>
           <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400">
-            Match times and calendar events will use this timezone.
+            {t("stepHint")}
           </p>
         </div>
 
@@ -79,11 +93,11 @@ export function TimezonePicker({
             htmlFor="timezone-select"
             className="block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Your timezone
+            {t("yourTimezone")}
           </label>
           {select}
           <p className="text-xs text-zinc-500">
-            Currently {offset || "UTC"} — kickoff times update as you change this.
+            {t("currentlyOffset", { offset: offset || "UTC" })}
           </p>
         </div>
 
@@ -93,11 +107,11 @@ export function TimezonePicker({
             onClick={() => onChange(detected)}
             className="w-full rounded-lg border border-zinc-300 px-4 py-2.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
           >
-            Use my timezone
+            {t("useMyTimezone")}
             {detectedLabel ? ` (${detectedLabel})` : ""}
           </button>
         )}
-        <span className="sr-only">Current offset {offset}</span>
+        <span className="sr-only">{t("currentOffset", { offset })}</span>
       </div>
     );
   }
@@ -109,7 +123,7 @@ export function TimezonePicker({
         className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300"
       >
         <Icon icon={Globe} className="size-4 text-emerald-600" />
-        Times shown in
+        {t("timesShownIn")}
       </label>
       <div className="flex items-center gap-2">
         {select}
@@ -117,13 +131,13 @@ export function TimezonePicker({
           <button
             type="button"
             onClick={() => onChange(detected)}
-            title={`Reset to your detected timezone (${detectedLabel})`}
+            title={t("resetDetected", { label: detectedLabel })}
             className="whitespace-nowrap rounded-lg border border-zinc-300 px-2 py-1.5 text-xs text-zinc-600 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
           >
-            Use my zone
+            {t("useMyZone")}
           </button>
         )}
-        <span className="sr-only">Current offset {offset}</span>
+        <span className="sr-only">{t("currentOffset", { offset })}</span>
       </div>
     </div>
   );

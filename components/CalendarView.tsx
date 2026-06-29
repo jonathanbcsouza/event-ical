@@ -1,11 +1,11 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { MatchRow } from "@/components/MatchRow";
 import { getFlag } from "@/lib/flags";
 import {
   getStageColor,
-  getStageLabel,
   isMatchUpcoming,
   matchInvolvesTeam,
   type Match,
@@ -22,7 +22,7 @@ type CalendarViewProps = {
   now?: number;
 };
 
-const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const WEEKDAY_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"] as const;
 const LEGEND_STAGES: MatchStage[] = [
   "group",
   "r32",
@@ -55,10 +55,12 @@ type MonthGrid = {
   cells: (Date | null)[];
 };
 
-function buildMonths(matches: Match[], timeZone?: string): MonthGrid[] {
+function buildMonths(
+  matches: Match[],
+  locale: string,
+  timeZone?: string,
+): MonthGrid[] {
   if (matches.length === 0) return [];
-  // Derive the visible month range from match dates in the selected timezone so
-  // the grid lines up with how matches are bucketed.
   const keys = matches.map((m) => matchDateKey(m, timeZone)).sort();
   const [minYear, minMonth] = keys[0].split("-").map(Number);
   const [maxYear, maxMonth] = keys[keys.length - 1].split("-").map(Number);
@@ -80,7 +82,7 @@ function buildMonths(matches: Match[], timeZone?: string): MonthGrid[] {
     months.push({
       year,
       month,
-      label: new Date(year, month, 1).toLocaleDateString(undefined, {
+      label: new Date(year, month, 1).toLocaleDateString(locale, {
         month: "long",
         year: "numeric",
       }),
@@ -99,6 +101,10 @@ export function CalendarView({
   timeZone,
   now,
 }: CalendarViewProps) {
+  const locale = useLocale();
+  const t = useTranslations("calendarView");
+  const tStages = useTranslations("stages");
+
   const matchesByDay = useMemo(() => {
     const map = new Map<string, Match[]>();
     for (const m of matches) {
@@ -117,8 +123,8 @@ export function CalendarView({
   }, [matches, timeZone]);
 
   const months = useMemo(
-    () => buildMonths(matches, timeZone),
-    [matches, timeZone],
+    () => buildMonths(matches, locale, timeZone),
+    [matches, locale, timeZone],
   );
   const selectedSet = useMemo(() => new Set(selectedIds), [selectedIds]);
 
@@ -146,7 +152,7 @@ export function CalendarView({
             <span
               className={`size-2.5 rounded-full ${getStageColor(stage).dot}`}
             />
-            {getStageLabel(stage)}
+            {tStages(stage)}
           </span>
         ))}
       </div>
@@ -158,12 +164,12 @@ export function CalendarView({
               {m.label}
             </h3>
             <div className="grid grid-cols-7 gap-1">
-              {WEEKDAYS.map((w) => (
+              {WEEKDAY_KEYS.map((key) => (
                 <div
-                  key={w}
+                  key={key}
                   className="py-1 text-center text-[11px] font-medium uppercase tracking-wide text-zinc-400"
                 >
-                  {w}
+                  {t(`weekdays.${key}`)}
                 </div>
               ))}
               {m.cells.map((cell, i) => {
@@ -226,14 +232,17 @@ export function CalendarView({
         <div className="rounded-xl border border-zinc-200 dark:border-zinc-800">
           <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-800">
             <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
-              {new Date(openDay + "T12:00:00").toLocaleDateString(undefined, {
+              {new Date(openDay + "T12:00:00").toLocaleDateString(locale, {
                 weekday: "long",
                 month: "long",
                 day: "numeric",
               })}{" "}
               <span className="font-normal text-zinc-400">
-                ({openDayMatches.length}{" "}
-                {openDayMatches.length === 1 ? "match" : "matches"})
+                (
+                {openDayMatches.length === 1
+                  ? t("matchOne", { count: openDayMatches.length })
+                  : t("matchMany", { count: openDayMatches.length })}
+                )
               </span>
             </h3>
             <button
@@ -251,7 +260,7 @@ export function CalendarView({
               }
               className="rounded-lg border border-zinc-200 px-3 py-1 text-xs text-zinc-700 hover:bg-zinc-50 disabled:opacity-40 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
             >
-              Add upcoming
+              {t("addUpcoming")}
             </button>
           </div>
           <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
@@ -273,9 +282,7 @@ export function CalendarView({
       )}
 
       {!openDay && (
-        <p className="text-center text-sm text-zinc-400">
-          Tap a highlighted day to see scores or select upcoming matches.
-        </p>
+        <p className="text-center text-sm text-zinc-400">{t("tapDayHint")}</p>
       )}
     </section>
   );

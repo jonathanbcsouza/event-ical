@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { StepHeader } from "@/components/StepHeader";
 import { ArrowRight, Icon } from "@/lib/icons";
@@ -27,13 +28,18 @@ export function StepCard({
   badge,
   headerAction,
   canComplete = true,
-  pendingLabel = "Select",
-  doneLabel = "Next",
+  pendingLabel,
+  doneLabel,
   onDone,
   isLastStep = false,
   children,
   className,
 }: StepCardProps) {
+  const tCommon = useTranslations("common");
+  const tSteps = useTranslations("steps");
+  const resolvedPendingLabel = pendingLabel ?? tSteps("selectToContinue");
+  const resolvedDoneLabel = doneLabel ?? tCommon("next");
+
   const [hintOpen, setHintOpen] = useState(false);
   const hintTimerRef = useRef<number | null>(null);
 
@@ -93,7 +99,7 @@ export function StepCard({
                       : "border border-zinc-300 bg-zinc-100 text-zinc-400 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-500",
                   )}
                 >
-                  {doneLabel}
+                  {resolvedDoneLabel}
                   <Icon
                     icon={ArrowRight}
                     className={cn("size-4", !canComplete && "opacity-60")}
@@ -105,7 +111,7 @@ export function StepCard({
                     role="status"
                     className="absolute right-0 top-full z-20 mt-1.5 w-max max-w-[14rem] rounded-lg border border-amber-300 bg-amber-50 px-2.5 py-1.5 text-xs font-medium text-amber-800 shadow-md dark:border-amber-500/50 dark:bg-amber-950 dark:text-amber-200"
                   >
-                    {pendingLabel}
+                    {resolvedPendingLabel}
                   </p>
                 )}
               </div>

@@ -1,0 +1,208 @@
+{
+  "site": {
+    "name": "Copa do Mundo 2026 - Calendário",
+    "shortName": "Copa do Mundo FIFA 2026",
+    "tagline": "Monte seu calendário de jogos",
+    "description": "Escolha seus times e jogos, depois baixe ou assine um calendário da Copa do Mundo FIFA 2026.",
+    "dateRange": "11 jun – 19 jul 2026",
+    "hosts": "Estados Unidos · Canadá · México",
+    "headerTitle": "Copa do Mundo 2026",
+    "headerSubtitle": "Calendário de jogos"
+  },
+  "stages": {
+    "group": "Fase de grupos",
+    "r32": "Trinta e dois avos de final",
+    "r16": "Oitavas de final",
+    "qf": "Quartas de final",
+    "sf": "Semifinal",
+    "third": "Disputa de 3º lugar",
+    "final": "Final"
+  },
+  "common": {
+    "next": "Próximo",
+    "vs": "x",
+    "final": "Final",
+    "match": "Jogo",
+    "progress": "Progresso",
+    "list": "Lista",
+    "calendar": "Calendário",
+    "viewMode": "Modo de visualização",
+    "selectAll": "Selecionar tudo",
+    "deselectAll": "Desmarcar tudo",
+    "clear": "Limpar",
+    "privacy": "Privacidade",
+    "backToCalendar": "← Voltar ao calendário"
+  },
+  "hero": {
+    "imageAlt": "Estádio da Copa do Mundo 2026 com bandeiras dos anfitriões e o troféu",
+    "description": "Escolha os times que você torce, selecione os jogos que importam e baixe ou assine com um clique."
+  },
+  "steps": {
+    "teams": "Times",
+    "timezone": "Fuso horário",
+    "matches": "Jogos",
+    "export": "Exportar",
+    "pickTeamsFirst": "Escolha times primeiro",
+    "noTeamsSelected": "Nenhum time selecionado",
+    "teamMore": "+{count} mais",
+    "upcomingPast": "{upcoming} próximos · {past} resultados",
+    "selectedForDownload": "{count} selecionados para download",
+    "selectGamesInStep3": "Selecione jogos no passo 3",
+    "selectToContinue": "Selecione pelo menos uma opção para continuar",
+    "step1Title": "Escolha seus times",
+    "step1Description": "Selecione as seleções que você quer acompanhar, ou escolha todas.",
+    "step1Pending": "Escolha pelo menos um time para continuar",
+    "step2Title": "Escolha seu fuso horário",
+    "step2Description": "Defina quando os jogos aparecem no seu calendário.",
+    "step3Title": "Escolha seus jogos",
+    "step3Description": "Veja próximos jogos ou resultados anteriores.",
+    "step3Pending": "Selecione pelo menos um jogo para exportar",
+    "step4Title": "Exporte seu calendário",
+    "step4Description": "Assine um feed ao vivo — adversários do mata-mata são preenchidos conforme seus times avançam."
+  },
+  "matchBrowser": {
+    "nextGames": "Próximos jogos",
+    "pastResults": "Resultados anteriores",
+    "selectedTeamsOnly": "Somente times selecionados",
+    "includeAllTeams": "Incluir todos os times",
+    "pickTeamsUpcoming": "Escolha times acima para ver próximos jogos.",
+    "allUpcoming": "Todos os próximos jogos que você pode adicionar ao calendário.",
+    "teamUpcoming": "Próximos jogos dos seus times — mata-mata é preenchido com os resultados.",
+    "pickTeamsPast": "Escolha times acima para ver resultados anteriores.",
+    "allPast": "Placares finais de todo o torneio.",
+    "teamPast": "Placares finais dos seus times."
+  },
+  "matchList": {
+    "title": "Jogos",
+    "emptyDefault": "Selecione um ou mais times acima para ver seus jogos.",
+    "nextGames": "Próximos jogos",
+    "pastResults": "Resultados anteriores",
+    "noUpcomingAll": "Nenhum jogo próximo no momento.",
+    "noUpcomingTeams": "Nenhum jogo próximo para seus times.",
+    "noResultsAll": "Ainda não há resultados.",
+    "noResultsTeams": "Ainda não há resultados para seus times.",
+    "pickTeamsResults": "Escolha times acima para ver resultados.",
+    "selectedCount": "{selected} de {total} selecionados para o calendário"
+  },
+  "calendarView": {
+    "weekdays": {
+      "sun": "Dom",
+      "mon": "Seg",
+      "tue": "Ter",
+      "wed": "Qua",
+      "thu": "Qui",
+      "fri": "Sex",
+      "sat": "Sáb"
+    },
+    "matchOne": "{count} jogo",
+    "matchMany": "{count} jogos",
+    "addUpcoming": "Adicionar próximos",
+    "tapDayHint": "Toque em um dia destacado para ver placares ou selecionar próximos jogos."
+  },
+  "timezone": {
+    "stepHint": "Horários e eventos do calendário usarão este fuso horário.",
+    "yourTimezone": "Seu fuso horário",
+    "currentlyOffset": "Atualmente {offset} — horários atualizam ao mudar isso.",
+    "useMyTimezone": "Usar meu fuso horário",
+    "currentOffset": "Deslocamento atual {offset}",
+    "timesShownIn": "Horários em",
+    "useMyZone": "Usar minha zona",
+    "resetDetected": "Restaurar fuso detectado ({label})",
+    "regions": {
+      "hosts": "Anfitriões Copa 2026",
+      "americas": "Américas",
+      "europeAfrica": "Europa e África",
+      "asiaPacific": "Ásia e Pacífico",
+      "other": "Outros"
+    }
+  },
+  "calendarActions": {
+    "google": "Adicionar ao Google Calendar",
+    "outlook": "Adicionar ao Outlook",
+    "apple": "Adicionar ao Apple Calendar",
+    "download": "Baixar .ics",
+    "googleTitleMobile": "Abre o app Google Calendar se instalado, senão o site móvel",
+    "googleTitleDesktop": "Assine no Google Calendar — times do mata-mata atualizam automaticamente",
+    "outlookTitleMobile": "Abre Outlook ou web móvel para assinar — sincroniza após confirmar",
+    "outlookTitleDesktop": "Assine no Outlook web — times do mata-mata atualizam automaticamente",
+    "appleTitle": "Abre Apple Calendar no iPhone/iPad para assinar o feed ao vivo",
+    "downloadTitle": "Baixe um instantâneo único dos jogos selecionados",
+    "subscribeAllHint": "Sua assinatura inclui todos os próximos jogos. Baixar .ics usa apenas os marcados.",
+    "subscribeTeamsHint": "Sua assinatura segue os times escolhidos no chaveamento. Baixar .ics usa apenas os marcados.",
+    "pastScoresHint": "Jogos passados mostram apenas placares.",
+    "mobileHint": "No celular, links abrem seu app de calendário se instalado. Google e Outlook podem usar o navegador para confirmar — depois sincroniza.",
+    "eventsUseTimezone": "Eventos usam {timezone}{offset}. Mude o fuso no passo 2.",
+    "hideHelp": "Ocultar",
+    "showHelp": "Como importar manualmente",
+    "help1": "Google e Outlook assinam um feed ao vivo — confirme uma vez no app. Nomes do mata-mata atualizam conforme times são confirmados.",
+    "help2": "No celular, links tentam abrir o app nativo. Se nada acontecer, use Baixar .ics ou assine no desktop — sincroniza no celular depois.",
+    "help3": "Se Outlook disser \"Não foi possível importar\", use \"Baixar .ics\" e Adicionar calendário → Enviar arquivo.",
+    "help4Work": "Conta de trabalho ou escola? <link></link> ou baixe o .ics e use Arquivo → Abrir e importar.",
+    "help4Link": "Use este link de assinatura Microsoft 365",
+    "help4Plain": "use o link de assinatura Microsoft 365",
+    "help5": "Para ver verde no Google Calendar: encontre \"FIFA World Cup 2026\" na barra lateral → ⋮ → escolha verde.",
+    "stageCount": "{count} {stage}"
+  },
+  "donate": {
+    "button": "Me pague um café",
+    "promptTitle": "Calendário pronto — {count, plural, one {# jogo} other {# jogos}} exportados",
+    "promptBody": "Grátis para usar. Se economizou tempo, me pague um café também.",
+    "footerTitle": "Gostou do calendário?",
+    "footerBody": "Este projeto é gratuito. Se economizou tempo, me pague um café também."
+  },
+  "github": {
+    "label": "Enviar issue ou contribuir no GitHub",
+    "tooltip": "Enviar issue ou contribuir"
+  },
+  "theme": {
+    "switchToLight": "Mudar para modo claro",
+    "switchToDark": "Mudar para modo escuro",
+    "light": "Modo claro",
+    "dark": "Modo escuro"
+  },
+  "footer": {
+    "disclaimer": "Não afiliado à FIFA. Dados de jogos apenas informativos."
+  },
+  "language": {
+    "label": "Idioma",
+    "select": "Selecionar idioma"
+  },
+  "privacy": {
+    "title": "Política de privacidade",
+    "metaTitle": "Privacidade — {siteName}",
+    "metaDescription": "Política de privacidade do Calendário Copa do Mundo 2026.",
+    "lastUpdated": "Última atualização: junho 2026",
+    "overviewTitle": "Visão geral",
+    "overviewBody": "{siteName} ({url}) é uma ferramenta gratuita para criar um calendário pessoal da Copa do Mundo FIFA 2026. Não exigimos conta nem armazenamos suas seleções em nossos servidores.",
+    "collectTitle": "O que coletamos",
+    "analyticsTitle": "Analytics",
+    "analyticsBody": "O Google Analytics pode coletar dados de uso anonimizados (páginas, tipo de dispositivo, país). Veja",
+    "analyticsLink": "a política de privacidade do Google",
+    "adsTitle": "Publicidade",
+    "adsBody": "Se ativo, o Google AdSense pode usar cookies para anúncios. Veja",
+    "adsLink": "as políticas de publicidade do Google",
+    "storageTitle": "Armazenamento local",
+    "storageBody": "Sua preferência de fuso horário é salva apenas no navegador.",
+    "donationsTitle": "Doações",
+    "donationsBody": "Pagamentos são processados pelo Stripe. Não recebemos nem armazenamos dados de cartão.",
+    "feedsTitle": "Feeds de calendário",
+    "feedsBody": "Ao exportar, IDs de jogos são enviados na URL para gerar o arquivo ICS. Isso é necessário para o serviço. Não registramos quais jogos você seleciona.",
+    "thirdPartiesTitle": "Terceiros",
+    "thirdPartiesBody": "Usamos Vercel (hosting), Google Analytics, Google AdSense opcional e Stripe (doações). Cada um tem sua própria política de privacidade.",
+    "contactTitle": "Contato",
+    "contactBody": "Dúvidas? Abra uma issue no repositório GitHub ou contate o proprietário do site.",
+    "disclaimer": "Não afiliado à FIFA. Horários apenas informativos."
+  },
+  "teamPicker": {
+    "shortNames": {
+      "BIH": "Bósnia",
+      "CZE": "Tchéquia",
+      "RSA": "África do S.",
+      "KOR": "Coreia do S.",
+      "CIV": "Costa do Marfim",
+      "NZL": "Nova Zelândia",
+      "KSA": "Arábia Saudita",
+      "COD": "RD Congo"
+    }
+  }
+}

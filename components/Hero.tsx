@@ -1,13 +1,16 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { CalendarCheck, Icon, MapPin, Trophy } from "@/lib/icons";
-import { SITE } from "@/lib/site";
 
 export function Hero() {
+  const t = useTranslations("hero");
+  const site = useTranslations("site");
+
   return (
     <section className="relative overflow-hidden rounded-3xl border border-emerald-900/15 shadow-lg shadow-emerald-950/10 dark:border-emerald-500/15">
       <Image
         src="/hero-stadium.png"
-        alt="World Cup 2026 stadium with the host nations' flags and the trophy"
+        alt={t("imageAlt")}
         width={1024}
         height={434}
         priority
@@ -18,21 +21,20 @@ export function Hero() {
       <div className="relative flex min-h-[16rem] flex-col justify-end gap-3 p-5 sm:min-h-[20rem] sm:p-8">
         <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow-sm">
           <Icon icon={Trophy} className="size-3.5" />
-          {SITE.shortName}
+          {site("shortName")}
         </span>
 
         <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-white drop-shadow-sm sm:text-5xl">
-          {SITE.tagline}
+          {site("tagline")}
         </h1>
 
         <p className="max-w-xl text-sm text-zinc-200 sm:text-base">
-          Pick the teams you support, choose the matches you care about, then
-          download or subscribe in one click.
+          {t("description")}
         </p>
 
         <div className="mt-1 flex flex-wrap gap-2">
-          <Badge icon={CalendarCheck}>{SITE.dateRange}</Badge>
-          <Badge icon={MapPin}>{SITE.hosts}</Badge>
+          <Badge icon={CalendarCheck}>{site("dateRange")}</Badge>
+          <Badge icon={MapPin}>{site("hosts")}</Badge>
         </div>
       </div>
     </section>

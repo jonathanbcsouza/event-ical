@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Icon, Lightbulb, Moon } from "@/lib/icons";
 
 type Theme = "light" | "dark";
@@ -18,6 +19,7 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeToggle() {
+  const t = useTranslations("theme");
   const [theme, setTheme] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
 
@@ -40,8 +42,8 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      title={isDark ? "Light mode" : "Dark mode"}
+      aria-label={isDark ? t("switchToLight") : t("switchToDark")}
+      title={isDark ? t("light") : t("dark")}
       className="inline-flex size-10 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-sm transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
     >
       {mounted ? (

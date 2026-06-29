@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Check, Icon, Lock } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
@@ -18,8 +19,10 @@ type StepRailProps = {
 };
 
 export function StepRail({ steps, onSelect }: StepRailProps) {
+  const t = useTranslations("common");
+
   return (
-    <nav aria-label="Progress" className="surface-card overflow-hidden rounded-2xl p-1.5 sm:p-3">
+    <nav aria-label={t("progress")} className="surface-card overflow-hidden rounded-2xl p-1.5 sm:p-3">
       <ol className="flex min-w-0 items-stretch">
         {steps.map((step, index) => (
           <li key={step.n} className="flex min-w-0 flex-1 items-center">

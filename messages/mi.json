@@ -1,0 +1,208 @@
+{
+  "site": {
+    "name": "Te Kapa o te Ao 2026 - Maramataka",
+    "shortName": "Te Kapa o te Ao FIFA 2026",
+    "tagline": "Waihangatia tō maramataka whakataetae",
+    "description": "Kōwhiria ō kapa me ngā whakataetae, ka tikiake, ka ohauru rānei ki te maramataka o Te Kapa o te Ao FIFA 2026.",
+    "dateRange": "11 Hune – 19 Hōngongoi 2026",
+    "hosts": "Amerika · Kānata · Mēhiko",
+    "headerTitle": "Te Kapa o te Ao 2026",
+    "headerSubtitle": "Maramataka Whakataetae"
+  },
+  "stages": {
+    "group": "Wāhanga rōpū",
+    "r32": "Te 32",
+    "r16": "Te 16",
+    "qf": "Whakataetae hāwhe",
+    "sf": "Whakataetae haurua",
+    "third": "Tūranga tuatoru",
+    "final": "Whakataetae whakamutunga"
+  },
+  "common": {
+    "next": "Panuku",
+    "vs": "ki",
+    "final": "Whakamutunga",
+    "match": "Whakataetae",
+    "progress": "Ahunga whakamua",
+    "list": "Rārangi",
+    "calendar": "Maramataka",
+    "viewMode": "Aratau tirohanga",
+    "selectAll": "Tīpako katoa",
+    "deselectAll": "Wetewete katoa",
+    "clear": "Ūkuia",
+    "privacy": "Tūmataitinga",
+    "backToCalendar": "← Hoki ki te maramataka"
+  },
+  "hero": {
+    "imageAlt": "Papa whakataetae o Te Kapa o te Ao 2026 me ngā haki o ngā whenua manaaki me te ipu",
+    "description": "Kōwhiria ngā kapa e tautoko ana koe, tīpakohia ngā whakataetae e hira ana, ka tikiake, ka ohauru rānei mā te pāwhiri kotahi."
+  },
+  "steps": {
+    "teams": "Kapa",
+    "timezone": "Rohe wā",
+    "matches": "Whakataetae",
+    "export": "Kaweake",
+    "pickTeamsFirst": "Kōwhiria ngā kapa i te tuatahi",
+    "noTeamsSelected": "Kāore he kapa i tīpakohia",
+    "teamMore": "+{count} atu anō",
+    "upcomingPast": "{upcoming} e haere mai · {past} kua hipa",
+    "selectedForDownload": "{count} kua tīpakohia mō te tikiake",
+    "selectGamesInStep3": "Tīpakohia ngā whakataetae i te hipanga 3",
+    "selectToContinue": "Tīpakohia kia kotahi te kōwhiringa kia haere tonu ai",
+    "step1Title": "Kōwhiria ō kapa",
+    "step1Description": "Kōwhiria ngā kapa ā-motu e hiahia ana koe ki te whai, tīpakohia rānei i te katoa.",
+    "step1Pending": "Kōwhiria kia kotahi te kapa kia haere tonu ai",
+    "step2Title": "Kōwhiria tō rohe wā",
+    "step2Description": "Whakatauhia te wā ka puta ai ngā tīmatanga me ngā kaupapa maramataka.",
+    "step3Title": "Kōwhiria ō whakataetae",
+    "step3Description": "Tirohia ngā whakataetae e haere mai ana, ngā hua kua hipa rānei.",
+    "step3Pending": "Tīpakohia kia kotahi te whakataetae hei kaweake",
+    "step4Title": "Kaweake tō maramataka",
+    "step4Description": "Ohaurua ki te puna ora — ka whakakīia ngā hoariri whakataetae whakamutunga i te wā e whakamua ana ō kapa."
+  },
+  "matchBrowser": {
+    "nextGames": "Ngā whakataetae e haere mai",
+    "pastResults": "Ngā hua kua hipa",
+    "selectedTeamsOnly": "Ngā kapa i tīpakohia anake",
+    "includeAllTeams": "Whakaurua ngā kapa katoa",
+    "pickTeamsUpcoming": "Kōwhiria ngā kapa i runga ake kia kite ngā whakataetae e haere mai.",
+    "allUpcoming": "Ngā whakataetae katoa e haere mai ana ka taea te tāpiri ki tō maramataka.",
+    "teamUpcoming": "Ngā whakataetae e haere mai mō ō kapa — ka whakakīia ngā whakataetae whakamutunga i te wā ka puta ngā hua.",
+    "pickTeamsPast": "Kōwhiria ngā kapa i runga ake kia kite ngā hua kua hipa.",
+    "allPast": "Ngā kaute whakamutunga mai i te whakataetae katoa.",
+    "teamPast": "Ngā kaute whakamutunga mō ō kapa."
+  },
+  "matchList": {
+    "title": "Whakataetae",
+    "emptyDefault": "Tīpakohia kotahi, neke atu rānei ngā kapa i runga ake kia kite ō rātou whakataetae.",
+    "nextGames": "Ngā whakataetae e haere mai",
+    "pastResults": "Ngā hua kua hipa",
+    "noUpcomingAll": "Kāore he whakataetae e haere mai i tēnei wā.",
+    "noUpcomingTeams": "Kāore he whakataetae e haere mai mō ō kapa.",
+    "noResultsAll": "Kāore anō kia puta ngā hua.",
+    "noResultsTeams": "Kāore anō kia puta ngā hua mō ō kapa.",
+    "pickTeamsResults": "Kōwhiria ngā kapa i runga ake kia kite ngā hua.",
+    "selectedCount": "{selected} o {total} kua tīpakohia mō te maramataka"
+  },
+  "calendarView": {
+    "weekdays": {
+      "sun": "Rā",
+      "mon": "Mane",
+      "tue": "Tū",
+      "wed": "Wen",
+      "thu": "Tāi",
+      "fri": "Para",
+      "sat": "Hāt"
+    },
+    "matchOne": "{count} whakataetae",
+    "matchMany": "{count} whakataetae",
+    "addUpcoming": "Tāpiri e haere mai",
+    "tapDayHint": "Pāwhiria tētahi rā kua miramira kia kite ngā kaute, kia tīpako rānei i ngā whakataetae e haere mai."
+  },
+  "timezone": {
+    "stepHint": "Ka whakamahi ngā wā whakataetae me ngā kaupapa maramataka i tēnei rohe wā.",
+    "yourTimezone": "Tō rohe wā",
+    "currentlyOffset": "I tēnei wā {offset} — ka whakahoutia ngā wā tīmatanga ina huri tēnei.",
+    "useMyTimezone": "Whakamahia taku rohe wā",
+    "currentOffset": "Te whakaneke o nāianei {offset}",
+    "timesShownIn": "Ngā wā e whakaaturia ana i",
+    "useMyZone": "Whakamahia taku rohe",
+    "resetDetected": "Whakahoki ki te rohe wā i kitea ({label})",
+    "regions": {
+      "hosts": "Ngā whenua manaaki CM 2026",
+      "americas": "Amerika",
+      "europeAfrica": "Ūropi me Āwherika",
+      "asiaPacific": "Āhia me Te Moana-nui-a-Kiwa",
+      "other": "Ētahi atu"
+    }
+  },
+  "calendarActions": {
+    "google": "Tāpiri ki Google Calendar",
+    "outlook": "Tāpiri ki Outlook",
+    "apple": "Tāpiri ki Apple Calendar",
+    "download": "Tikiake .ics",
+    "googleTitleMobile": "Ka whakatuwhera te taupānga Google Calendar mēnā kua tāuta, ki te paetukutuku pūkoro rānei",
+    "googleTitleDesktop": "Ohauru i Google Calendar — ka whakahoutia ngā kapa whakamutunga ā-aunoa",
+    "outlookTitleMobile": "Ka whakatuwhera Outlook, te tukutuku pūkoro rānei hei ohauru — ka tukutahi i muri i te whakaū",
+    "outlookTitleDesktop": "Ohauru i Outlook i te tukutuku — ka whakahoutia ngā kapa whakamutunga ā-aunoa",
+    "appleTitle": "Ka whakatuwhera Apple Calendar tika i runga iPhone/iPad hei ohauru ki te puna ora",
+    "downloadTitle": "Tikiake he whakaahua kotahi o ō whakataetae i tīpakohia",
+    "subscribeAllHint": "Kei roto i tō ohaurunga ngā whakataetae katoa e haere mai. Ka whakamahi te tikiake .ics i ngā whakataetae kua tohua anake.",
+    "subscribeTeamsHint": "Ka whai tō ohaurunga i ngā kapa i kōwhiria e koe puta noa i te tūāpapa. Ka whakamahi te tikiake .ics i ngā whakataetae kua tohua anake.",
+    "pastScoresHint": "Ka whakaatu ngā whakataetae kua hipa i ngā kaute anake.",
+    "mobileHint": "I runga pūkoro, ka whakatuwhera ngā hono i tō taupānga maramataka mēnā kua tāuta. Ka whakamahi pea a Google me Outlook i te pūtirotiro hei whakaū — ka tukutahi ki tō waea i muri iho.",
+    "eventsUseTimezone": "Ka whakamahi ngā kaupapa i {timezone}{offset}. Huri i te rohe wā i te hipanga 2.",
+    "hideHelp": "Huna",
+    "showHelp": "Me pēhea te kawemai ā-ringa",
+    "help1": "Ka ohauru a Google me Outlook ki te puna ora — whakaū kotahi i tō taupānga maramataka. Ka whakahoutia ngā ingoa whakamutunga ina whakatauhia ngā kapa.",
+    "help2": "I runga pūkoro, ka ngana ngā hono ki te whakatuwhera i te taupānga taketake. Ki te kore e puta he mea, whakamahia te Tikiake .ics, ohauru rānei mai i te pūtirotiro papamahi.",
+    "help3": "Ki te kī a Outlook \"Kāore i taea te kawemai i te maramataka\", whakamahia \"Tikiake .ics\" me Tāpiri maramataka → Tukuake mai i te kōnae.",
+    "help4Work": "Pūkete mahi, kura rānei? <link></link>, tikiake rānei i te .ics ka whakamahi Kōnae → Whakatuwhera me Kawemai.",
+    "help4Link": "Whakamahia tēnei hono ohaurunga Microsoft 365",
+    "help4Plain": "whakamahia te hono ohaurunga Microsoft 365",
+    "help5": "Hei whakamahi i te kākāriki i Google Calendar: kimihia \"FIFA World Cup 2026\" i te pae taha mauī → ⋮ → kōwhiria te kākāriki.",
+    "stageCount": "{count} {stage}"
+  },
+  "donate": {
+    "button": "Hokona he kawhe māku",
+    "promptTitle": "Kua rite te maramataka — {count, plural, one {# whakataetae} other {# whakataetae}} kua kaweake",
+    "promptBody": "He kore utu te whakamahi. Mēnā i whakaora i a koe i te wā, hokona he kawhe māku anō.",
+    "footerTitle": "E pai ana ki a koe te maramataka?",
+    "footerBody": "He kore utu tēnei kaupapa. Mēnā i whakaora i a koe i te wā, hokona he kawhe māku anō."
+  },
+  "github": {
+    "label": "Tukuna he take, whakapā atu rānei ki GitHub",
+    "tooltip": "Tukuna he take, whakapā atu rānei"
+  },
+  "theme": {
+    "switchToLight": "Huri ki te aratau mārama",
+    "switchToDark": "Huri ki te aratau pōuri",
+    "light": "Aratau mārama",
+    "dark": "Aratau pōuri"
+  },
+  "footer": {
+    "disclaimer": "Kāore e whai pānga ki FIFA. He mōhiohio anake ngā raraunga whakataetae."
+  },
+  "language": {
+    "label": "Reo",
+    "select": "Kōwhiria te reo"
+  },
+  "privacy": {
+    "title": "Kaupapa here tūmataitinga",
+    "metaTitle": "Tūmataitinga — {siteName}",
+    "metaDescription": "Kaupapa here tūmataitinga mō te Maramataka Te Kapa o te Ao 2026.",
+    "lastUpdated": "Whakahoutanga whakamutunga: Hune 2026",
+    "overviewTitle": "Tirohanga whānui",
+    "overviewBody": "He utauta kore utu a {siteName} ({url}) hei hanga i tētahi maramataka whakataetae whaiaro mō Te Kapa o te Ao FIFA 2026. Kāore mātou e hiahia pūkete, kāore hoki e penapena i ō kōwhiringa kapa, whakataetae rānei i ā mātou tūmau.",
+    "collectTitle": "Ngā mea ka kohikohi e mātou",
+    "analyticsTitle": "Tātaritanga",
+    "analyticsBody": "Ka taea e Google Analytics te kohikohi i ngā raraunga whakamahinga ingoamuna (ngā whārangi, momo pūrere, whenua). Tirohia",
+    "analyticsLink": "te kaupapa here tūmataitinga a Google",
+    "adsTitle": "Panui",
+    "adsBody": "Mēnā kua whakahohea, ka whakamahi pea a Google AdSense i ngā pihikete hei whakaatu panui. Tirohia",
+    "adsLink": "ngā kaupapa here panui a Google",
+    "storageTitle": "Rokiroki ā-rohe",
+    "storageBody": "Ka penapenahia tō manakohanga rohe wā i tō pūtirotiro anake.",
+    "donationsTitle": "Koha",
+    "donationsBody": "Ka whakahaerehia ngā utu e Stripe. Kāore mātou e whiwhi, e penapena rānei i ngā taipitopito kāri.",
+    "feedsTitle": "Ngā puna maramataka",
+    "feedsBody": "Ina kaweake koe i te maramataka, ka tukuna ngā ID whakataetae i te URL hei hanga i te kōnae ICS. He mea tika tēnei mō te mahi a te ratonga. Kāore mātou e taki i ngā whakataetae motuhake i tīpakohia e koe.",
+    "thirdPartiesTitle": "Ngā rōpū tuatoru",
+    "thirdPartiesBody": "Ka whakamahi mātou i a Vercel (manaaki), Google Analytics, Google AdSense (kōwhiringa), me Stripe (koha). He kaupapa here tūmataitinga motuhake tā ia mea.",
+    "contactTitle": "Whakapā",
+    "contactBody": "He pātai? Huakina he take i te pūtaka GitHub o te kaupapa, whakapā rānei ki te rangatira pae.",
+    "disclaimer": "Kāore e whai pānga ki FIFA. He mōhiohio anake ngā hōtaka whakataetae."
+  },
+  "teamPicker": {
+    "shortNames": {
+      "BIH": "Pōnia",
+      "CZE": "Te Whenua Tīeki",
+      "RSA": "Awherika Tonga",
+      "KOR": "Kōrea Tonga",
+      "CIV": "Te Tai Ivory",
+      "NZL": "Aotearoa",
+      "KSA": "Hūrai",
+      "COD": "Kongo DR"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { MatchRow } from "@/components/MatchRow";
 import { partitionMatches, type Match } from "@/lib/fixtures";
 import { Icon, Users } from "@/lib/icons";
@@ -25,10 +26,15 @@ export function MatchList({
   onSelectionChange,
   timeZone,
   now,
-  title = "Matches",
-  emptyMessage = "Select one or more teams above to see their matches.",
+  title,
+  emptyMessage,
   mode = "upcoming",
 }: MatchListProps) {
+  const t = useTranslations("matchList");
+  const tCommon = useTranslations("common");
+  const resolvedTitle = title ?? t("title");
+  const resolvedEmpty = emptyMessage ?? t("emptyDefault");
+
   const { upcoming, results } = partitionMatches(matches, now);
   const shown = mode === "results" ? results : upcoming;
 
@@ -36,7 +42,7 @@ export function MatchList({
     return (
       <div className="rounded-xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-12 text-center dark:border-zinc-700 dark:bg-zinc-900/50">
         <Icon icon={Users} className="mx-auto mb-3 size-8 text-zinc-400" />
-        <p className="text-zinc-600 dark:text-zinc-400">{emptyMessage}</p>
+        <p className="text-zinc-600 dark:text-zinc-400">{resolvedEmpty}</p>
       </div>
     );
   }
@@ -45,7 +51,7 @@ export function MatchList({
     return (
       <section className="space-y-3">
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-          {title} ({shown.length})
+          {resolvedTitle} ({shown.length})
         </h2>
         <ul className="divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
           {shown.map((match) => (
@@ -74,7 +80,7 @@ export function MatchList({
     <section className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-          {title} ({shown.length})
+          {resolvedTitle} ({shown.length})
         </h2>
         <div className="flex gap-2">
           <button
@@ -86,7 +92,7 @@ export function MatchList({
             }
             className="rounded-lg border border-zinc-200 px-3 py-1.5 text-sm text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
           >
-            Select all
+            {tCommon("selectAll")}
           </button>
           <button
             type="button"
@@ -98,7 +104,7 @@ export function MatchList({
             disabled={!someUpcomingSelected}
             className="rounded-lg border border-zinc-200 px-3 py-1.5 text-sm text-zinc-700 hover:bg-zinc-50 disabled:opacity-40 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
           >
-            Clear
+            {tCommon("clear")}
           </button>
         </div>
       </div>
@@ -122,8 +128,10 @@ export function MatchList({
           className="size-4 rounded border-zinc-300 accent-emerald-600"
         />
         <span className="text-zinc-700 dark:text-zinc-300">
-          {upcoming.filter((m) => selectedIds.includes(m.id)).length} of{" "}
-          {upcoming.length} selected for calendar
+          {t("selectedCount", {
+            selected: upcoming.filter((m) => selectedIds.includes(m.id)).length,
+            total: upcoming.length,
+          })}
         </span>
       </label>
 

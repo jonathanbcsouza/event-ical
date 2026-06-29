@@ -1,0 +1,208 @@
+{
+  "site": {
+    "name": "World Cup 2026 - Calendar",
+    "shortName": "FIFA World Cup 2026",
+    "tagline": "Build your match calendar",
+    "description": "Pick your teams and matches, then download or subscribe to a FIFA World Cup 2026 calendar.",
+    "dateRange": "Jun 11 – Jul 19, 2026",
+    "hosts": "United States · Canada · Mexico",
+    "headerTitle": "World Cup 2026",
+    "headerSubtitle": "Match Calendar"
+  },
+  "stages": {
+    "group": "Group stage",
+    "r32": "Round of 32",
+    "r16": "Round of 16",
+    "qf": "Quarter-final",
+    "sf": "Semi-final",
+    "third": "Third place",
+    "final": "Final"
+  },
+  "common": {
+    "next": "Next",
+    "vs": "vs",
+    "final": "Final",
+    "match": "Match",
+    "progress": "Progress",
+    "list": "List",
+    "calendar": "Calendar",
+    "viewMode": "View mode",
+    "selectAll": "Select all",
+    "deselectAll": "Deselect all",
+    "clear": "Clear",
+    "privacy": "Privacy",
+    "backToCalendar": "← Back to calendar"
+  },
+  "hero": {
+    "imageAlt": "World Cup 2026 stadium with the host nations' flags and the trophy",
+    "description": "Pick the teams you support, choose the matches you care about, then download or subscribe in one click."
+  },
+  "steps": {
+    "teams": "Teams",
+    "timezone": "Timezone",
+    "matches": "Matches",
+    "export": "Export",
+    "pickTeamsFirst": "Pick teams first",
+    "noTeamsSelected": "No teams selected",
+    "teamMore": "+{count} more",
+    "upcomingPast": "{upcoming} upcoming · {past} past",
+    "selectedForDownload": "{count} selected for download",
+    "selectGamesInStep3": "Select games in step 3",
+    "selectToContinue": "Select at least one option to continue",
+    "step1Title": "Pick your teams",
+    "step1Description": "Choose the national teams you want to follow, or select all.",
+    "step1Pending": "Pick at least one team to continue",
+    "step2Title": "Choose your timezone",
+    "step2Description": "Set when kickoffs and calendar events appear for you.",
+    "step3Title": "Choose your matches",
+    "step3Description": "Review upcoming games or past results.",
+    "step3Pending": "Select at least one game to export",
+    "step4Title": "Export your calendar",
+    "step4Description": "Subscribe for a live feed — knockout opponents fill in as your teams advance."
+  },
+  "matchBrowser": {
+    "nextGames": "Next games",
+    "pastResults": "Past results",
+    "selectedTeamsOnly": "Selected teams only",
+    "includeAllTeams": "Include all teams",
+    "pickTeamsUpcoming": "Pick teams above to see upcoming games.",
+    "allUpcoming": "All upcoming games you can add to your calendar.",
+    "teamUpcoming": "Upcoming games for your teams — knockouts fill in as results come in.",
+    "pickTeamsPast": "Pick teams above to see past results.",
+    "allPast": "Final scores from across the tournament.",
+    "teamPast": "Final scores for your teams."
+  },
+  "matchList": {
+    "title": "Matches",
+    "emptyDefault": "Select one or more teams above to see their matches.",
+    "nextGames": "Next games",
+    "pastResults": "Past results",
+    "noUpcomingAll": "No upcoming games right now.",
+    "noUpcomingTeams": "No upcoming games for your teams.",
+    "noResultsAll": "No results yet.",
+    "noResultsTeams": "No results for your teams yet.",
+    "pickTeamsResults": "Pick teams above to see results.",
+    "selectedCount": "{selected} of {total} selected for calendar"
+  },
+  "calendarView": {
+    "weekdays": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "matchOne": "{count} match",
+    "matchMany": "{count} matches",
+    "addUpcoming": "Add upcoming",
+    "tapDayHint": "Tap a highlighted day to see scores or select upcoming matches."
+  },
+  "timezone": {
+    "stepHint": "Match times and calendar events will use this timezone.",
+    "yourTimezone": "Your timezone",
+    "currentlyOffset": "Currently {offset} — kickoff times update as you change this.",
+    "useMyTimezone": "Use my timezone",
+    "currentOffset": "Current offset {offset}",
+    "timesShownIn": "Times shown in",
+    "useMyZone": "Use my zone",
+    "resetDetected": "Reset to your detected timezone ({label})",
+    "regions": {
+      "hosts": "World Cup 2026 hosts",
+      "americas": "Americas",
+      "europeAfrica": "Europe & Africa",
+      "asiaPacific": "Asia & Pacific",
+      "other": "Other"
+    }
+  },
+  "calendarActions": {
+    "google": "Add to Google Calendar",
+    "outlook": "Add to Outlook",
+    "apple": "Add to Apple Calendar",
+    "download": "Download .ics",
+    "googleTitleMobile": "Opens Google Calendar app when installed, otherwise the mobile site",
+    "googleTitleDesktop": "Subscribe in Google Calendar — knockout teams update automatically as results come in",
+    "outlookTitleMobile": "Opens Outlook app or mobile web to subscribe — syncs to the app after you confirm",
+    "outlookTitleDesktop": "Subscribe in Outlook on the web — knockout teams update automatically as results come in",
+    "appleTitle": "Opens Apple Calendar directly on iPhone/iPad to subscribe to the live feed",
+    "downloadTitle": "Download a one-time snapshot of your selected matches",
+    "subscribeAllHint": "Your subscription includes all upcoming games. Download .ics uses your checked games only.",
+    "subscribeTeamsHint": "Your subscription follows the teams you picked through the bracket. Download .ics uses checked games only.",
+    "pastScoresHint": "Past games show scores only.",
+    "mobileHint": "On mobile, links open your calendar app when installed. Google and Outlook may still use the browser to confirm the subscription — it then syncs to the app.",
+    "eventsUseTimezone": "Events use {timezone}{offset}. Change the timezone in step 2.",
+    "hideHelp": "Hide",
+    "showHelp": "How to import manually",
+    "help1": "Google and Outlook subscribe to a live feed — confirm once in your calendar app. Knockout match names update as teams are confirmed.",
+    "help2": "On mobile, Google and Outlook links try to open the native app. If nothing happens, use Download .ics or subscribe from a desktop browser — it syncs to your phone afterward.",
+    "help3": "If Outlook says \"Couldn't import calendar\", use \"Download .ics\" and Add calendar → Upload from file (Microsoft's documented fallback).",
+    "help4Work": "Work or school account? <link></link> instead, or download the .ics and use File → Open & Import.",
+    "help4Link": "Use this Microsoft 365 subscribe link",
+    "help4Plain": "use the Microsoft 365 subscribe link",
+    "help5": "To use green in Google Calendar: find \"FIFA World Cup 2026\" in the left sidebar → ⋮ → pick green.",
+    "stageCount": "{count} {stage}"
+  },
+  "donate": {
+    "button": "Buy me a coffee",
+    "promptTitle": "Calendar ready — {count, plural, one {# match} other {# matches}} exported",
+    "promptBody": "Free to use. If this saved you time, buy me a nice coffee too.",
+    "footerTitle": "Enjoying the calendar?",
+    "footerBody": "This project is free to use. If it saved you time, buy me a nice coffee too."
+  },
+  "github": {
+    "label": "Submit issue or contribute on GitHub",
+    "tooltip": "Submit issue or contribute"
+  },
+  "theme": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "light": "Light mode",
+    "dark": "Dark mode"
+  },
+  "footer": {
+    "disclaimer": "Not affiliated with FIFA. Match data for informational use only."
+  },
+  "language": {
+    "label": "Language",
+    "select": "Select language"
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "metaTitle": "Privacy — {siteName}",
+    "metaDescription": "Privacy policy for World Cup 2026 Calendar.",
+    "lastUpdated": "Last updated: June 2026",
+    "overviewTitle": "Overview",
+    "overviewBody": "{siteName} ({url}) is a free tool to build a personal FIFA World Cup 2026 match calendar. We do not require an account and do not store your team or match selections on our servers.",
+    "collectTitle": "What we collect",
+    "analyticsTitle": "Analytics",
+    "analyticsBody": "Google Analytics may collect anonymised usage data (pages visited, device type, country). See",
+    "analyticsLink": "Google's privacy policy",
+    "adsTitle": "Advertising",
+    "adsBody": "If enabled, Google AdSense may use cookies to serve ads. See",
+    "adsLink": "Google advertising policies",
+    "storageTitle": "Local storage",
+    "storageBody": "Your timezone preference is saved in your browser only.",
+    "donationsTitle": "Donations",
+    "donationsBody": "Payments are handled by Stripe. We do not receive or store card details.",
+    "feedsTitle": "Calendar feeds",
+    "feedsBody": "When you export a calendar, match IDs are sent in the URL to generate an ICS file. This is required for the service to work. We do not log which specific matches you select.",
+    "thirdPartiesTitle": "Third parties",
+    "thirdPartiesBody": "We use Vercel (hosting), Google Analytics, optional Google AdSense, and Stripe (donations). Each has its own privacy policy.",
+    "contactTitle": "Contact",
+    "contactBody": "Questions? Open an issue on the project GitHub repository or contact the site owner.",
+    "disclaimer": "Not affiliated with FIFA. Match schedules are for informational use only."
+  },
+  "teamPicker": {
+    "shortNames": {
+      "BIH": "Bosnia",
+      "CZE": "Czechia",
+      "RSA": "S. Africa",
+      "KOR": "S. Korea",
+      "CIV": "Ivory Coast",
+      "NZL": "N. Zealand",
+      "KSA": "Saudi",
+      "COD": "DR Congo"
+    }
+  }
+}

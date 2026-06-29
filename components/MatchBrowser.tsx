@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export type MatchBrowserTab = "next" | "past";
@@ -24,82 +25,60 @@ export function MatchBrowser({
   nextCount,
   pastCount,
 }: MatchBrowserProps) {
+  const t = useTranslations("matchBrowser");
+
+  const helperText =
+    activeTab === "next"
+      ? !hasTeams
+        ? t("pickTeamsUpcoming")
+        : teamScope === "all"
+          ? t("allUpcoming")
+          : t("teamUpcoming")
+      : !hasTeams
+        ? t("pickTeamsPast")
+        : teamScope === "all"
+          ? t("allPast")
+          : t("teamPast");
+
   return (
     <section className="space-y-3">
       <div className="flex rounded-xl border border-zinc-200 bg-zinc-50 p-1 dark:border-zinc-700 dark:bg-zinc-900/50">
         <TabButton
           active={activeTab === "next"}
           onClick={() => onActiveTabChange("next")}
-          label="Next games"
+          label={t("nextGames")}
           count={nextCount}
         />
         <TabButton
           active={activeTab === "past"}
           onClick={() => onActiveTabChange("past")}
-          label="Past results"
+          label={t("pastResults")}
           count={pastCount}
         />
       </div>
 
-      {activeTab === "next" && (
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            disabled={!hasTeams}
-            onClick={() => onTeamScopeChange("selected")}
-            className={cn(
-              scopeButtonClass(teamScope === "selected"),
-              !hasTeams && "opacity-40",
-            )}
-          >
-            Selected teams only
-          </button>
-          <button
-            type="button"
-            onClick={() => onTeamScopeChange("all")}
-            className={scopeButtonClass(teamScope === "all")}
-          >
-            Include all teams
-          </button>
-        </div>
-      )}
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          disabled={!hasTeams}
+          onClick={() => onTeamScopeChange("selected")}
+          className={cn(
+            scopeButtonClass(teamScope === "selected"),
+            !hasTeams && "opacity-40",
+          )}
+        >
+          {t("selectedTeamsOnly")}
+        </button>
+        <button
+          type="button"
+          onClick={() => onTeamScopeChange("all")}
+          className={scopeButtonClass(teamScope === "all")}
+        >
+          {t("includeAllTeams")}
+        </button>
+      </div>
 
-      {activeTab === "past" && (
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            disabled={!hasTeams}
-            onClick={() => onTeamScopeChange("selected")}
-            className={cn(
-              scopeButtonClass(teamScope === "selected"),
-              !hasTeams && "opacity-40",
-            )}
-          >
-            Selected teams only
-          </button>
-          <button
-            type="button"
-            onClick={() => onTeamScopeChange("all")}
-            className={scopeButtonClass(teamScope === "all")}
-          >
-            Include all teams
-          </button>
-        </div>
-      )}
-
-      <p className="text-xs text-zinc-500">
-        {activeTab === "next"
-          ? !hasTeams
-            ? "Pick teams above to see upcoming games."
-            : teamScope === "all"
-              ? "All upcoming games you can add to your calendar."
-              : "Upcoming games for your teams — knockouts fill in as results come in."
-          : !hasTeams
-            ? "Pick teams above to see past results."
-            : teamScope === "all"
-              ? "Final scores from across the tournament."
-              : "Final scores for your teams."}
-      </p>
+      <p className="text-xs text-zinc-500">{helperText}</p>
     </section>
   );
 }

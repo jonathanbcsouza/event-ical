@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { CalendarActions, StageBreakdown } from "@/components/CalendarActions";
 import { CalendarView } from "@/components/CalendarView";
@@ -13,12 +14,13 @@ import { MatchList } from "@/components/MatchList";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StepCard } from "@/components/StepCard";
 import { StepRail, type StepRailItem, type StepStatus } from "@/components/StepRail";
-import { TeamPicker, TeamPickerControls, teamSummary } from "@/components/TeamPicker";
+import { TeamPicker, TeamPickerControls } from "@/components/TeamPicker";
 import { TimezonePicker } from "@/components/TimezonePicker";
 import { ViewToggle, type ViewMode } from "@/components/ViewToggle";
 import {
   filterMatchesByTeams,
   filterUpcomingMatches,
+  getTeamsByGroup,
   partitionMatches,
   type Match,
 } from "@/lib/fixtures";
@@ -44,6 +46,10 @@ export function HomePage({
   serverNow,
   requestTimeZone,
 }: HomePageProps) {
+  const tSteps = useTranslations("steps");
+  const tCommon = useTranslations("common");
+  const tMatchList = useTranslations("matchList");
+
   const [selectedTeams, setSelectedTeams] = useState<string[]>([]);
   const [selectedMatchIds, setSelectedMatchIds] = useState<string[]>([]);
   const [activeStep, setActiveStep] = useState(1);
@@ -181,6 +187,17 @@ export function HomePage({
 
   const showList = view === "list" || matchTab === "past";
 
+  function teamSummaryLabel(selected: string[]): string {
+    if (selected.length === 0) return tSteps("noTeamsSelected");
+    const groups = getTeamsByGroup();
+    const names = groups
+      .flatMap(({ teams }) => teams)
+      .filter((t) => selected.includes(t.code))
+      .map((t) => t.name);
+    if (names.length <= 3) return names.join(", ");
+    return `${names.slice(0, 3).join(", ")} ${tSteps("teamMore", { count: names.length - 3 })}`;
+  }
+
   function getStepStatus(step: number): StepStatus {
     if (!hasTeams && step > 1) return "locked";
     if (step === 4 && hasTeams && !hasSelectedMatches) return "locked";
@@ -192,32 +209,35 @@ export function HomePage({
   const steps: StepRailItem[] = [
     {
       n: 1,
-      label: "Teams",
-      summary: teamSummary(selectedTeams),
+      label: tSteps("teams"),
+      summary: teamSummaryLabel(selectedTeams),
       status: getStepStatus(1),
     },
     {
       n: 2,
-      label: "Timezone",
+      label: tSteps("timezone"),
       summary: getTimeZoneDisplayName(timeZone),
       status: getStepStatus(2),
     },
     {
       n: 3,
-      label: "Matches",
+      label: tSteps("matches"),
       summary: hasTeams
-        ? `${nextMatches.length} upcoming · ${pastMatches.length} past`
-        : "Pick teams first",
+        ? tSteps("upcomingPast", {
+            upcoming: nextMatches.length,
+            past: pastMatches.length,
+          })
+        : tSteps("pickTeamsFirst"),
       status: getStepStatus(3),
     },
     {
       n: 4,
-      label: "Export",
+      label: tSteps("export"),
       summary: hasTeams
         ? hasSelectedMatches
-          ? `${selectedUpcomingCount} selected for download`
-          : "Select games in step 3"
-        : "Pick teams first",
+          ? tSteps("selectedForDownload", { count: selectedUpcomingCount })
+          : tSteps("selectGamesInStep3")
+        : tSteps("pickTeamsFirst"),
       status: getStepStatus(4),
     },
   ];
@@ -244,11 +264,11 @@ export function HomePage({
           {activeStep === 1 && (
             <StepCard
               step={1}
-              title="Pick your teams"
-              description="Choose the national teams you want to follow, or select all."
+              title={tSteps("step1Title")}
+              description={tSteps("step1Description")}
               canComplete={hasTeams}
-              pendingLabel="Pick at least one team to continue"
-              doneLabel="Next"
+              pendingLabel={tSteps("step1Pending")}
+              doneLabel={tCommon("next")}
               onDone={() => goToStep(2)}
               headerAction={
                 <TeamPickerControls
@@ -264,11 +284,11 @@ export function HomePage({
           {activeStep === 2 && (
             <StepCard
               step={2}
-              title="Choose your timezone"
-              description="Set when kickoffs and calendar events appear for you."
+              title={tSteps("step2Title")}
+              description={tSteps("step2Description")}
               canComplete={hasTeams}
-              pendingLabel="Pick at least one team to continue"
-              doneLabel="Next"
+              pendingLabel={tSteps("step1Pending")}
+              doneLabel={tCommon("next")}
               onDone={() => goToStep(3)}
             >
               <TimezonePicker
@@ -283,11 +303,11 @@ export function HomePage({
           {activeStep === 3 && (
             <StepCard
               step={3}
-              title="Choose your matches"
-              description="Review upcoming games or past results."
+              title={tSteps("step3Title")}
+              description={tSteps("step3Description")}
               canComplete={hasTeams && hasSelectedMatches}
-              pendingLabel="Select at least one game to export"
-              doneLabel="Next"
+              pendingLabel={tSteps("step3Pending")}
+              doneLabel={tCommon("next")}
               onDone={() => completeStep3()}
               badge={
                 (matchTab === "next" ? nextMatches : pastMatches).length > 0 ? (
@@ -319,7 +339,7 @@ export function HomePage({
                   {matchTab === "next" ? (
                     hasTeams ? (
                       <MatchList
-                        title="Next games"
+                        title={tMatchList("nextGames")}
                         matches={scopedMatches}
                         mode="upcoming"
                         now={now}
@@ -328,8 +348,8 @@ export function HomePage({
                         timeZone={timeZone}
                         emptyMessage={
                           useAllTeams
-                            ? "No upcoming games right now."
-                            : "No upcoming games for your teams."
+                            ? tMatchList("noUpcomingAll")
+                            : tMatchList("noUpcomingTeams")
                         }
                       />
                     ) : (
@@ -343,7 +363,7 @@ export function HomePage({
                     )
                   ) : hasTeams ? (
                     <MatchList
-                      title="Past results"
+                      title={tMatchList("pastResults")}
                       matches={scopedMatches}
                       mode="results"
                       now={now}
@@ -352,8 +372,8 @@ export function HomePage({
                       timeZone={timeZone}
                       emptyMessage={
                         useAllTeams
-                          ? "No results yet."
-                          : "No results for your teams yet."
+                          ? tMatchList("noResultsAll")
+                          : tMatchList("noResultsTeams")
                       }
                     />
                   ) : (
@@ -364,7 +384,7 @@ export function HomePage({
                       selectedIds={[]}
                       onSelectionChange={() => {}}
                       timeZone={timeZone}
-                      emptyMessage="Pick teams above to see results."
+                      emptyMessage={tMatchList("pickTeamsResults")}
                     />
                   )}
 
@@ -391,11 +411,11 @@ export function HomePage({
           {activeStep === 4 && (
             <StepCard
               step={4}
-              title="Export your calendar"
+              title={tSteps("step4Title")}
               description={
                 hasTeams
-                  ? "Subscribe for a live feed — knockout opponents fill in as your teams advance."
-                  : "Pick teams first."
+                  ? tSteps("step4Description")
+                  : tSteps("pickTeamsFirst")
               }
               canComplete={hasTeams}
               isLastStep

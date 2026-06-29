@@ -1,0 +1,208 @@
+{
+  "site": {
+    "name": "2026 世界杯 - 赛程日历",
+    "shortName": "2026 FIFA 世界杯",
+    "tagline": "创建你的比赛日历",
+    "description": "选择你支持的球队和比赛，然后下载或订阅 2026 FIFA 世界杯日历。",
+    "dateRange": "2026年6月11日 – 7月19日",
+    "hosts": "美国 · 加拿大 · 墨西哥",
+    "headerTitle": "2026 世界杯",
+    "headerSubtitle": "比赛日历"
+  },
+  "stages": {
+    "group": "小组赛",
+    "r32": "32强",
+    "r16": "16强",
+    "qf": "四分之一决赛",
+    "sf": "半决赛",
+    "third": "季军赛",
+    "final": "决赛"
+  },
+  "common": {
+    "next": "下一步",
+    "vs": "对",
+    "final": "决赛",
+    "match": "比赛",
+    "progress": "进度",
+    "list": "列表",
+    "calendar": "日历",
+    "viewMode": "视图模式",
+    "selectAll": "全选",
+    "deselectAll": "取消全选",
+    "clear": "清除",
+    "privacy": "隐私",
+    "backToCalendar": "← 返回日历"
+  },
+  "hero": {
+    "imageAlt": "2026 世界杯球场，东道主国旗与奖杯",
+    "description": "选择你支持的球队、勾选关注的比赛，一键下载或订阅日历。"
+  },
+  "steps": {
+    "teams": "球队",
+    "timezone": "时区",
+    "matches": "比赛",
+    "export": "导出",
+    "pickTeamsFirst": "请先选择球队",
+    "noTeamsSelected": "未选择球队",
+    "teamMore": "等 {count} 支",
+    "upcomingPast": "{upcoming} 场即将进行 · {past} 场已结束",
+    "selectedForDownload": "已选 {count} 场用于下载",
+    "selectGamesInStep3": "请在第 3 步选择比赛",
+    "selectToContinue": "请至少选择一项以继续",
+    "step1Title": "选择你的球队",
+    "step1Description": "选择你想关注的国家队，或全选。",
+    "step1Pending": "请至少选择一支球队以继续",
+    "step2Title": "选择时区",
+    "step2Description": "设置开球时间和日历事件的显示时区。",
+    "step3Title": "选择比赛",
+    "step3Description": "查看即将进行的比赛或过往结果。",
+    "step3Pending": "请至少选择一场比赛以导出",
+    "step4Title": "导出日历",
+    "step4Description": "订阅实时赛程 — 随着球队晋级，淘汰赛对手会自动更新。"
+  },
+  "matchBrowser": {
+    "nextGames": "即将进行",
+    "pastResults": "过往结果",
+    "selectedTeamsOnly": "仅所选球队",
+    "includeAllTeams": "包含所有球队",
+    "pickTeamsUpcoming": "在上方选择球队以查看即将进行的比赛。",
+    "allUpcoming": "可添加到日历的所有即将进行的比赛。",
+    "teamUpcoming": "你所选球队的即将进行的比赛 — 淘汰赛对阵随结果更新。",
+    "pickTeamsPast": "在上方选择球队以查看过往结果。",
+    "allPast": "整个赛事的最终比分。",
+    "teamPast": "你所选球队的最终比分。"
+  },
+  "matchList": {
+    "title": "比赛",
+    "emptyDefault": "在上方选择一个或多个球队以查看其比赛。",
+    "nextGames": "即将进行",
+    "pastResults": "过往结果",
+    "noUpcomingAll": "目前没有即将进行的比赛。",
+    "noUpcomingTeams": "你的球队暂无即将进行的比赛。",
+    "noResultsAll": "尚无结果。",
+    "noResultsTeams": "你的球队尚无结果。",
+    "pickTeamsResults": "在上方选择球队以查看结果。",
+    "selectedCount": "已选 {selected}/{total} 场加入日历"
+  },
+  "calendarView": {
+    "weekdays": {
+      "sun": "日",
+      "mon": "一",
+      "tue": "二",
+      "wed": "三",
+      "thu": "四",
+      "fri": "五",
+      "sat": "六"
+    },
+    "matchOne": "{count} 场比赛",
+    "matchMany": "{count} 场比赛",
+    "addUpcoming": "添加即将进行",
+    "tapDayHint": "点击高亮日期查看比分或选择即将进行的比赛。"
+  },
+  "timezone": {
+    "stepHint": "比赛时间和日历事件将使用此时区。",
+    "yourTimezone": "你的时区",
+    "currentlyOffset": "当前 {offset} — 更改时区后开球时间会更新。",
+    "useMyTimezone": "使用我的时区",
+    "currentOffset": "当前偏移 {offset}",
+    "timesShownIn": "时间显示为",
+    "useMyZone": "使用我的时区",
+    "resetDetected": "重置为检测到的时区（{label}）",
+    "regions": {
+      "hosts": "2026 世界杯主办地",
+      "americas": "美洲",
+      "europeAfrica": "欧洲与非洲",
+      "asiaPacific": "亚洲与太平洋",
+      "other": "其他"
+    }
+  },
+  "calendarActions": {
+    "google": "添加到 Google 日历",
+    "outlook": "添加到 Outlook",
+    "apple": "添加到 Apple 日历",
+    "download": "下载 .ics",
+    "googleTitleMobile": "如已安装则打开 Google 日历应用，否则打开移动网站",
+    "googleTitleDesktop": "在 Google 日历中订阅 — 淘汰赛球队随结果自动更新",
+    "outlookTitleMobile": "打开 Outlook 应用或移动网页订阅 — 确认后同步到应用",
+    "outlookTitleDesktop": "在 Outlook 网页版订阅 — 淘汰赛球队随结果自动更新",
+    "appleTitle": "在 iPhone/iPad 上直接打开 Apple 日历订阅实时赛程",
+    "downloadTitle": "下载所选比赛的一次性快照",
+    "subscribeAllHint": "订阅包含所有即将进行的比赛。下载 .ics 仅使用已勾选的比赛。",
+    "subscribeTeamsHint": "订阅跟随你所选球队在淘汰赛中的赛程。下载 .ics 仅使用已勾选的比赛。",
+    "pastScoresHint": "已结束的比赛仅显示比分。",
+    "mobileHint": "在手机上，链接会在已安装时打开日历应用。Google 和 Outlook 可能仍用浏览器确认订阅 — 之后会同步到手机。",
+    "eventsUseTimezone": "事件使用 {timezone}{offset}。请在第 2 步更改时区。",
+    "hideHelp": "隐藏",
+    "showHelp": "如何手动导入",
+    "help1": "Google 和 Outlook 订阅实时赛程 — 在日历应用中确认一次即可。淘汰赛名称随球队确定而更新。",
+    "help2": "在手机上，Google 和 Outlook 链接会尝试打开原生应用。若无反应，请下载 .ics 或在桌面浏览器订阅 — 之后会同步到手机。",
+    "help3": "若 Outlook 显示「无法导入日历」，请使用「下载 .ics」并选择添加日历 → 从文件上传（Microsoft 官方备用方案）。",
+    "help4Work": "工作或学校账户？请<link></link>，或下载 .ics 并使用「文件 → 打开并导入」。",
+    "help4Link": "使用此 Microsoft 365 订阅链接",
+    "help4Plain": "使用 Microsoft 365 订阅链接",
+    "help5": "要在 Google 日历中显示绿色：在左侧栏找到「FIFA World Cup 2026」→ ⋮ → 选择绿色。",
+    "stageCount": "{count} 场{stage}"
+  },
+  "donate": {
+    "button": "请我喝杯咖啡",
+    "promptTitle": "日历已就绪 — 已导出 {count, plural, other {# 场比赛}}",
+    "promptBody": "免费使用。如果节省了你的时间，也欢迎请我喝杯咖啡。",
+    "footerTitle": "喜欢这个日历？",
+    "footerBody": "本项目免费使用。如果节省了你的时间，也欢迎请我喝杯咖啡。"
+  },
+  "github": {
+    "label": "在 GitHub 提交问题或贡献",
+    "tooltip": "提交问题或贡献"
+  },
+  "theme": {
+    "switchToLight": "切换到浅色模式",
+    "switchToDark": "切换到深色模式",
+    "light": "浅色模式",
+    "dark": "深色模式"
+  },
+  "footer": {
+    "disclaimer": "与 FIFA 无关联。比赛数据仅供参考。"
+  },
+  "language": {
+    "label": "语言",
+    "select": "选择语言"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "metaTitle": "隐私 — {siteName}",
+    "metaDescription": "2026 世界杯日历隐私政策。",
+    "lastUpdated": "最后更新：2026 年 6 月",
+    "overviewTitle": "概述",
+    "overviewBody": "{siteName}（{url}）是一款免费的 2026 FIFA 世界杯个人比赛日历工具。我们不要求注册账户，也不会在服务器上存储你的球队或比赛选择。",
+    "collectTitle": "我们收集的信息",
+    "analyticsTitle": "分析",
+    "analyticsBody": "Google Analytics 可能收集匿名使用数据（访问页面、设备类型、国家/地区）。请参阅",
+    "analyticsLink": "Google 隐私政策",
+    "adsTitle": "广告",
+    "adsBody": "如启用，Google AdSense 可能使用 Cookie 投放广告。请参阅",
+    "adsLink": "Google 广告政策",
+    "storageTitle": "本地存储",
+    "storageBody": "你的时区偏好仅保存在浏览器中。",
+    "donationsTitle": "捐赠",
+    "donationsBody": "支付由 Stripe 处理。我们不会接收或存储银行卡信息。",
+    "feedsTitle": "日历订阅",
+    "feedsBody": "导出日历时，比赛 ID 会通过 URL 发送以生成 ICS 文件。这是服务正常运行所必需的。我们不会记录你选择了哪些比赛。",
+    "thirdPartiesTitle": "第三方",
+    "thirdPartiesBody": "我们使用 Vercel（托管）、Google Analytics、可选的 Google AdSense 和 Stripe（捐赠）。各服务均有独立的隐私政策。",
+    "contactTitle": "联系",
+    "contactBody": "有问题？请在项目 GitHub 仓库提交 issue，或联系网站所有者。",
+    "disclaimer": "与 FIFA 无关联。比赛赛程仅供参考。"
+  },
+  "teamPicker": {
+    "shortNames": {
+      "BIH": "波黑",
+      "CZE": "捷克",
+      "RSA": "南非",
+      "KOR": "韩国",
+      "CIV": "科特迪瓦",
+      "NZL": "新西兰",
+      "KSA": "沙特",
+      "COD": "刚果（金）"
+    }
+  }
+}

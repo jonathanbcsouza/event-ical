@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { DonatePrompt } from "@/components/DonatePrompt";
 import {
@@ -15,7 +16,6 @@ import {
 import { getMobilePlatform, type MobilePlatform } from "@/lib/device";
 import {
   countByStage,
-  getStageLabel,
   type MatchStage,
 } from "@/lib/fixtures";
 import { getTimeZoneOffsetLabel } from "@/lib/timezones";
@@ -57,6 +57,9 @@ export function CalendarActions({
   matchCount,
   timeZone,
 }: CalendarActionsProps) {
+  const t = useTranslations("calendarActions");
+  const tStages = useTranslations("stages");
+
   const [showImportHelp, setShowImportHelp] = useState(false);
   const [mobilePlatform, setMobilePlatform] = useState<MobilePlatform | null>(
     null,
@@ -118,10 +121,8 @@ export function CalendarActions({
   const exportActions: ExportAction[] = [
     {
       id: "google",
-      label: "Add to Google Calendar",
-      title: isMobile
-        ? "Opens Google Calendar app when installed, otherwise the mobile site"
-        : "Subscribe in Google Calendar — knockout teams update automatically as results come in",
+      label: t("google"),
+      title: isMobile ? t("googleTitleMobile") : t("googleTitleDesktop"),
       icon: CalendarDays,
       variant: "primary",
       enabled: canSubscribe,
@@ -130,10 +131,8 @@ export function CalendarActions({
     },
     {
       id: "outlook",
-      label: "Add to Outlook",
-      title: isMobile
-        ? "Opens Outlook app or mobile web to subscribe — syncs to the app after you confirm"
-        : "Subscribe in Outlook on the web — knockout teams update automatically as results come in",
+      label: t("outlook"),
+      title: isMobile ? t("outlookTitleMobile") : t("outlookTitleDesktop"),
       icon: Mail,
       variant: "secondary",
       enabled: canSubscribe,
@@ -144,9 +143,8 @@ export function CalendarActions({
       ? [
           {
             id: "apple" as const,
-            label: "Add to Apple Calendar",
-            title:
-              "Opens Apple Calendar directly on iPhone/iPad to subscribe to the live feed",
+            label: t("apple"),
+            title: t("appleTitle"),
             icon: CalendarDays,
             variant: "secondary" as const,
             enabled: canSubscribe,
@@ -157,9 +155,8 @@ export function CalendarActions({
       : []),
     {
       id: "download",
-      label: "Download .ics",
-      title:
-        "Download a one-time snapshot of your selected matches",
+      label: t("download"),
+      title: t("downloadTitle"),
       icon: Download,
       variant: "secondary",
       enabled: canDownload,
@@ -178,31 +175,26 @@ export function CalendarActions({
 
       {canSubscribe && (
         <p className="mt-3 text-xs text-zinc-500">
-          {includeAllTeams
-            ? "Your subscription includes all upcoming games. Download .ics uses your checked games only."
-            : "Your subscription follows the teams you picked through the bracket. Download .ics uses checked games only."}{" "}
-          Past games show scores only.
+          {includeAllTeams ? t("subscribeAllHint") : t("subscribeTeamsHint")}{" "}
+          {t("pastScoresHint")}
         </p>
       )}
 
       {canSubscribe && <DonatePrompt matchCount={matchCount} />}
 
       {canSubscribe && isMobile && (
-        <p className="mt-3 text-xs text-zinc-500">
-          On mobile, links open your calendar app when installed. Google and
-          Outlook may still use the browser to confirm the subscription — it
-          then syncs to the app.
-        </p>
+        <p className="mt-3 text-xs text-zinc-500">{t("mobileHint")}</p>
       )}
 
       {canSubscribe && timeZone && (
         <p className="mt-3 flex items-center gap-1.5 text-xs text-zinc-500">
           <Icon icon={Globe} className="size-3.5" />
-          Events use {timeZone.replace(/_/g, " ")}
-          {getTimeZoneOffsetLabel(timeZone)
-            ? ` (${getTimeZoneOffsetLabel(timeZone)})`
-            : ""}
-          . Change the timezone in step 2.
+          {t("eventsUseTimezone", {
+            timezone: timeZone.replace(/_/g, " "),
+            offset: getTimeZoneOffsetLabel(timeZone)
+              ? ` (${getTimeZoneOffsetLabel(timeZone)})`
+              : "",
+          })}
         </p>
       )}
 
@@ -215,45 +207,32 @@ export function CalendarActions({
           icon={showImportHelp ? ChevronUp : ChevronDown}
           className="size-4"
         />
-        {showImportHelp ? "Hide" : "How to import manually"}
+        {showImportHelp ? t("hideHelp") : t("showHelp")}
       </button>
 
       {showImportHelp && (
         <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-zinc-600 dark:text-zinc-400">
+          <li>{t("help1")}</li>
+          <li>{t("help2")}</li>
+          <li>{t("help3")}</li>
           <li>
-            Google and Outlook subscribe to a live feed — confirm once in your
-            calendar app. Knockout match names update as teams are confirmed.
+            {t.rich("help4Work", {
+              link: () =>
+                canSubscribe ? (
+                  <a
+                    href={outlookOfficeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2"
+                  >
+                    {t("help4Link")}
+                  </a>
+                ) : (
+                  t("help4Plain")
+                ),
+            })}
           </li>
-          <li>
-            On mobile, Google and Outlook links try to open the native app.
-            If nothing happens, use Download .ics or subscribe from a desktop
-            browser — it syncs to your phone afterward.
-          </li>
-          <li>
-            If Outlook says &ldquo;Couldn&apos;t import calendar&rdquo;, use
-            &ldquo;Download .ics&rdquo; and Add calendar → Upload from file
-            (Microsoft&apos;s documented fallback).
-          </li>
-          <li>
-            Work or school account?{" "}
-            {canSubscribe ? (
-              <a
-                href={outlookOfficeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2"
-              >
-                Use this Microsoft 365 subscribe link
-              </a>
-            ) : (
-              "use the Microsoft 365 subscribe link"
-            )}{" "}
-            instead, or download the .ics and use File → Open &amp; Import.
-          </li>
-          <li>
-            To use green in Google Calendar: find &ldquo;FIFA World Cup
-            2026&rdquo; in the left sidebar → ⋮ → pick green.
-          </li>
+          <li>{t("help5")}</li>
         </ol>
       )}
     </div>
@@ -299,11 +278,19 @@ export function StageBreakdown({
 }: {
   matches: { stage: MatchStage }[];
 }) {
+  const t = useTranslations("calendarActions");
+  const tStages = useTranslations("stages");
+
   if (matches.length === 0) return null;
   const counts = countByStage(matches as Parameters<typeof countByStage>[0]);
   const parts = (Object.entries(counts) as [MatchStage, number][])
     .filter(([, n]) => n > 0)
-    .map(([stage, n]) => `${n} ${getStageLabel(stage).toLowerCase()}`);
+    .map(([stage, n]) =>
+      t("stageCount", {
+        count: n,
+        stage: tStages(stage).toLowerCase(),
+      }),
+    );
 
   return (
     <p className="text-xs text-zinc-500">{parts.join(" · ")}</p>

@@ -1,18 +1,10 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { CalendarDays, Icon, List } from "@/lib/icons";
 
 export type ViewMode = "list" | "calendar";
-
-const OPTIONS: {
-  id: ViewMode;
-  label: string;
-  icon: typeof List;
-}[] = [
-  { id: "list", label: "List", icon: List },
-  { id: "calendar", label: "Calendar", icon: CalendarDays },
-];
 
 type ViewToggleProps = {
   value: ViewMode;
@@ -20,7 +12,17 @@ type ViewToggleProps = {
 };
 
 export function ViewToggle({ value, onChange }: ViewToggleProps) {
+  const t = useTranslations("common");
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const OPTIONS: {
+    id: ViewMode;
+    label: string;
+    icon: typeof List;
+  }[] = [
+    { id: "list", label: t("list"), icon: List },
+    { id: "calendar", label: t("calendar"), icon: CalendarDays },
+  ];
 
   function handleKeyDown(e: React.KeyboardEvent, index: number) {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -34,7 +36,7 @@ export function ViewToggle({ value, onChange }: ViewToggleProps) {
   return (
     <div
       role="tablist"
-      aria-label="View mode"
+      aria-label={t("viewMode")}
       className="flex w-full rounded-lg border border-zinc-200 bg-zinc-100 p-1 sm:inline-flex sm:w-auto dark:border-zinc-700 dark:bg-zinc-900"
     >
       {OPTIONS.map((option, index) => {

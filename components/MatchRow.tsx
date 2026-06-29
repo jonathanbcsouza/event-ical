@@ -1,12 +1,13 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { getFlag } from "@/lib/flags";
 import {
   formatMatchScore,
   getStageColor,
-  getStageLabel,
   isMatchSelectable,
   type Match,
+  type MatchStage,
 } from "@/lib/fixtures";
 
 type MatchRowProps = {
@@ -26,12 +27,17 @@ export function MatchRow({
   timeZone,
   now,
 }: MatchRowProps) {
+  const locale = useLocale();
+  const tCommon = useTranslations("common");
+  const tStages = useTranslations("stages");
+
   const date = new Date(match.startUtc);
   const stageColor = getStageColor(match.stage);
   const selectable = isMatchSelectable(match, now);
   const score = formatMatchScore(match);
   const homeWon = match.result?.winner === "home";
   const awayWon = match.result?.winner === "away";
+  const stageLabel = tStages(match.stage as MatchStage);
 
   const content = (
     <div className="min-w-0 flex-1">
@@ -65,7 +71,7 @@ export function MatchRow({
             </span>
             <span className="truncate">{match.home.name}</span>
           </span>
-          <span className="text-zinc-400">vs</span>
+          <span className="text-zinc-400">{tCommon("vs")}</span>
           <span className="inline-flex items-center gap-1.5">
             <span className="truncate">{match.away.name}</span>
             <span aria-hidden className="text-base leading-none">
@@ -77,7 +83,7 @@ export function MatchRow({
       <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-zinc-500">
         {showDate && (
           <span>
-            {date.toLocaleString(undefined, {
+            {date.toLocaleString(locale, {
               weekday: "short",
               month: "short",
               day: "numeric",
@@ -89,7 +95,7 @@ export function MatchRow({
         )}
         {!showDate && (
           <span>
-            {date.toLocaleTimeString(undefined, {
+            {date.toLocaleTimeString(locale, {
               hour: "numeric",
               minute: "2-digit",
               timeZone,
@@ -98,15 +104,17 @@ export function MatchRow({
         )}
         {score && (
           <span className="rounded-full bg-zinc-200/80 px-2 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
-            Final
+            {tCommon("final")}
           </span>
         )}
         <span
           className={`rounded-full px-2 py-0.5 text-xs font-medium ${stageColor.chip}`}
         >
-          {getStageLabel(match.stage)}
+          {stageLabel}
         </span>
-        <span className="text-zinc-400">Match {match.matchNumber}</span>
+        <span className="text-zinc-400">
+          {tCommon("match")} {match.matchNumber}
+        </span>
       </div>
       <p className="text-sm text-zinc-400">
         {match.venue}, {match.city}

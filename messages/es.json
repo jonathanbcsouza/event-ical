@@ -1,0 +1,208 @@
+{
+  "site": {
+    "name": "Copa del Mundo 2026 - Calendario",
+    "shortName": "Copa del Mundo FIFA 2026",
+    "tagline": "Crea tu calendario de partidos",
+    "description": "Elige tus equipos y partidos, luego descarga o suscríbete a un calendario de la Copa del Mundo FIFA 2026.",
+    "dateRange": "11 jun – 19 jul 2026",
+    "hosts": "Estados Unidos · Canadá · México",
+    "headerTitle": "Copa del Mundo 2026",
+    "headerSubtitle": "Calendario de partidos"
+  },
+  "stages": {
+    "group": "Fase de grupos",
+    "r32": "Dieciseisavos de final",
+    "r16": "Octavos de final",
+    "qf": "Cuartos de final",
+    "sf": "Semifinal",
+    "third": "Tercer puesto",
+    "final": "Final"
+  },
+  "common": {
+    "next": "Siguiente",
+    "vs": "vs",
+    "final": "Final",
+    "match": "Partido",
+    "progress": "Progreso",
+    "list": "Lista",
+    "calendar": "Calendario",
+    "viewMode": "Modo de vista",
+    "selectAll": "Seleccionar todo",
+    "deselectAll": "Deseleccionar todo",
+    "clear": "Limpiar",
+    "privacy": "Privacidad",
+    "backToCalendar": "← Volver al calendario"
+  },
+  "hero": {
+    "imageAlt": "Estadio de la Copa del Mundo 2026 con banderas de anfitriones y el trofeo",
+    "description": "Elige los equipos que apoyas, selecciona los partidos que te importan y descarga o suscríbete con un clic."
+  },
+  "steps": {
+    "teams": "Equipos",
+    "timezone": "Zona horaria",
+    "matches": "Partidos",
+    "export": "Exportar",
+    "pickTeamsFirst": "Elige equipos primero",
+    "noTeamsSelected": "Ningún equipo seleccionado",
+    "teamMore": "+{count} más",
+    "upcomingPast": "{upcoming} próximos · {past} resultados",
+    "selectedForDownload": "{count} seleccionados para descargar",
+    "selectGamesInStep3": "Selecciona partidos en el paso 3",
+    "selectToContinue": "Selecciona al menos una opción para continuar",
+    "step1Title": "Elige tus equipos",
+    "step1Description": "Selecciona las selecciones que quieres seguir, o elige todas.",
+    "step1Pending": "Elige al menos un equipo para continuar",
+    "step2Title": "Elige tu zona horaria",
+    "step2Description": "Define cuándo aparecen los partidos en tu calendario.",
+    "step3Title": "Elige tus partidos",
+    "step3Description": "Revisa próximos partidos o resultados pasados.",
+    "step3Pending": "Selecciona al menos un partido para exportar",
+    "step4Title": "Exporta tu calendario",
+    "step4Description": "Suscríbete a un feed en vivo — los rivales de eliminatorias se completan a medida que avanzan tus equipos."
+  },
+  "matchBrowser": {
+    "nextGames": "Próximos partidos",
+    "pastResults": "Resultados anteriores",
+    "selectedTeamsOnly": "Solo equipos seleccionados",
+    "includeAllTeams": "Incluir todos los equipos",
+    "pickTeamsUpcoming": "Elige equipos arriba para ver próximos partidos.",
+    "allUpcoming": "Todos los próximos partidos que puedes añadir a tu calendario.",
+    "teamUpcoming": "Próximos partidos de tus equipos — las eliminatorias se completan con los resultados.",
+    "pickTeamsPast": "Elige equipos arriba para ver resultados anteriores.",
+    "allPast": "Resultados finales de todo el torneo.",
+    "teamPast": "Resultados finales de tus equipos."
+  },
+  "matchList": {
+    "title": "Partidos",
+    "emptyDefault": "Selecciona uno o más equipos arriba para ver sus partidos.",
+    "nextGames": "Próximos partidos",
+    "pastResults": "Resultados anteriores",
+    "noUpcomingAll": "No hay próximos partidos ahora.",
+    "noUpcomingTeams": "No hay próximos partidos para tus equipos.",
+    "noResultsAll": "Aún no hay resultados.",
+    "noResultsTeams": "Aún no hay resultados para tus equipos.",
+    "pickTeamsResults": "Elige equipos arriba para ver resultados.",
+    "selectedCount": "{selected} de {total} seleccionados para el calendario"
+  },
+  "calendarView": {
+    "weekdays": {
+      "sun": "Dom",
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mié",
+      "thu": "Jue",
+      "fri": "Vie",
+      "sat": "Sáb"
+    },
+    "matchOne": "{count} partido",
+    "matchMany": "{count} partidos",
+    "addUpcoming": "Añadir próximos",
+    "tapDayHint": "Toca un día resaltado para ver resultados o seleccionar próximos partidos."
+  },
+  "timezone": {
+    "stepHint": "Los horarios y eventos del calendario usarán esta zona horaria.",
+    "yourTimezone": "Tu zona horaria",
+    "currentlyOffset": "Actualmente {offset} — los horarios se actualizan al cambiar esto.",
+    "useMyTimezone": "Usar mi zona horaria",
+    "currentOffset": "Desplazamiento actual {offset}",
+    "timesShownIn": "Horarios en",
+    "useMyZone": "Usar mi zona",
+    "resetDetected": "Restablecer a tu zona detectada ({label})",
+    "regions": {
+      "hosts": "Anfitriones Copa 2026",
+      "americas": "Américas",
+      "europeAfrica": "Europa y África",
+      "asiaPacific": "Asia y Pacífico",
+      "other": "Otros"
+    }
+  },
+  "calendarActions": {
+    "google": "Añadir a Google Calendar",
+    "outlook": "Añadir a Outlook",
+    "apple": "Añadir a Apple Calendar",
+    "download": "Descargar .ics",
+    "googleTitleMobile": "Abre la app de Google Calendar si está instalada, si no el sitio móvil",
+    "googleTitleDesktop": "Suscríbete en Google Calendar — los equipos de eliminatorias se actualizan automáticamente",
+    "outlookTitleMobile": "Abre Outlook o la web móvil para suscribirte — se sincroniza tras confirmar",
+    "outlookTitleDesktop": "Suscríbete en Outlook web — los equipos de eliminatorias se actualizan automáticamente",
+    "appleTitle": "Abre Apple Calendar en iPhone/iPad para suscribirte al feed en vivo",
+    "downloadTitle": "Descarga una instantánea única de tus partidos seleccionados",
+    "subscribeAllHint": "Tu suscripción incluye todos los próximos partidos. Descargar .ics usa solo los marcados.",
+    "subscribeTeamsHint": "Tu suscripción sigue los equipos elegidos en el cuadro. Descargar .ics usa solo los marcados.",
+    "pastScoresHint": "Los partidos pasados solo muestran resultados.",
+    "mobileHint": "En móvil, los enlaces abren tu app de calendario si está instalada. Google y Outlook pueden usar el navegador para confirmar — luego se sincroniza.",
+    "eventsUseTimezone": "Los eventos usan {timezone}{offset}. Cambia la zona horaria en el paso 2.",
+    "hideHelp": "Ocultar",
+    "showHelp": "Cómo importar manualmente",
+    "help1": "Google y Outlook se suscriben a un feed en vivo — confirma una vez en tu app. Los nombres de eliminatorias se actualizan al confirmarse equipos.",
+    "help2": "En móvil, los enlaces intentan abrir la app nativa. Si no pasa nada, usa Descargar .ics o suscríbete desde un navegador de escritorio.",
+    "help3": "Si Outlook dice \"No se pudo importar el calendario\", usa \"Descargar .ics\" y Añadir calendario → Subir archivo.",
+    "help4Work": "¿Cuenta de trabajo o escuela? <link></link> o descarga el .ics y usa Archivo → Abrir e importar.",
+    "help4Link": "Usa este enlace de suscripción de Microsoft 365",
+    "help4Plain": "usa el enlace de suscripción de Microsoft 365",
+    "help5": "Para ver verde en Google Calendar: busca \"FIFA World Cup 2026\" en la barra lateral → ⋮ → elige verde.",
+    "stageCount": "{count} {stage}"
+  },
+  "donate": {
+    "button": "Invítame un café",
+    "promptTitle": "Calendario listo — {count, plural, one {# partido} other {# partidos}} exportados",
+    "promptBody": "Gratis de usar. Si te ahorró tiempo, invítame un café también.",
+    "footerTitle": "¿Te gusta el calendario?",
+    "footerBody": "Este proyecto es gratis. Si te ahorró tiempo, invítame un café también."
+  },
+  "github": {
+    "label": "Enviar issue o contribuir en GitHub",
+    "tooltip": "Enviar issue o contribuir"
+  },
+  "theme": {
+    "switchToLight": "Cambiar a modo claro",
+    "switchToDark": "Cambiar a modo oscuro",
+    "light": "Modo claro",
+    "dark": "Modo oscuro"
+  },
+  "footer": {
+    "disclaimer": "No afiliado a la FIFA. Datos de partidos solo informativos."
+  },
+  "language": {
+    "label": "Idioma",
+    "select": "Seleccionar idioma"
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "metaTitle": "Privacidad — {siteName}",
+    "metaDescription": "Política de privacidad del Calendario Copa del Mundo 2026.",
+    "lastUpdated": "Última actualización: junio 2026",
+    "overviewTitle": "Resumen",
+    "overviewBody": "{siteName} ({url}) es una herramienta gratuita para crear un calendario personal de la Copa del Mundo FIFA 2026. No requerimos cuenta ni guardamos tus selecciones en nuestros servidores.",
+    "collectTitle": "Qué recopilamos",
+    "analyticsTitle": "Analítica",
+    "analyticsBody": "Google Analytics puede recopilar datos de uso anonimizados (páginas, tipo de dispositivo, país). Consulta",
+    "analyticsLink": "la política de privacidad de Google",
+    "adsTitle": "Publicidad",
+    "adsBody": "Si está activo, Google AdSense puede usar cookies para mostrar anuncios. Consulta",
+    "adsLink": "las políticas de publicidad de Google",
+    "storageTitle": "Almacenamiento local",
+    "storageBody": "Tu preferencia de zona horaria se guarda solo en tu navegador.",
+    "donationsTitle": "Donaciones",
+    "donationsBody": "Los pagos los gestiona Stripe. No recibimos ni almacenamos datos de tarjetas.",
+    "feedsTitle": "Feeds de calendario",
+    "feedsBody": "Al exportar, los IDs de partidos se envían en la URL para generar el archivo ICS. Es necesario para el servicio. No registramos qué partidos seleccionas.",
+    "thirdPartiesTitle": "Terceros",
+    "thirdPartiesBody": "Usamos Vercel (hosting), Google Analytics, Google AdSense opcional y Stripe (donaciones). Cada uno tiene su propia política de privacidad.",
+    "contactTitle": "Contacto",
+    "contactBody": "¿Preguntas? Abre un issue en el repositorio de GitHub o contacta al propietario del sitio.",
+    "disclaimer": "No afiliado a la FIFA. Horarios solo informativos."
+  },
+  "teamPicker": {
+    "shortNames": {
+      "BIH": "Bosnia",
+      "CZE": "Chequia",
+      "RSA": "S. África",
+      "KOR": "Corea del S.",
+      "CIV": "Costa de Marfil",
+      "NZL": "N. Zelanda",
+      "KSA": "Arabia Saudí",
+      "COD": "RD Congo"
+    }
+  }
+}
