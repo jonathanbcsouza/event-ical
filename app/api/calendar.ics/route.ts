@@ -23,7 +23,7 @@ async function resolveCalendarMatches(request: NextRequest): Promise<Match[]> {
   const stagesParam = request.nextUrl.searchParams.get("stages");
   const allParam = request.nextUrl.searchParams.get("all");
 
-  const resolved = getResolvedMatches();
+  const resolved = await getResolvedMatches();
 
   // Live subscriptions (all/teams/stages) include past results with final
   // scores so the calendar shows the full tournament, not just what's left.
@@ -99,7 +99,7 @@ export async function GET(request: NextRequest) {
       "Content-Disposition": download
         ? `attachment; filename="${ICS_FILENAME}"`
         : `inline; filename="${ICS_FILENAME}"`,
-      "Cache-Control": "public, max-age=300, s-maxage=300",
+      "Cache-Control": "no-store",
     },
   });
 }

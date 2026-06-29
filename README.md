@@ -55,10 +55,18 @@ Copy `.env.example` to `.env.local`:
 
 ## Data
 
-Match fixtures live in [`data/fixtures-2026.json`](data/fixtures-2026.json) (104 matches). Regenerate from the source script:
+Match **schedules** live in [`data/fixtures-2026.json`](data/fixtures-2026.json) (104 matches). Regenerate from the source script:
 
 ```bash
 node scripts/generate-fixtures.mjs
+```
+
+**Scores** are fetched live on every page load and calendar feed request from [openfootball](https://github.com/openfootball/worldcup.json) (`2026/worldcup.json`). If that fetch fails, the app falls back to [`data/results-2026.json`](data/results-2026.json).
+
+To refresh the bundled fallback file manually:
+
+```bash
+npm run sync-results
 ```
 
 ## API

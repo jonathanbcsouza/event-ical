@@ -1,4 +1,3 @@
-import resultsData from "@/data/results-2026.json";
 import {
   ALL_MATCHES,
   GROUPS,
@@ -7,25 +6,20 @@ import {
   type MatchStage,
   type TeamRef,
 } from "@/lib/fixtures";
-
-type ResultRow = {
-  pair: string;
-  date: string;
-  scores: Record<string, number>;
-  winner: string;
-};
-
-const ROWS = resultsData as unknown as ResultRow[];
+import { loadResultRows, type ResultRow } from "@/lib/results-source";
 
 function pairKey(a: string, b: string): string {
   return [a, b].sort().join("-");
 }
 
-const RESULTS_BY_PAIR = new Map<string, ResultRow[]>();
-for (const row of ROWS) {
-  const list = RESULTS_BY_PAIR.get(row.pair);
-  if (list) list.push(row);
-  else RESULTS_BY_PAIR.set(row.pair, [row]);
+function buildResultsByPair(rows: ResultRow[]): Map<string, ResultRow[]> {
+  const map = new Map<string, ResultRow[]>();
+  for (const row of rows) {
+    const list = map.get(row.pair);
+    if (list) list.push(row);
+    else map.set(row.pair, [row]);
+  }
+  return map;
 }
 
 function pickResult(rows: ResultRow[], startUtc: string): ResultRow {
@@ -38,10 +32,13 @@ function pickResult(rows: ResultRow[], startUtc: string): ResultRow {
   });
 }
 
-function overlayResult(match: Match): Match {
+function overlayResult(
+  match: Match,
+  resultsByPair: Map<string, ResultRow[]>,
+): Match {
   if (match.home.code === "TBD" || match.away.code === "TBD") return match;
 
-  const rows = RESULTS_BY_PAIR.get(pairKey(match.home.code, match.away.code));
+  const rows = resultsByPair.get(pairKey(match.home.code, match.away.code));
   if (!rows || rows.length === 0) return match;
 
   const row = pickResult(rows, match.startUtc);
@@ -216,16 +213,23 @@ function resolveKnockoutTeams(matches: Match[]): Match[] {
   return matches;
 }
 
-export function resolveMatches(staticMatches: Match[]): Match[] {
+export function resolveMatches(
+  staticMatches: Match[],
+  rows: ResultRow[],
+): Match[] {
+  const resultsByPair = buildResultsByPair(rows);
   // Clone so in-place knockout resolution never mutates shared fixture data.
-  let matches = staticMatches.map((m) => ({ ...overlayResult(m) }));
+  let matches = staticMatches.map((m) => ({
+    ...overlayResult(m, resultsByPair),
+  }));
   matches = resolveKnockoutTeams(matches);
   // Overlay again so any results for freshly-resolved knockout pairs apply.
-  return matches.map(overlayResult);
+  return matches.map((m) => overlayResult(m, resultsByPair));
 }
 
-export function getResolvedMatches(): Match[] {
-  return resolveMatches(ALL_MATCHES);
+export async function getResolvedMatches(): Promise<Match[]> {
+  const rows = await loadResultRows();
+  return resolveMatches(ALL_MATCHES, rows);
 }
 
 export function filterMatchesByStages(

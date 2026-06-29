@@ -14,7 +14,7 @@ export default async function Page({ params }: Props) {
 
   const headerStore = await headers();
   const requestTimeZone = getRequestTimeZone((name) => headerStore.get(name));
-  const matches = getResolvedMatches();
+  const matches = await getResolvedMatches();
 
   return (
     <HomePage
